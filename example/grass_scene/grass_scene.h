@@ -1,7 +1,7 @@
 #pragma once
 
-#include <grass_scene/sprites/grass.h>
-#include <grass_scene/sprites/character.h>
+#include <grass_scene/environment/grass.h>
+#include <grass_scene/player/character.h>
 #include <scenes/scene.h>
 
 //------------------------------------------------------------------//

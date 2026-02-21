@@ -1,4 +1,4 @@
-#include <grass_scene/sprites/grass.h>
+#include <grass_scene/environment/grass.h>
 
 //------------------------------------------------------------------//
 
