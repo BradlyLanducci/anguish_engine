@@ -52,7 +52,11 @@ void PhysicsManager::update(float currentTime)
 
     if (currentTime - lastTime >= PHYSICS_INTERVAL)
     {
-        const float delta{ currentTime - lastTime };
+        /*
+            I've clamped the max delta to be 60 physics fps
+            You'd probably actually want this to be configurable
+        */
+        const float delta{ std::min(currentTime - lastTime, 1.f / 60.f) };
         lastTime = currentTime;
 
         // Call physics update
@@ -62,8 +66,7 @@ void PhysicsManager::update(float currentTime)
         }
 
         // Collect collisions
-        // std::vector<Collision> collisions;
-        std::vector<std::pair<CollisionObject *, CollisionObject *> > collisions;
+        std::vector<std::pair<CollisionObject *, CollisionObject *>> collisions;
         for (const auto &co1 : m_collisionObjects)
         {
             for (const auto &co2 : m_collisionObjects)
@@ -118,11 +121,6 @@ void PhysicsManager::update(float currentTime)
                 parent->setGlobalPosition(roundedPos);
             }
         }
-
-        // for (const auto& collision : collisions)
-        // {
-        // handle collisions
-        // }
     }
 }
 

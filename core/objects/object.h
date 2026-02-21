@@ -14,13 +14,14 @@ public:
     explicit Object(bool doIdle = true, bool doPhysics = true);
     ~Object() override;
 
-    void addChild(Object *child);
+    void addChild(Object *p_child);
     [[nodiscard]] Object *getParent() const;
 
     virtual void idleUpdate(float delta);
     virtual void physicsUpdate(float delta);
 
     [[nodiscard]] Rect rect() const;
+    [[nodiscard]] Vector2 position() const;
     [[nodiscard]] Vector2 globalPosition() const;
     [[nodiscard]] Vector2 size() const;
     [[nodiscard]] Vector2 scale() const;
@@ -37,15 +38,15 @@ public:
 protected:
     void addIdleCb(const std::function<void(float)> &cb);
     void addPhysicsCb(const std::function<void(float)> &cb);
-    void setParent(Object *parent);
+    void setParent(Object *p_parent);
 
-    Object *m_parent{ nullptr };
+    Object *mp_parent{ nullptr };
     Rect m_rect;
 
 private:
     std::vector<Object *> m_children;
-    std::vector<std::function<void(float)> > m_idleCbs;
-    std::vector<std::function<void(float)> > m_physicsCbs;
+    std::vector<std::function<void(float)>> m_idleCbs;
+    std::vector<std::function<void(float)>> m_physicsCbs;
 };
 
 //------------------------------------------------------------------//

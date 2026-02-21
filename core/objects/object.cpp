@@ -37,10 +37,10 @@ Object::~Object()
 
 //------------------------------------------------------------------//
 
-void Object::addChild(Object *child)
+void Object::addChild(Object *p_child)
 {
-    child->setParent(this);
-    m_children.push_back(child);
+    p_child->setParent(this);
+    m_children.push_back(p_child);
 }
 
 //------------------------------------------------------------------//
@@ -59,16 +59,16 @@ void Object::addPhysicsCb(const std::function<void(float)> &cb)
 
 //------------------------------------------------------------------//
 
-void Object::setParent(Object *parent)
+void Object::setParent(Object *p_parent)
 {
-    m_parent = parent;
+    mp_parent = p_parent;
 }
 
 //------------------------------------------------------------------//
 
 Object *Object::getParent() const
 {
-    return m_parent;
+    return mp_parent;
 }
 
 //------------------------------------------------------------------//
@@ -96,6 +96,18 @@ void Object::physicsUpdate(float delta)
 Rect Object::rect() const
 {
     return m_rect;
+}
+
+//------------------------------------------------------------------//
+
+Vector2 Object::position() const
+{
+    Vector2 gp{ globalPosition() };
+    if (mp_parent)
+    {
+        return mp_parent->globalPosition() - gp;
+    }
+    return gp;
 }
 
 //------------------------------------------------------------------//

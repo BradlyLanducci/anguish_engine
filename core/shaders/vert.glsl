@@ -14,6 +14,6 @@ out vec2 TexCoord;
 void main()
 {
     vec2 scaledPos = aPos * spriteSize + globalPos;
-    gl_Position = projection * view * vec4(scaledPos, 0.0, 1.0);
+    gl_Position = projection * view * model * vec4(scaledPos, 0.0, 1.0);
     TexCoord = aTexCoord;
 }

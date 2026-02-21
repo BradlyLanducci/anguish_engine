@@ -4,7 +4,7 @@
 
 GrassScene::GrassScene()
     : c(new Character())
-      , g(new Grass())
+    , g(new Grass())
 {
     addChild(c);
     addChild(g);

@@ -3,15 +3,16 @@
 //------------------------------------------------------------------//
 
 Grass::Grass()
-		: Object()
-		, m_sprite(new Sprite())
-		, m_collision(new CollisionObject())
+    : Object()
+    , m_sprite(new Sprite())
+    , m_collision(new CollisionObject())
 {
-	addChild(m_sprite);
-	addChild(m_collision);
-	m_sprite->setTexture("example/grass_scene/textures/grass.png");
-	m_collision->setSize(m_sprite->rect().size);
-	setGlobalPosition(Vector2(0, 540));
+    addChild(m_sprite);
+    addChild(m_collision);
+    m_sprite->setTexture("example/grass_scene/textures/grass.png");
+    setSize(m_sprite->rect().size);
+    m_collision->setSize(size());
+    setGlobalPosition(Vector2(0, 100));
 }
 
 //------------------------------------------------------------------//

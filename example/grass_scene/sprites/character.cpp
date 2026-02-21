@@ -8,7 +8,7 @@
 
 Character::Character()
     : m_sprite(new Sprite())
-      , m_collision(new CollisionObject())
+    , m_collision(new CollisionObject())
 {
     addChild(m_sprite);
     addChild(m_collision);
@@ -16,19 +16,10 @@ Character::Character()
     m_sprite->setTexture("example/grass_scene/textures/test.png");
     m_collision->setSize(m_sprite->rect().size);
 
-    m_collision->collided.connect([this]()
-    {
-        endJump();
-    });
+    m_collision->collided.connect([this]() { endJump(); });
 
-    addIdleCb([this](float delta)
-    {
-        idleUpdate(delta);
-    });
-    addPhysicsCb([this](float delta)
-    {
-        physicsUpdate(delta);
-    });
+    addIdleCb([this](float delta) { idleUpdate(delta); });
+    addPhysicsCb([this](float delta) { physicsUpdate(delta); });
 }
 
 //------------------------------------------------------------------//
