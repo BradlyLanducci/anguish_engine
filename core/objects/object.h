@@ -21,6 +21,7 @@ public:
     virtual void physicsUpdate(float delta);
 
     [[nodiscard]] Rect rect() const;
+    [[nodiscard]] Rect globalRect() const;
     [[nodiscard]] Vector2 position() const;
     [[nodiscard]] Vector2 globalPosition() const;
     [[nodiscard]] Vector2 size() const;

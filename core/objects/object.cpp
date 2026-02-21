@@ -100,6 +100,13 @@ Rect Object::rect() const
 
 //------------------------------------------------------------------//
 
+Rect Object::globalRect() const
+{
+    return Rect{ m_rect.origin + m_globalPosition, m_rect.size, m_rect.scale };
+}
+
+//------------------------------------------------------------------//
+
 Vector2 Object::position() const
 {
     return m_rect.origin;

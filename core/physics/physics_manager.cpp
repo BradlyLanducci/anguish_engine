@@ -73,30 +73,27 @@ void PhysicsManager::update(float currentTime)
             {
                 if (co1 != co2)
                 {
-                    Rect r1 = co1->rect();
-                    Rect r2 = co2->rect();
+                    Rect r1{ co1->globalRect() };
+                    Rect r2{ co2->globalRect() };
+
                     if (AABB::aabb(r1, r2))
                     {
-                        Rect r1 = co1->rect();
-                        Rect r2 = co2->rect();
-                        if (AABB::aabb(r1, r2))
+                        /// TODO: This seems really inefficient lol
+                        bool duplicate = false;
+                        for (const auto &collision : collisions)
                         {
-                            bool duplicate = false;
-                            for (const auto &collision : collisions)
+                            if (collision.first == co1 && collision.second == co2)
                             {
-                                if (collision.first == co1 && collision.second == co2)
-                                {
-                                    duplicate = true;
-                                }
-                                else if (collision.second == co1 && collision.first == co2)
-                                {
-                                    duplicate = true;
-                                }
+                                duplicate = true;
                             }
-                            if (!duplicate)
+                            else if (collision.second == co1 && collision.first == co2)
                             {
-                                collisions.push_back(std::pair(co1, co2));
+                                duplicate = true;
                             }
+                        }
+                        if (!duplicate)
+                        {
+                            collisions.push_back(std::pair(co1, co2));
                         }
                     }
                 }
@@ -108,11 +105,8 @@ void PhysicsManager::update(float currentTime)
             CollisionObject *co1 = collision.first;
             CollisionObject *co2 = collision.second;
 
-            Rect r1{ co1->rect() };
-            Rect r2{ co2->rect() };
-
-            r1.origin += co1->globalPosition();
-            r2.origin += co2->globalPosition();
+            Rect r1{ co1->globalRect() };
+            Rect r2{ co2->globalRect() };
 
             Vector2 offset = AABB::collide(r1, r2);
             Object *parent = co1->getParent();
