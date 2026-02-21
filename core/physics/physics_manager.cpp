@@ -108,8 +108,11 @@ void PhysicsManager::update(float currentTime)
             CollisionObject *co1 = collision.first;
             CollisionObject *co2 = collision.second;
 
-            Rect r1 = co1->rect();
-            Rect r2 = co2->rect();
+            Rect r1{ co1->rect() };
+            Rect r2{ co2->rect() };
+
+            r1.origin += co1->globalPosition();
+            r2.origin += co2->globalPosition();
 
             Vector2 offset = AABB::collide(r1, r2);
             Object *parent = co1->getParent();

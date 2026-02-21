@@ -19,6 +19,7 @@ struct Vector2
     Vector2 operator*(const Vector2 &other) const;
     Vector2 operator*(const Vector2i &other) const;
     Vector2 operator+(const Vector2 &other) const;
+    Vector2 &operator+=(const Vector2 &other);
     Vector2 operator-(const Vector2 &other) const;
 
     friend std::ostream &operator<<(std::ostream &os, const Vector2 &vector);

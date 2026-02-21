@@ -6,7 +6,14 @@ Jumper::Jumper(Object *p_subject, CollisionObject *p_subject_collision)
     : mp_subject(p_subject)
     , mp_subjectCollision(p_subject_collision)
 {
-    mp_subjectCollision->collided.connect([this]() { state = State::Idle; });
+    mp_subjectCollision->collided.connect(
+        [this]()
+        {
+            if (state == State::Falling)
+            {
+                state = State::Idle;
+            }
+        });
 }
 
 //------------------------------------------------------------------//
@@ -32,8 +39,9 @@ void Jumper::physicsUpdate(float delta)
 
         if (m_accumulator <= m_jumpSeconds)
         {
+            float progress{ 1.f - (m_accumulator / m_jumpSeconds) };
             auto gp{ mp_subject->globalPosition() };
-            gp.y -= m_jumpForce * delta;
+            gp.y -= m_jumpForce * delta * progress;
             mp_subject->setGlobalPosition(gp);
         }
         else

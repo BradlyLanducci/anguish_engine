@@ -14,10 +14,9 @@ public:
         Idle,
         Jumping,
         Falling
-    } state;
+    } state{ State::Idle };
 
     void begin(float jumpTime, float jumpForce);
-    void end();
 
 private:
     void physicsUpdate(float delta);

@@ -42,6 +42,7 @@ protected:
 
     Object *mp_parent{ nullptr };
     Rect m_rect;
+    Vector2 m_globalPosition;
 
 private:
     std::vector<Object *> m_children;

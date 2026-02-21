@@ -102,19 +102,14 @@ Rect Object::rect() const
 
 Vector2 Object::position() const
 {
-    Vector2 gp{ globalPosition() };
-    if (mp_parent)
-    {
-        return mp_parent->globalPosition() - gp;
-    }
-    return gp;
+    return m_rect.origin;
 }
 
 //------------------------------------------------------------------//
 
 Vector2 Object::globalPosition() const
 {
-    return m_rect.origin;
+    return m_globalPosition;
 }
 
 //------------------------------------------------------------------//
@@ -146,11 +141,11 @@ void Object::setRect(const Rect &rect)
 
 void Object::setGlobalPosition(Vector2 globalPosition)
 {
-    globalPosition.roundToInt();
-    m_rect.origin = globalPosition;
+    m_globalPosition = globalPosition;
+
     for (auto &c : m_children)
     {
-        c->setGlobalPosition(globalPosition);
+        c->setGlobalPosition(globalPosition + c->position());
     }
 
     moved.emit();
