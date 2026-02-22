@@ -32,19 +32,19 @@ void Character::physicsUpdate(float delta)
     float amountToMove{ 200.f * delta };
 
     Vector2 gp{ globalPosition() };
-    if (Keyboard::isPressed(Keyboard::Key::Left)) // left
+    if (Keyboard::isPressed(Keyboard::Key::Left))
     {
         gp.x -= amountToMove;
     }
-    if (Keyboard::isPressed(Keyboard::Key::Up)) // up
+    if (Keyboard::isPressed(Keyboard::Key::Up))
     {
         m_jumper.begin(0.3f, 300.f);
     }
-    if (Keyboard::isPressed(Keyboard::Key::Right)) // right
+    if (Keyboard::isPressed(Keyboard::Key::Right))
     {
         gp.x += amountToMove;
     }
-    if (Keyboard::isPressed(Keyboard::Key::Down)) // down
+    if (Keyboard::isPressed(Keyboard::Key::Down))
     {
         gp.y += amountToMove;
     }
