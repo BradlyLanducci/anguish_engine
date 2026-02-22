@@ -1,42 +1,45 @@
 #include <utilities/keyboard.h>
-#include <glog/logging.h>
+
+#include <utilities/logger.h>
+#include <magic_enum/magic_enum.hpp>
 
 // #define LOG_KEYS
 
 //------------------------------------------------------------------//
 
-void Keyboard::initialize(GLFWwindow* window)
+void Keyboard::initialize(GLFWwindow *window)
 {
-	glfwSetKeyCallback(window, Keyboard::processInput);
+    glfwSetKeyCallback(window, Keyboard::processInput);
 }
 
 //------------------------------------------------------------------//
 
-bool Keyboard::isPressed(int key)
+bool Keyboard::isPressed(Key key)
 {
-	return m_keyboard[key];
+    return m_keyboard[key];
 }
 
 //------------------------------------------------------------------//
 
-void Keyboard::processInput(GLFWwindow* window, int key, int scancode, int action, int mods)
+void Keyboard::processInput(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
-	if (action == GLFW_PRESS)
-	{
-		m_keyboard[key] = true;
+    Key k{ static_cast<Key>(key) };
+    if (action == GLFW_PRESS)
+    {
+        m_keyboard[k] = true;
 
 #ifdef LOG_KEYS
-		LOG(INFO) << key << " : " << " pressed";
+        Log(Info) << key << " : " << " pressed";
 #endif
-	}
-	else if (action == GLFW_RELEASE)
-	{
-		m_keyboard[key] = false;
+    }
+    else if (action == GLFW_RELEASE)
+    {
+        m_keyboard[k] = false;
 
 #ifdef LOG_KEYS
-		LOG(INFO) << key << " : " << " released";
+        Log(Info) << key << " : " << " released";
 #endif
-	}
+    }
 }
 
 //------------------------------------------------------------------//

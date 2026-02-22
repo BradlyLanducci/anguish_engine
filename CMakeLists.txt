@@ -2,10 +2,25 @@ cmake_minimum_required(VERSION 3.21)
 
 project(AnguishEngine)
 
-add_compile_options("-O0")
+include(FetchContent)
 
-find_package(glog CONFIG REQUIRED)
-find_package(glm CONFIG REQUIRED)
+FetchContent_Declare(
+	glm
+	GIT_REPOSITORY https://github.com/g-truc/glm.git
+        GIT_TAG master
+        SOURCE_DIR ${CMAKE_BINARY_DIR}/glm
+        BINARY_DIR ${CMAKE_BINARY_DIR}/glm_build
+)
+FetchContent_MakeAvailable(glm)
+
+FetchContent_Declare(
+        magic_enum
+        GIT_REPOSITORY https://github.com/Neargye/magic_enum.git
+        GIT_TAG master
+        SOURCE_DIR ${CMAKE_BINARY_DIR}/magic_enum
+        BINARY_DIR ${CMAKE_BINARY_DIR}/magic_enum_build
+)
+FetchContent_MakeAvailable(magic_enum)
 
 add_definitions(-DGLFW_INCLUDE_NONE=1)
 
@@ -28,22 +43,6 @@ set_target_properties(assimp
         PROPERTIES
         IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/builds/Debug/assimp-vc143-mt.dll
         IMPORTED_IMPLIB ${PROJECT_SOURCE_DIR}/Dependencies/lib/assimp-vc143-mt.lib
-)
-
-file(GLOB IMGUI_SOURCES
-        ${CMAKE_SOURCE_DIR}/Dependencies/include/imgui/*.cpp
-)
-
-add_library(ImGui
-        STATIC
-        ${IMGUI_SOURCES}
-)
-
-target_include_directories(ImGui
-        PUBLIC
-        imgui
-        ${CMAKE_INCLUDE_PATH}
-        ${CMAKE_SOURCE_DIR}/Dependencies/include
 )
 
 add_subdirectory(core)

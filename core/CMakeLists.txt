@@ -32,9 +32,8 @@ target_include_directories(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
-        glog::glog
         glfw3
         glm::glm
         assimp
-        ImGui
+        magic_enum        
 )

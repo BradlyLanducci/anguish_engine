@@ -2,7 +2,7 @@
 #include <utilities/keyboard.h>
 #include <utilities/camera.h>
 
-#include <glog/logging.h>
+#include <utilities/logger.h>
 
 //------------------------------------------------------------------//
 
@@ -32,19 +32,19 @@ void Character::physicsUpdate(float delta)
     float amountToMove{ 200.f * delta };
 
     Vector2 gp{ globalPosition() };
-    if (Keyboard::isPressed(263)) // left
+    if (Keyboard::isPressed(Keyboard::Key::Left)) // left
     {
         gp.x -= amountToMove;
     }
-    if (Keyboard::isPressed(265)) // up
+    if (Keyboard::isPressed(Keyboard::Key::Up)) // up
     {
         m_jumper.begin(0.3f, 300.f);
     }
-    if (Keyboard::isPressed(262)) // right
+    if (Keyboard::isPressed(Keyboard::Key::Right)) // right
     {
         gp.x += amountToMove;
     }
-    if (Keyboard::isPressed(264)) // down
+    if (Keyboard::isPressed(Keyboard::Key::Down)) // down
     {
         gp.y += amountToMove;
     }

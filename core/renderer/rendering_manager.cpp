@@ -2,7 +2,7 @@
 #include <objects/sprite_object.h>
 #include <utilities/window.h>
 
-#include <glog/logging.h>
+#include <utilities/logger.h>
 
 //------------------------------------------------------------------//
 
@@ -27,7 +27,7 @@ RenderingManager &RenderingManager::get()
 void RenderingManager::addObject(Sprite *sprite)
 {
     m_sprites.push_back(sprite);
-    LOG(INFO) << "Added object now we have " << m_sprites.size() << " objects";
+    Log(Info) << "Added object now we have " << m_sprites.size() << " objects";
 }
 
 //------------------------------------------------------------------//

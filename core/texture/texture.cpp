@@ -10,66 +10,66 @@
 
 Texture::Texture()
 {
-	glGenTextures(1, &m_id);
-	checkGLError();
-	glBindTexture(GL_TEXTURE_2D, m_id);
-	checkGLError();
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	checkGLError();
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	checkGLError();
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	checkGLError();
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	checkGLError();
+    glGenTextures(1, &m_id);
+    checkGLError();
+    glBindTexture(GL_TEXTURE_2D, m_id);
+    checkGLError();
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    checkGLError();
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    checkGLError();
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    checkGLError();
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    checkGLError();
 }
 
 //------------------------------------------------------------------//
 
 Vector2i Texture::getSize() const
 {
-	return m_size;
+    return m_size;
 }
 
 //------------------------------------------------------------------//
 
 void Texture::setSize(Vector2i size)
 {
-	m_size = size;
+    m_size = size;
 }
 
 //------------------------------------------------------------------//
 
-void Texture::load(const std::string& path)
+void Texture::load(const std::string &path)
 {
-    int &x{reinterpret_cast<int&>(m_size.x)};
-    int &y{reinterpret_cast<int&>(m_size.y)};
+    int &x{ reinterpret_cast<int &>(m_size.x) };
+    int &y{ reinterpret_cast<int &>(m_size.y) };
 
     mp_data = stbi_load(path.c_str(), &x, &y, &m_channels, 0);
 
-	if (mp_data)
-	{
-		glBindTexture(GL_TEXTURE_2D, m_id);
-		checkGLError();
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_size.x, m_size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, mp_data);
-		checkGLError();
-		glGenerateMipmap(GL_TEXTURE_2D);
-		checkGLError();
+    if (mp_data)
+    {
+        glBindTexture(GL_TEXTURE_2D, m_id);
+        checkGLError();
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_size.x, m_size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, mp_data);
+        checkGLError();
+        glGenerateMipmap(GL_TEXTURE_2D);
+        checkGLError();
 
-		stbi_image_free(mp_data);
-	}
-	else
-	{
-		LOG(ERROR) << "Failed to load texture with file path " << path;
-	}
+        stbi_image_free(mp_data);
+    }
+    else
+    {
+        Log(Error) << "Failed to load texture with file path " << path;
+    }
 }
 
 //------------------------------------------------------------------//
 
 void Texture::bind()
 {
-	glBindTexture(GL_TEXTURE_2D, m_id);
-	checkGLError();
+    glBindTexture(GL_TEXTURE_2D, m_id);
+    checkGLError();
 }
 
 //------------------------------------------------------------------//

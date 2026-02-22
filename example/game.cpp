@@ -5,16 +5,14 @@
 #include <renderer/rendering_manager.h>
 #include <scenes/scene.h>
 
-#include <glog/logging.h>
+#include <utilities/logger.h>
 #include <glad/glad.h>
 
 //------------------------------------------------------------------//
 
-Game::Game(char *&binaryName)
+Game::Game()
     : mp_window(Window::get())
 {
-    google::InitGoogleLogging(binaryName);
-
     setScene(new GrassScene());
 }
 
@@ -37,7 +35,7 @@ int Game::run()
 {
     if (!mp_window)
     {
-        LOG(INFO) << "Failed to start Anguish.";
+        Log(Info) << "Failed to start Anguish.";
         return -1;
     }
 

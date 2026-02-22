@@ -2,7 +2,7 @@
 #include <objects/collision_object.h>
 #include <physics/aabb.h>
 
-#include <glog/logging.h>
+#include <utilities/logger.h>
 
 //------------------------------------------------------------------//
 
@@ -33,7 +33,7 @@ const std::vector<CollisionObject *> &PhysicsManager::getCollisionObjects()
 void PhysicsManager::addCollisionObject(CollisionObject *collisionObject)
 {
     m_collisionObjects.push_back(collisionObject);
-    LOG(INFO) << "Added collision object now we have " << m_collisionObjects.size() << " objects";
+    Log(Info) << "Added collision object now we have " << m_collisionObjects.size() << " objects";
 }
 
 //------------------------------------------------------------------//
@@ -41,24 +41,30 @@ void PhysicsManager::addCollisionObject(CollisionObject *collisionObject)
 void PhysicsManager::addObject(Object *object)
 {
     m_objects.push_back(object);
-    LOG(INFO) << "Added object " << object << " now we have " << m_objects.size() << " objects";
+    Log(Info) << "Added object " << object << " now we have " << m_objects.size() << " objects";
 }
 
 //------------------------------------------------------------------//
 
 void PhysicsManager::update(float currentTime)
 {
-    static float lastTime = 0.f;
+    static float lastTime{};
+    static float dtAccumulator{};
 
-    if (currentTime - lastTime >= PHYSICS_INTERVAL)
+    float deltaTime{ currentTime - lastTime };
+    lastTime = currentTime;
+
+    dtAccumulator += deltaTime;
+
+    /*
+        We want to calculate all possible physics frames that we have available.
+    */
+    while (dtAccumulator >= PHYSICS_INTERVAL)
     {
-        const float delta{ std::min(currentTime - lastTime, PHYSICS_INTERVAL) };
-        lastTime = currentTime;
-
         // Call physics update
         for (const auto &o : m_objects)
         {
-            o->physicsUpdate(delta);
+            o->physicsUpdate(PHYSICS_INTERVAL);
         }
 
         // Collect collisions
@@ -114,6 +120,8 @@ void PhysicsManager::update(float currentTime)
                 parent->setGlobalPosition(roundedPos);
             }
         }
+
+        dtAccumulator -= PHYSICS_INTERVAL;
     }
 }
 

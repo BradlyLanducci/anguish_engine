@@ -2,7 +2,7 @@
 #include <idle/idle_manager.h>
 #include <physics/physics_manager.h>
 
-#include <glog/logging.h>
+#include <utilities/logger.h>
 
 //------------------------------------------------------------------//
 
