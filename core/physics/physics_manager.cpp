@@ -52,11 +52,7 @@ void PhysicsManager::update(float currentTime)
 
     if (currentTime - lastTime >= PHYSICS_INTERVAL)
     {
-        /*
-            I've clamped the max delta to be 60 physics fps
-            You'd probably actually want this to be configurable
-        */
-        const float delta{ std::min(currentTime - lastTime, 1.f / 60.f) };
+        const float delta{ std::min(currentTime - lastTime, PHYSICS_INTERVAL) };
         lastTime = currentTime;
 
         // Call physics update
@@ -102,19 +98,19 @@ void PhysicsManager::update(float currentTime)
 
         for (auto &collision : collisions)
         {
-            CollisionObject *co1 = collision.first;
-            CollisionObject *co2 = collision.second;
+            CollisionObject *co1{ collision.first };
+            CollisionObject *co2{ collision.second };
 
             Rect r1{ co1->globalRect() };
             Rect r2{ co2->globalRect() };
 
-            Vector2 offset = AABB::collide(r1, r2);
-            Object *parent = co1->getParent();
+            Vector2 offset{ AABB::collide(r1, r2) };
+            Object *parent{ co1->getParent() };
             co1->collided.emit();
             if (parent)
             {
-                Vector2 offsetPos = co1->globalPosition() + offset;
-                Vector2 roundedPos = Vector2(std::round(offsetPos.x), std::round(offsetPos.y));
+                Vector2 offsetPos{ co1->globalPosition() + offset };
+                Vector2 roundedPos{ Vector2(std::round(offsetPos.x), std::round(offsetPos.y)) };
                 parent->setGlobalPosition(roundedPos);
             }
         }

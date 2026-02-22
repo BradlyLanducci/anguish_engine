@@ -8,14 +8,14 @@
 class CollisionObject : public Object
 {
 public:
-	CollisionObject();
-	~CollisionObject() override = default;
+    CollisionObject();
+    ~CollisionObject() override = default;
 
-	Signal collided;
+    Signal collided;
 
 private:
-	void physicsUpdate(float delta) override;
-	void idleUpdate(float delta) override;
+    void physicsUpdate(float delta) override;
+    void idleUpdate(float delta) override;
 };
 
 //------------------------------------------------------------------//

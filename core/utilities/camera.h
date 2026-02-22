@@ -1,21 +1,22 @@
 #pragma once
 
-#include <glm/gtc/matrix_transform.hpp>
 #include <utilities/data_structures.h>
-#include <objects/object.h>
+#include <objects/camera_object.h>
 
 //------------------------------------------------------------------//
 
-class Camera : public Object
+class Camera
 {
 public:
     static Camera &get();
 
-private:
-    Camera();
-    ~Camera() override = default;
+    void setCurrent(CameraObject *p_camera);
 
-    glm::mat4 m_view{ 1.f };
+private:
+    Camera() = default;
+    ~Camera() = default;
+
+    CameraObject *mp_camera{ nullptr };
 };
 
 //------------------------------------------------------------------//

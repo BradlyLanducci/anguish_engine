@@ -12,16 +12,26 @@ Camera &Camera::get()
 
 //------------------------------------------------------------------//
 
-Camera::Camera()
-    : Object(false, false)
+void Camera::setCurrent(CameraObject *p_camera)
 {
-    moved.connect([this]()
+    if (mp_camera)
     {
-        Vector2 gp{ globalPosition() };
-        glm::mat4 translate = glm::translate(m_view, { -gp.x + static_cast<float>(WINDOW_WIDTH) / 2.f,
-                                                       -gp.y + static_cast<float>(WINDOW_HEIGHT) / 2.f, 0.0f });
-        RenderingManager::setViewMatrix(translate);
-    });
+        // We can remove all connections in this case
+        mp_camera->moved.removeConnections();
+    }
+
+    mp_camera = p_camera;
+
+    (void)mp_camera->moved.connect(
+        [this]()
+        {
+            Vector2 gp{ mp_camera->globalPosition() };
+            Vector2 windowSize{ Window::size() };
+            glm::mat4 translate{ glm::translate(mp_camera->view(),
+                                                { -gp.x + static_cast<float>(windowSize.x) / 2.f,
+                                                  -gp.y + static_cast<float>(windowSize.y) / 2.f, 0.0f }) };
+            RenderingManager::setViewMatrix(translate);
+        });
 }
 
 //------------------------------------------------------------------//

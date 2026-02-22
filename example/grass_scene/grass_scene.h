@@ -2,6 +2,8 @@
 
 #include <grass_scene/environment/grass.h>
 #include <grass_scene/player/character.h>
+
+#include <objects/camera_object.h>
 #include <scenes/scene.h>
 
 //------------------------------------------------------------------//
@@ -13,8 +15,9 @@ public:
     ~GrassScene() override = default;
 
 private:
-    Character *c{ nullptr };
-    Grass *g{ nullptr };
+    CameraObject *mp_camera;
+    Character *mp_character{ nullptr };
+    Grass *mp_grass{ nullptr };
 };
 
 //------------------------------------------------------------------//

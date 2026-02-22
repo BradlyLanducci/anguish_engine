@@ -58,8 +58,6 @@ void Character::physicsUpdate(float delta)
     }
 
     setGlobalPosition(gp);
-
-    Camera::get().setGlobalPosition(gp);
 }
 
 //------------------------------------------------------------------//

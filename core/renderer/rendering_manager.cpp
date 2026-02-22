@@ -36,7 +36,7 @@ void RenderingManager::update(float currentTime)
 {
     for (const auto &sprite : m_sprites)
     {
-        Vector2 windowSize{ Window::getSize() };
+        Vector2 windowSize{ Window::size() };
         m_projection = glm::ortho(0.0f, windowSize.x, windowSize.y, 0.0f);
         sprite->setProjectionMatrix(m_projection);
         sprite->setViewMatrix(m_view);
@@ -45,7 +45,6 @@ void RenderingManager::update(float currentTime)
 }
 
 //------------------------------------------------------------------//
-
 
 void RenderingManager::setViewMatrix(const glm::mat4 &view)
 {

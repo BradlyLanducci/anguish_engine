@@ -11,7 +11,7 @@
 //------------------------------------------------------------------//
 
 Game::Game(char *&binaryName)
-    : mp_window(Window::getWindow())
+    : mp_window(Window::get())
 {
     google::InitGoogleLogging(binaryName);
 
