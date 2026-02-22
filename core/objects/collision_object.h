@@ -12,10 +12,6 @@ public:
     ~CollisionObject() override = default;
 
     Signal collided;
-
-private:
-    void physicsUpdate(float delta) override;
-    void idleUpdate(float delta) override;
 };
 
 //------------------------------------------------------------------//

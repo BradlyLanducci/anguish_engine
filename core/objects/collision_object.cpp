@@ -4,21 +4,9 @@
 //------------------------------------------------------------------//
 
 CollisionObject::CollisionObject()
+    : Object(false, false)
 {
-	addPhysicsCb([this] (float delta) { physicsUpdate(delta); });
-	PhysicsManager::addCollisionObject(this);
-}
-
-//------------------------------------------------------------------//
-
-void CollisionObject::physicsUpdate(float delta)
-{
-}
-
-//------------------------------------------------------------------//
-
-void CollisionObject::idleUpdate(float delta)
-{
+    PhysicsManager::addCollisionObject(this);
 }
 
 //------------------------------------------------------------------//

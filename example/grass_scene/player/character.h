@@ -15,7 +15,6 @@ public:
     Character();
     ~Character() override = default;
 
-    void idleUpdate(float delta) override;
     void physicsUpdate(float delta) override;
 
 private:

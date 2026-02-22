@@ -37,8 +37,6 @@ public:
     Signal scaled;
 
 protected:
-    void addIdleCb(const std::function<void(float)> &cb);
-    void addPhysicsCb(const std::function<void(float)> &cb);
     void setParent(Object *p_parent);
 
     Object *mp_parent{ nullptr };
@@ -47,8 +45,6 @@ protected:
 
 private:
     std::vector<Object *> m_children;
-    std::vector<std::function<void(float)>> m_idleCbs;
-    std::vector<std::function<void(float)>> m_physicsCbs;
 };
 
 //------------------------------------------------------------------//

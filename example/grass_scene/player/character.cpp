@@ -7,7 +7,8 @@
 //------------------------------------------------------------------//
 
 Character::Character()
-    : mp_sprite(new Sprite())
+    : Object(false, true)
+    , mp_sprite(new Sprite())
     , mp_collision(new CollisionObject())
     , m_jumper(this, mp_collision)
 {
@@ -16,15 +17,6 @@ Character::Character()
 
     mp_sprite->setTexture("example/grass_scene/textures/test.png");
     mp_collision->setSize(mp_sprite->rect().size);
-
-    addIdleCb([this](float delta) { idleUpdate(delta); });
-    addPhysicsCb([this](float delta) { physicsUpdate(delta); });
-}
-
-//------------------------------------------------------------------//
-
-void Character::idleUpdate(float delta)
-{
 }
 
 //------------------------------------------------------------------//

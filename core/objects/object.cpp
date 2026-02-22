@@ -45,20 +45,6 @@ void Object::addChild(Object *p_child)
 
 //------------------------------------------------------------------//
 
-void Object::addIdleCb(const std::function<void(float)> &cb)
-{
-    m_idleCbs.push_back(cb);
-}
-
-//------------------------------------------------------------------//
-
-void Object::addPhysicsCb(const std::function<void(float)> &cb)
-{
-    m_physicsCbs.push_back(cb);
-}
-
-//------------------------------------------------------------------//
-
 void Object::setParent(Object *p_parent)
 {
     mp_parent = p_parent;
@@ -75,20 +61,12 @@ Object *Object::getParent() const
 
 void Object::idleUpdate(float delta)
 {
-    for (const auto &cb : m_idleCbs)
-    {
-        cb(delta);
-    }
 }
 
 //------------------------------------------------------------------//
 
 void Object::physicsUpdate(float delta)
 {
-    for (const auto &cb : m_physicsCbs)
-    {
-        cb(delta);
-    }
 }
 
 //------------------------------------------------------------------//
