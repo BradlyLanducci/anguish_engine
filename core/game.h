@@ -15,12 +15,12 @@ public:
     ~Game();
 
     int run();
-    void setScene(Scene *s);
+    void setScene(Scene *p_scene);
 
 private:
     GLFWwindow *mp_window;
 
-    Scene *m_scene{ nullptr };
+    Scene *mp_scene{ nullptr };
 };
 
 //------------------------------------------------------------------//

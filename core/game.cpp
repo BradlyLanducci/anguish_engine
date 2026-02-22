@@ -1,5 +1,4 @@
 #include <game.h>
-#include <grass_scene/grass_scene.h>
 #include <idle/idle_manager.h>
 #include <physics/physics_manager.h>
 #include <renderer/rendering_manager.h>
@@ -13,17 +12,16 @@
 Game::Game()
     : mp_window(Window::get())
 {
-    setScene(new GrassScene());
 }
 
 //------------------------------------------------------------------//
 
 Game::~Game()
 {
-    if (m_scene)
+    if (mp_scene)
     {
-        delete m_scene;
-        m_scene = nullptr;
+        delete mp_scene;
+        mp_scene = nullptr;
     }
 
     glUseProgram(0);
@@ -35,7 +33,7 @@ int Game::run()
 {
     if (!mp_window)
     {
-        Log(Info) << "Failed to start Anguish.";
+        Log(Info) << "Failed to start game.";
         return -1;
     }
 
@@ -43,7 +41,7 @@ int Game::run()
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        float currentTime = static_cast<float>(glfwGetTime()); // Should they use their own current time??
+        float currentTime = static_cast<float>(glfwGetTime());
         IdleManager::update(currentTime);
         PhysicsManager::update(currentTime);
         RenderingManager::update(currentTime);
@@ -59,12 +57,12 @@ int Game::run()
 
 void Game::setScene(Scene *s)
 {
-    if (m_scene)
+    if (mp_scene)
     {
-        delete m_scene;
+        delete mp_scene;
     }
 
-    m_scene = s;
+    mp_scene = s;
 }
 
 //------------------------------------------------------------------//
