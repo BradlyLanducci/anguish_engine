@@ -60,7 +60,7 @@ struct Rect
     [[nodiscard]] Vector2 topLeft() const;
     [[nodiscard]] Vector2 topRight() const;
     [[nodiscard]] Vector2 bottomLeft() const;
-    [[nodiscard]] Vector2 bottomRight();
+    [[nodiscard]] Vector2 bottomRight() const;
 };
 
 //------------------------------------------------------------------//

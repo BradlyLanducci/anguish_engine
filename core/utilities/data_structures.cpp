@@ -149,21 +149,21 @@ Vector2 Rect::topLeft() const
 
 Vector2 Rect::topRight() const
 {
-    return { this->origin.x + this->size.x, this->origin.y };
+    return { this->origin.x + this->size.x * this->scale.x, this->origin.y };
 }
 
 //------------------------------------------------------------------//
 
 Vector2 Rect::bottomLeft() const
 {
-    return { this->origin.x, this->origin.y + this->size.y };
+    return { this->origin.x, this->origin.y + this->size.y * this->scale.y };
 }
 
 //------------------------------------------------------------------//
 
-Vector2 Rect::bottomRight()
+Vector2 Rect::bottomRight() const
 {
-    return { this->origin + this->size };
+    return { this->origin + this->size * this->scale };
 }
 
 //------------------------------------------------------------------//

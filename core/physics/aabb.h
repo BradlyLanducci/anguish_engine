@@ -9,12 +9,12 @@
 class AABB
 {
 public:
-	static bool aabb(Rect r1, Rect r2);
-	static Vector2 collide(Rect r1, Rect r2);
+    static bool aabb(const Rect &r1, const Rect &r2);
+    static Vector2 collide(const Rect &r1, const Rect &r2);
 
 private:
-	AABB() = default;
-	~AABB() = default;
+    AABB() = default;
+    ~AABB() = default;
 };
 
 //------------------------------------------------------------------//

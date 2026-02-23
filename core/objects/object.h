@@ -26,24 +26,23 @@ public:
     [[nodiscard]] Vector2 globalPosition() const;
     [[nodiscard]] Vector2 size() const;
     [[nodiscard]] Vector2 scale() const;
+    [[nodiscard]] Object *parent() const;
 
     void setRect(const Rect &rect);
     void setGlobalPosition(Vector2 globalPosition);
     void setSize(const Vector2 &size);
     void setScale(const Vector2 &scale);
+    void setParent(Object *p_parent);
 
     Signal moved;
     Signal resized;
     Signal scaled;
 
-protected:
-    void setParent(Object *p_parent);
-
+private:
     Object *mp_parent{ nullptr };
     Rect m_rect;
     Vector2 m_globalPosition;
 
-private:
     std::vector<Object *> m_children;
 };
 

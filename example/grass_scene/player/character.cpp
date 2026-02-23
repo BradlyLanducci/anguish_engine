@@ -15,23 +15,24 @@ Character::Character()
     addChild(mp_sprite);
     addChild(mp_collision);
 
-    mp_sprite->setTexture("example/grass_scene/textures/test.png");
-    mp_collision->setSize(mp_sprite->rect().size);
+    mp_sprite->setTexture("example/grass_scene/textures/bananaman.png");
+    mp_sprite->setScale({ 0.25, 0.25 });
+    mp_collision->setSize(mp_sprite->rect().size * mp_sprite->rect().scale);
 }
 
 //------------------------------------------------------------------//
 
 void Character::physicsUpdate(float delta)
 {
+    Vector2 gp{ globalPosition() };
     if (m_jumper.state != Jumper::State::Jumping)
     {
         float gravity{ 300.f * delta };
-        m_globalPosition.y += gravity;
+        gp.y += gravity;
     }
 
     float amountToMove{ 200.f * delta };
 
-    Vector2 gp{ globalPosition() };
     if (Keyboard::isPressed(Keyboard::Key::Left))
     {
         gp.x -= amountToMove;
@@ -43,10 +44,6 @@ void Character::physicsUpdate(float delta)
     if (Keyboard::isPressed(Keyboard::Key::Right))
     {
         gp.x += amountToMove;
-    }
-    if (Keyboard::isPressed(Keyboard::Key::Down))
-    {
-        gp.y += amountToMove;
     }
 
     setGlobalPosition(gp);

@@ -113,6 +113,13 @@ Vector2 Object::scale() const
 
 //------------------------------------------------------------------//
 
+Object *Object::parent() const
+{
+    return mp_parent;
+}
+
+//------------------------------------------------------------------//
+
 void Object::setRect(const Rect &rect)
 {
     m_rect = rect;
