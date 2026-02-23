@@ -1,7 +1,7 @@
 #pragma once
 
 #include <objects/item.h>
-#include <utilities/data_structures.h>
+#include <utilities/rect.h>
 #include <utilities/signal.h>
 
 #include <functional>

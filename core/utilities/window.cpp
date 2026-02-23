@@ -1,5 +1,5 @@
 #include <utilities/window.h>
-#include <utilities/data_structures.h>
+#include <utilities/vector2.h>
 #include <utilities/keyboard.h>
 
 #include <cstdint>

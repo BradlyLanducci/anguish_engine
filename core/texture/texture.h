@@ -2,7 +2,7 @@
 
 //------------------------------------------------------------------//
 
-#include <utilities/data_structures.h>
+#include <utilities/vector2i.h>
 #include <shaders/shader_program.h>
 
 #include <cstdint>

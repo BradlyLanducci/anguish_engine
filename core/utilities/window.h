@@ -2,7 +2,7 @@
 
 //------------------------------------------------------------------//
 
-#include <utilities/data_structures.h>
+#include <utilities/vector2.h>
 
 #include <GLFW/glfw3.h>
 

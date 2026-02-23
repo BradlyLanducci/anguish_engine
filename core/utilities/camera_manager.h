@@ -1,6 +1,5 @@
 #pragma once
 
-#include <utilities/data_structures.h>
 #include <objects/camera.h>
 
 //------------------------------------------------------------------//
