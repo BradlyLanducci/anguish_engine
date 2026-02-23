@@ -17,10 +17,26 @@ IdleManager &IdleManager::get()
 
 //------------------------------------------------------------------//
 
-void IdleManager::addObject(Object *object)
+IdleManager::~IdleManager()
 {
-    m_objects.push_back(object);
-    Log(Info) << "Added object " << object << " now we have " << m_objects.size() << " objects";
+    for (const auto &p_object : m_objects)
+    {
+        Log(Error) << "Leaked idle object " << p_object;
+    }
+}
+
+//------------------------------------------------------------------//
+
+void IdleManager::addObject(Object *p_object)
+{
+    m_objects.push_back(p_object);
+}
+
+//------------------------------------------------------------------//
+
+void IdleManager::removeObject(Object *p_object)
+{
+    std::erase(m_objects, p_object);
 }
 
 //------------------------------------------------------------------//

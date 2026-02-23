@@ -24,10 +24,26 @@ RenderingManager &RenderingManager::get()
 
 //------------------------------------------------------------------//
 
-void RenderingManager::addObject(Sprite *sprite)
+RenderingManager::~RenderingManager()
 {
-    m_sprites.push_back(sprite);
-    Log(Info) << "Added object now we have " << m_sprites.size() << " objects";
+    for (const auto &p_sprite : m_sprites)
+    {
+        Log(Error) << "Leaked sprite " << p_sprite;
+    }
+}
+
+//------------------------------------------------------------------//
+
+void RenderingManager::addSprite(Sprite *p_sprite)
+{
+    m_sprites.push_back(p_sprite);
+}
+
+//------------------------------------------------------------------//
+
+void RenderingManager::removeSprite(Sprite *p_sprite)
+{
+    std::erase(m_sprites, p_sprite);
 }
 
 //------------------------------------------------------------------//

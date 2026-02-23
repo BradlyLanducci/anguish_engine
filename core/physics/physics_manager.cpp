@@ -23,6 +23,16 @@ PhysicsManager &PhysicsManager::get()
 
 //------------------------------------------------------------------//
 
+PhysicsManager::~PhysicsManager()
+{
+    for (const auto &p_object : m_collisionObjects)
+    {
+        Log(Error) << "Leaked physics object " << p_object;
+    }
+}
+
+//------------------------------------------------------------------//
+
 const std::vector<Collision *> &PhysicsManager::getCollisionObjects()
 {
     return m_collisionObjects;
@@ -30,18 +40,30 @@ const std::vector<Collision *> &PhysicsManager::getCollisionObjects()
 
 //------------------------------------------------------------------//
 
-void PhysicsManager::addCollisionObject(Collision *collisionObject)
+void PhysicsManager::addCollisionObject(Collision *p_collisionObject)
 {
-    m_collisionObjects.push_back(collisionObject);
-    Log(Info) << "Added collision object now we have " << m_collisionObjects.size() << " objects";
+    m_collisionObjects.push_back(p_collisionObject);
 }
 
 //------------------------------------------------------------------//
 
-void PhysicsManager::addObject(Object *object)
+void PhysicsManager::addObject(Object *p_object)
 {
-    m_objects.push_back(object);
-    Log(Info) << "Added object " << object << " now we have " << m_objects.size() << " objects";
+    m_objects.push_back(p_object);
+}
+
+//------------------------------------------------------------------//
+
+void PhysicsManager::removeObject(Object *p_object)
+{
+    std::erase(m_objects, p_object);
+}
+
+//------------------------------------------------------------------//
+
+void PhysicsManager::removeCollisionObject(Object *p_object)
+{
+    std::erase(m_collisionObjects, p_object);
 }
 
 //------------------------------------------------------------------//

@@ -22,7 +22,7 @@ struct Log_impl
 {
     Log_impl(const char *file, int line, LogType type)
     {
-        std::cout << file << " (" << line << ") " << "[" << type << "]: ";
+        std::cout << file << " (" << line << ") " << "[" << magic_enum::enum_name<LogType>(type) << "]: ";
     }
 
     ~Log_impl()

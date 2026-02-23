@@ -16,17 +16,20 @@ class PhysicsManager
 {
 public:
     static PhysicsManager &get();
-    static const std::vector<Collision *> &getCollisionObjects();
-    static void addCollisionObject(Collision *collisionObject);
-    static void addObject(Object *object);
-    static void update(float currentTime);
+    ~PhysicsManager();
+
+    const std::vector<Collision *> &getCollisionObjects();
+    void addCollisionObject(Collision *p_collisionObject);
+    void addObject(Object *p_object);
+    void removeCollisionObject(Object *p_object);
+    void removeObject(Object *p_object);
+    void update(float currentTime);
 
     PhysicsManager(const PhysicsManager &) = delete;
     PhysicsManager &operator=(const PhysicsManager &) = delete;
 
 private:
     PhysicsManager() = default;
-    ~PhysicsManager() = default;
 
     static std::vector<Collision *> m_collisionObjects;
     static std::vector<Object *> m_objects;

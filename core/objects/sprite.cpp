@@ -8,7 +8,7 @@
 
 Sprite::Sprite()
 {
-    RenderingManager::addObject(this);
+    RenderingManager::get().addSprite(this);
 
     m_shaderProgram.setVertexShader("core/shaders/vert.glsl");
     m_shaderProgram.setFragmentShader("core/shaders/frag.glsl");
@@ -35,6 +35,13 @@ Sprite::Sprite()
     checkGLError();
 
     m_shaderProgram.mp_fragmentShader->setInt("texture1", 0);
+}
+
+//------------------------------------------------------------------//
+
+Sprite::~Sprite()
+{
+    RenderingManager::get().removeSprite(this);
 }
 
 //------------------------------------------------------------------//

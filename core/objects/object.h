@@ -39,10 +39,11 @@ public:
     Signal scaled;
 
 private:
+    bool m_idleObject{ true };
+    bool m_physicsObject{ true };
     Object *mp_parent{ nullptr };
     Rect m_rect;
     Vector2 m_globalPosition;
-
     std::vector<Object *> m_children;
 };
 

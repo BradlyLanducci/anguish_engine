@@ -30,7 +30,7 @@ void CameraManager::setCurrent(Camera *p_camera)
             glm::mat4 translate{ glm::translate(mp_camera->view(),
                                                 { -gp.x + static_cast<float>(windowSize.x) / 2.f,
                                                   -gp.y + static_cast<float>(windowSize.y) / 2.f, 0.0f }) };
-            RenderingManager::setViewMatrix(translate);
+            RenderingManager::get().setViewMatrix(translate);
         });
 }
 

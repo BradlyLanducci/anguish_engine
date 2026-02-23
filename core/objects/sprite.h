@@ -14,6 +14,7 @@ class Sprite : public Object
 {
 public:
     Sprite();
+    ~Sprite();
 
     void setProjectionMatrix(const glm::mat4 &projection) const;
     void setViewMatrix(const glm::mat4 &view) const;

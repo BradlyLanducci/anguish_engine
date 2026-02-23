@@ -7,15 +7,17 @@
 //------------------------------------------------------------------//
 
 Object::Object(bool doIdle, bool doPhysics)
+    : m_idleObject(doIdle)
+    , m_physicsObject(doPhysics)
 {
     if (doIdle)
     {
-        IdleManager::addObject(this);
+        IdleManager::get().addObject(this);
     }
 
     if (doPhysics)
     {
-        PhysicsManager::addObject(this);
+        PhysicsManager::get().addObject(this);
     }
 }
 
@@ -33,6 +35,16 @@ Object::~Object()
     }
 
     m_children.clear();
+
+    if (m_idleObject)
+    {
+        IdleManager::get().removeObject(this);
+    }
+
+    if (m_physicsObject)
+    {
+        PhysicsManager::get().removeObject(this);
+    }
 }
 
 //------------------------------------------------------------------//

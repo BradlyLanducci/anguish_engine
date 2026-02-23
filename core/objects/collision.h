@@ -9,7 +9,7 @@ class Collision : public Object
 {
 public:
     Collision();
-    ~Collision() override = default;
+    ~Collision() override;
 
     Signal collided;
 };

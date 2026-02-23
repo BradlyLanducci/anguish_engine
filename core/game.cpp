@@ -42,9 +42,9 @@ int Game::run()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         float currentTime = static_cast<float>(glfwGetTime());
-        IdleManager::update(currentTime);
-        PhysicsManager::update(currentTime);
-        RenderingManager::update(currentTime);
+        IdleManager::get().update(currentTime);
+        PhysicsManager::get().update(currentTime);
+        RenderingManager::get().update(currentTime);
 
         glfwSwapBuffers(mp_window);
         glfwPollEvents();

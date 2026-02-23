@@ -16,17 +16,19 @@ class RenderingManager
 {
 public:
     static RenderingManager &get();
-    static void addObject(Sprite *object);
-    static void update(float currentTime);
+    ~RenderingManager();
 
-    static void setViewMatrix(const glm::mat4 &view);
+    void addSprite(Sprite *p_sprite);
+    void removeSprite(Sprite *p_sprite);
+    void update(float currentTime);
+
+    void setViewMatrix(const glm::mat4 &view);
 
     RenderingManager(const RenderingManager &) = delete;
     RenderingManager &operator=(const RenderingManager &) = delete;
 
 private:
     RenderingManager() = default;
-    ~RenderingManager() = default;
 
     static std::vector<Sprite *> m_sprites;
     static glm::mat4 m_projection;

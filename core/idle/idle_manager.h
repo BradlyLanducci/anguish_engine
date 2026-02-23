@@ -16,15 +16,17 @@ class IdleManager
 {
 public:
     static IdleManager &get();
-    static void addObject(Object *object);
-    static void update(float currentTime);
+    ~IdleManager();
+
+    void addObject(Object *p_object);
+    void removeObject(Object *p_object);
+    void update(float currentTime);
 
     IdleManager(const IdleManager &) = delete;
     IdleManager &operator=(const IdleManager &) = delete;
 
 private:
     IdleManager() = default;
-    ~IdleManager() = default;
 
     static std::vector<Object *> m_objects;
 };

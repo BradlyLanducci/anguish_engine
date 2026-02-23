@@ -6,7 +6,14 @@
 Collision::Collision()
     : Object(false, false)
 {
-    PhysicsManager::addCollisionObject(this);
+    PhysicsManager::get().addCollisionObject(this);
+}
+
+//------------------------------------------------------------------//
+
+Collision::~Collision()
+{
+    PhysicsManager::get().removeCollisionObject(this);
 }
 
 //------------------------------------------------------------------//
