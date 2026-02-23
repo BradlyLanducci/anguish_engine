@@ -1,6 +1,6 @@
 #include <grass_scene/player/character.h>
 #include <utilities/keyboard.h>
-#include <utilities/camera.h>
+#include <utilities/camera_manager.h>
 
 #include <utilities/logger.h>
 
@@ -9,15 +9,17 @@
 Character::Character()
     : Object(false, true)
     , mp_sprite(new Sprite())
-    , mp_collision(new CollisionObject())
+    , mp_collision(new Collision())
     , m_jumper(this, mp_collision)
 {
+    setScale({ 0.25f, 0.25f });
+
     addChild(mp_sprite);
     addChild(mp_collision);
 
     mp_sprite->setTexture("example/grass_scene/textures/bananaman.png");
-    mp_sprite->setScale({ 0.25, 0.25 });
-    mp_collision->setSize(mp_sprite->rect().size * mp_sprite->rect().scale);
+
+    mp_collision->setSize(mp_sprite->size() * mp_sprite->scale());
 }
 
 //------------------------------------------------------------------//

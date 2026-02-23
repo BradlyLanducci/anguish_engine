@@ -1,4 +1,4 @@
-#include <objects/sprite_object.h>
+#include <objects/sprite.h>
 #include <renderer/rendering_manager.h>
 #include <shaders/shader.h>
 #include <ogl/gl_error.h>
@@ -42,7 +42,7 @@ Sprite::Sprite()
 void Sprite::setTexture(const std::string &texturePath)
 {
     m_texture.load(texturePath);
-    setSize(Vector2(m_texture.getSize()));
+    setSize(Vector2(m_texture.size()));
 }
 
 //------------------------------------------------------------------//
@@ -65,7 +65,7 @@ void Sprite::draw()
 {
     m_shaderProgram.mp_vertexShader->setMat4("model", m_model);
     m_shaderProgram.mp_vertexShader->setVec2("globalPos", globalPosition());
-    m_shaderProgram.mp_vertexShader->setVec2("spriteSize", m_texture.getSize() * scale());
+    m_shaderProgram.mp_vertexShader->setVec2("spriteSize", size() * scale());
     glUseProgram(m_shaderProgram.get());
     glBindVertexArray(m_vao.get());
     m_texture.bind();

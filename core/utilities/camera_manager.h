@@ -1,22 +1,22 @@
 #pragma once
 
 #include <utilities/data_structures.h>
-#include <objects/camera_object.h>
+#include <objects/camera.h>
 
 //------------------------------------------------------------------//
 
-class Camera
+class CameraManager
 {
 public:
-    static Camera &get();
+    static CameraManager &get();
 
-    void setCurrent(CameraObject *p_camera);
+    void setCurrent(Camera *p_camera);
 
 private:
-    Camera() = default;
-    ~Camera() = default;
+    CameraManager() = default;
+    ~CameraManager() = default;
 
-    CameraObject *mp_camera{ nullptr };
+    Camera *mp_camera{ nullptr };
 };
 
 //------------------------------------------------------------------//

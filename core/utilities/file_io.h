@@ -5,6 +5,8 @@
 #include <sstream>
 #include <utilities/logger.h>
 
+//------------------------------------------------------------------//
+
 namespace FileIO
 {
     static std::string toString(const std::string &path)
@@ -23,3 +25,5 @@ namespace FileIO
         return buffer.str();
     }
 }
+
+//------------------------------------------------------------------//

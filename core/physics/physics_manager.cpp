@@ -1,5 +1,5 @@
 #include <physics/physics_manager.h>
-#include <objects/collision_object.h>
+#include <objects/collision.h>
 #include <physics/aabb.h>
 
 #include <utilities/logger.h>
@@ -11,7 +11,7 @@ constexpr float PHYSICS_INTERVAL = 1.f / 60.f;
 //------------------------------------------------------------------//
 
 std::vector<Object *> PhysicsManager::m_objects;
-std::vector<CollisionObject *> PhysicsManager::m_collisionObjects;
+std::vector<Collision *> PhysicsManager::m_collisionObjects;
 
 //------------------------------------------------------------------//
 
@@ -23,14 +23,14 @@ PhysicsManager &PhysicsManager::get()
 
 //------------------------------------------------------------------//
 
-const std::vector<CollisionObject *> &PhysicsManager::getCollisionObjects()
+const std::vector<Collision *> &PhysicsManager::getCollisionObjects()
 {
     return m_collisionObjects;
 }
 
 //------------------------------------------------------------------//
 
-void PhysicsManager::addCollisionObject(CollisionObject *collisionObject)
+void PhysicsManager::addCollisionObject(Collision *collisionObject)
 {
     m_collisionObjects.push_back(collisionObject);
     Log(Info) << "Added collision object now we have " << m_collisionObjects.size() << " objects";
@@ -68,7 +68,7 @@ void PhysicsManager::update(float currentTime)
         }
 
         // Collect collisions
-        std::vector<std::pair<CollisionObject *, CollisionObject *>> collisions;
+        std::vector<std::pair<Collision *, Collision *>> collisions;
         for (const auto &co1 : m_collisionObjects)
         {
             for (const auto &co2 : m_collisionObjects)
@@ -104,8 +104,8 @@ void PhysicsManager::update(float currentTime)
 
         for (auto &collision : collisions)
         {
-            CollisionObject *co1{ collision.first };
-            CollisionObject *co2{ collision.second };
+            Collision *co1{ collision.first };
+            Collision *co2{ collision.second };
 
             Rect r1{ co1->globalRect() };
             Rect r2{ co2->globalRect() };

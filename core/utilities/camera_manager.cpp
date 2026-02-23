@@ -1,18 +1,18 @@
-#include <utilities/camera.h>
+#include <utilities/camera_manager.h>
 #include <renderer/rendering_manager.h>
 #include <utilities/window.h>
 
 //------------------------------------------------------------------//
 
-Camera &Camera::get()
+CameraManager &CameraManager::get()
 {
-    static Camera c;
+    static CameraManager c;
     return c;
 }
 
 //------------------------------------------------------------------//
 
-void Camera::setCurrent(CameraObject *p_camera)
+void CameraManager::setCurrent(Camera *p_camera)
 {
     if (mp_camera)
     {

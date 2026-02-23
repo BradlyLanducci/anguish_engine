@@ -4,8 +4,8 @@
 
 #include <grass_scene/player/jumper.h>
 
-#include <objects/collision_object.h>
-#include <objects/sprite_object.h>
+#include <objects/collision.h>
+#include <objects/sprite.h>
 
 //------------------------------------------------------------------//
 
@@ -19,7 +19,7 @@ public:
 
 private:
     Sprite *mp_sprite;
-    CollisionObject *mp_collision;
+    Collision *mp_collision;
     Jumper m_jumper;
 };
 

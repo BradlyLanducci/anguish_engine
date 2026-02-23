@@ -26,7 +26,7 @@ Texture::Texture()
 
 //------------------------------------------------------------------//
 
-Vector2i Texture::getSize() const
+Vector2i Texture::size() const
 {
     return m_size;
 }
@@ -42,10 +42,12 @@ void Texture::setSize(Vector2i size)
 
 void Texture::load(const std::string &path)
 {
-    int &x{ reinterpret_cast<int &>(m_size.x) };
-    int &y{ reinterpret_cast<int &>(m_size.y) };
+    int &x{ reinterpret_cast<int &>(m_originalSize.x) };
+    int &y{ reinterpret_cast<int &>(m_originalSize.y) };
 
     mp_data = stbi_load(path.c_str(), &x, &y, &m_channels, 0);
+
+    m_size = m_originalSize;
 
     if (mp_data)
     {

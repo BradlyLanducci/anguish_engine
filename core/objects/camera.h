@@ -6,10 +6,10 @@
 
 //------------------------------------------------------------------//
 
-class CameraObject : public Object
+class Camera : public Object
 {
 public:
-    CameraObject();
+    Camera();
 
     glm::mat4 view() const;
 

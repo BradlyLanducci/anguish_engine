@@ -2,7 +2,7 @@
 
 //------------------------------------------------------------------//
 
-Jumper::Jumper(Object *p_subject, CollisionObject *p_subject_collision)
+Jumper::Jumper(Object *p_subject, Collision *p_subject_collision)
     : mp_subject(p_subject)
     , mp_subjectCollision(p_subject_collision)
 {

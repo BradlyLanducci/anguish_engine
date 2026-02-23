@@ -5,11 +5,11 @@
 
 //------------------------------------------------------------------//
 
-class CollisionObject : public Object
+class Collision : public Object
 {
 public:
-    CollisionObject();
-    ~CollisionObject() override = default;
+    Collision();
+    ~Collision() override = default;
 
     Signal collided;
 };

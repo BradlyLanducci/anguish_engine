@@ -2,8 +2,8 @@
 
 //------------------------------------------------------------------//
 
-#include <objects/collision_object.h>
-#include <objects/sprite_object.h>
+#include <objects/collision.h>
+#include <objects/sprite.h>
 
 //------------------------------------------------------------------//
 
@@ -18,7 +18,7 @@ public:
 
 private:
     Sprite *m_sprite;
-    CollisionObject *m_collision;
+    Collision *m_collision;
 };
 
 //------------------------------------------------------------------//

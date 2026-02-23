@@ -1,22 +1,22 @@
-#include <objects/camera_object.h>
+#include <objects/camera.h>
 
 //------------------------------------------------------------------//
 
-CameraObject::CameraObject()
+Camera::Camera()
     : Object(true, false)
 {
 }
 
 //------------------------------------------------------------------//
 
-glm::mat4 CameraObject::view() const
+glm::mat4 Camera::view() const
 {
     return m_view;
 }
 
 //------------------------------------------------------------------//
 
-void CameraObject::follow(Object *p_object)
+void Camera::follow(Object *p_object)
 {
     if (mp_objectToFollow)
     {
@@ -28,7 +28,7 @@ void CameraObject::follow(Object *p_object)
 
 //------------------------------------------------------------------//
 
-void CameraObject::followObject()
+void Camera::followObject()
 {
     setGlobalPosition(mp_objectToFollow->globalPosition());
 }

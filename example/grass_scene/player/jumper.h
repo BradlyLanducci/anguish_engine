@@ -1,13 +1,13 @@
 #pragma once
 
-#include <objects/collision_object.h>
+#include <objects/collision.h>
 
 //------------------------------------------------------------------//
 
 class Jumper : public Object
 {
 public:
-    Jumper(Object *p_subject, CollisionObject *p_subject_collision);
+    Jumper(Object *p_subject, Collision *p_subject_collision);
 
     enum class State : uint32_t
     {
@@ -22,7 +22,7 @@ private:
     void physicsUpdate(float delta);
 
     Object *mp_subject{ nullptr };
-    CollisionObject *mp_subjectCollision{ nullptr };
+    Collision *mp_subjectCollision{ nullptr };
 
     float m_accumulator{};
     float m_jumpForce{};

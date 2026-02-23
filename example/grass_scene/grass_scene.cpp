@@ -1,11 +1,11 @@
 #include <grass_scene/grass_scene.h>
 
-#include <utilities/camera.h>
+#include <utilities/camera_manager.h>
 
 //------------------------------------------------------------------//
 
 GrassScene::GrassScene()
-    : mp_camera(new CameraObject())
+    : mp_camera(new Camera())
     , mp_character(new Character())
     , mp_grass(new Grass())
 
@@ -16,7 +16,7 @@ GrassScene::GrassScene()
 
     mp_camera->follow(mp_character);
 
-    Camera::get().setCurrent(mp_camera);
+    CameraManager::get().setCurrent(mp_camera);
 }
 
 //------------------------------------------------------------------//

@@ -5,7 +5,7 @@
 Grass::Grass()
     : Object()
     , m_sprite(new Sprite())
-    , m_collision(new CollisionObject())
+    , m_collision(new Collision())
 {
     addChild(m_sprite);
     addChild(m_collision);

@@ -1,5 +1,5 @@
 #include <renderer/rendering_manager.h>
-#include <objects/sprite_object.h>
+#include <objects/sprite.h>
 #include <utilities/window.h>
 
 #include <utilities/logger.h>
@@ -39,6 +39,7 @@ void RenderingManager::update(float currentTime)
         Vector2 windowSize{ Window::size() };
         m_projection = glm::ortho(0.0f, windowSize.x, windowSize.y, 0.0f);
         sprite->setProjectionMatrix(m_projection);
+        /// TODO: Batching.. this is very inefficient
         sprite->setViewMatrix(m_view);
         sprite->draw();
     }

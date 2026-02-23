@@ -1,9 +1,9 @@
-#include <objects/collision_object.h>
+#include <objects/collision.h>
 #include <physics/physics_manager.h>
 
 //------------------------------------------------------------------//
 
-CollisionObject::CollisionObject()
+Collision::Collision()
     : Object(false, false)
 {
     PhysicsManager::addCollisionObject(this);
