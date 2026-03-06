@@ -19,21 +19,21 @@ Vector2 Rect::topLeft() const
 
 Vector2 Rect::topRight() const
 {
-    return { this->origin.x + this->size.x * this->scale.x, this->origin.y };
+    return { this->origin.x + this->size.x, this->origin.y };
 }
 
 //------------------------------------------------------------------//
 
 Vector2 Rect::bottomLeft() const
 {
-    return { this->origin.x, this->origin.y + this->size.y * this->scale.y };
+    return { this->origin.x, this->origin.y + this->size.y };
 }
 
 //------------------------------------------------------------------//
 
 Vector2 Rect::bottomRight() const
 {
-    return { this->origin + this->size * this->scale };
+    return { this->origin + this->size };
 }
 
 //------------------------------------------------------------------//

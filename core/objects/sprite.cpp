@@ -34,7 +34,7 @@ Sprite::Sprite()
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(QUAD_INDICES), QUAD_INDICES, GL_STATIC_DRAW);
     checkGLError();
 
-    m_shaderProgram.mp_fragmentShader->setInt("texture1", 0);
+    m_shaderProgram.p_fragmentShader->setInt("texture1", 0);
 }
 
 //------------------------------------------------------------------//
@@ -56,23 +56,23 @@ void Sprite::setTexture(const std::string &texturePath)
 
 void Sprite::setProjectionMatrix(const glm::mat4 &projection) const
 {
-    m_shaderProgram.mp_vertexShader->setMat4("projection", projection);
+    m_shaderProgram.p_vertexShader->setMat4("projection", projection);
 }
 
 //------------------------------------------------------------------//
 
 void Sprite::setViewMatrix(const glm::mat4 &view) const
 {
-    m_shaderProgram.mp_vertexShader->setMat4("view", view);
+    m_shaderProgram.p_vertexShader->setMat4("view", view);
 }
 
 //------------------------------------------------------------------//
 
 void Sprite::draw()
 {
-    m_shaderProgram.mp_vertexShader->setMat4("model", m_model);
-    m_shaderProgram.mp_vertexShader->setVec2("globalPos", globalPosition());
-    m_shaderProgram.mp_vertexShader->setVec2("spriteSize", size() * scale());
+    m_shaderProgram.p_vertexShader->setMat4("model", m_model);
+    m_shaderProgram.p_vertexShader->setVec2("globalPos", globalPosition());
+    m_shaderProgram.p_vertexShader->setVec2("spriteSize", size() * scale());
     glUseProgram(m_shaderProgram.get());
     glBindVertexArray(m_vao.get());
     m_texture.bind();

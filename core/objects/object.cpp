@@ -92,7 +92,7 @@ Rect Object::rect() const
 
 Rect Object::globalRect() const
 {
-    return Rect{ m_rect.origin + m_globalPosition, m_rect.size, m_rect.scale };
+    return Rect{ globalPosition(), size(), scale() };
 }
 
 //------------------------------------------------------------------//
@@ -106,7 +106,16 @@ Vector2 Object::position() const
 
 Vector2 Object::globalPosition() const
 {
-    return m_globalPosition;
+    Vector2 gp{ m_rect.origin };
+
+    auto p_parent{ mp_parent };
+    while (p_parent)
+    {
+        gp += p_parent->rect().origin;
+        p_parent = p_parent->getParent();
+    }
+
+    return gp;
 }
 
 //------------------------------------------------------------------//
@@ -120,7 +129,16 @@ Vector2 Object::size() const
 
 Vector2 Object::scale() const
 {
-    return m_rect.scale;
+    Vector2 scale{ m_scale };
+
+    auto p_parent{ mp_parent };
+    while (p_parent)
+    {
+        scale *= p_parent->m_scale;
+        p_parent = p_parent->getParent();
+    }
+
+    return scale;
 }
 
 //------------------------------------------------------------------//
@@ -143,15 +161,17 @@ void Object::setRect(const Rect &rect)
 
 //------------------------------------------------------------------//
 
+void Object::setPosition(Vector2 position)
+{
+    m_rect.origin = position;
+    moved.emit();
+}
+
+//------------------------------------------------------------------//
+
 void Object::setGlobalPosition(Vector2 globalPosition)
 {
-    m_globalPosition = globalPosition;
-
-    for (auto &c : m_children)
-    {
-        c->setGlobalPosition(globalPosition + c->position());
-    }
-
+    m_rect.origin = globalPosition;
     moved.emit();
 }
 
@@ -167,7 +187,7 @@ void Object::setSize(const Vector2 &size)
 
 void Object::setScale(const Vector2 &scale)
 {
-    m_rect.scale = scale;
+    m_scale = scale;
     scaled.emit();
 }
 

@@ -12,7 +12,7 @@ Character::Character()
     , mp_collision(new Collision())
     , m_jumper(this, mp_collision)
 {
-    setScale({ 0.25f, 0.25f });
+    setScale({ 0.125f, 0.125f });
 
     addChild(mp_sprite);
     addChild(mp_collision);

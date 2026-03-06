@@ -29,6 +29,7 @@ public:
     [[nodiscard]] Object *parent() const;
 
     void setRect(const Rect &rect);
+    void setPosition(Vector2 position);
     void setGlobalPosition(Vector2 globalPosition);
     void setSize(const Vector2 &size);
     void setScale(const Vector2 &scale);
@@ -43,7 +44,7 @@ private:
     bool m_physicsObject{ true };
     Object *mp_parent{ nullptr };
     Rect m_rect;
-    Vector2 m_globalPosition;
+    Vector2 m_scale{ 1.f, 1.f };
     std::vector<Object *> m_children;
 };
 
