@@ -1,10 +1,9 @@
 #include <utilities/rect.h>
 
 //------------------------------------------------------------------//
-Rect::Rect(Vector2 _origin, Vector2 _size, Vector2 _scale)
+Rect::Rect(Vector2 _origin, Vector2 _size)
     : origin(_origin)
     , size(_size)
-    , scale(_scale)
 {
 }
 

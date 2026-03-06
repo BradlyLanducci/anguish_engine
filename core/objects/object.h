@@ -3,6 +3,7 @@
 #include <objects/item.h>
 #include <utilities/rect.h>
 #include <utilities/signal.h>
+#include <utilities/transform.h>
 
 #include <functional>
 
@@ -15,20 +16,19 @@ public:
     ~Object() override;
 
     void addChild(Object *p_child);
-    [[nodiscard]] Object *getParent() const;
 
     virtual void idleUpdate(float delta);
     virtual void physicsUpdate(float delta);
 
-    [[nodiscard]] Rect rect() const;
-    [[nodiscard]] Rect globalRect() const;
-    [[nodiscard]] Vector2 position() const;
+    [[nodiscard]] const Transform &transform() const;
+    [[nodiscard]] const Transform &globalTransform() const;
+    [[nodiscard]] const Vector2 &position() const;
     [[nodiscard]] Vector2 globalPosition() const;
-    [[nodiscard]] Vector2 size() const;
+    [[nodiscard]] const Vector2 &size() const;
     [[nodiscard]] Vector2 scale() const;
     [[nodiscard]] Object *parent() const;
 
-    void setRect(const Rect &rect);
+    void setTransform(const Transform &transform);
     void setPosition(Vector2 position);
     void setGlobalPosition(Vector2 globalPosition);
     void setSize(const Vector2 &size);
@@ -43,8 +43,8 @@ private:
     bool m_idleObject{ true };
     bool m_physicsObject{ true };
     Object *mp_parent{ nullptr };
-    Rect m_rect;
-    Vector2 m_scale{ 1.f, 1.f };
+    Vector2 m_size;
+    Transform m_transform;
     std::vector<Object *> m_children;
 };
 

@@ -97,8 +97,8 @@ void PhysicsManager::update(float currentTime)
             {
                 if (co1 != co2)
                 {
-                    Rect r1{ co1->globalRect() };
-                    Rect r2{ co2->globalRect() };
+                    Rect r1{ co1->globalPosition(), co1->size() };
+                    Rect r2{ co2->globalPosition(), co2->size() };
 
                     if (AABB::aabb(r1, r2))
                     {
@@ -124,16 +124,13 @@ void PhysicsManager::update(float currentTime)
             }
         }
 
-        for (auto &collision : collisions)
+        for (auto &[co1, co2] : collisions)
         {
-            Collision *co1{ collision.first };
-            Collision *co2{ collision.second };
-
-            Rect r1{ co1->globalRect() };
-            Rect r2{ co2->globalRect() };
+            Rect r1{ co1->globalPosition(), co1->size() };
+            Rect r2{ co2->globalPosition(), co2->size() };
 
             Vector2 offset{ AABB::collide(r1, r2) };
-            Object *parent{ co1->getParent() };
+            Object *parent{ co1->parent() };
             co1->collided.emit();
             if (parent)
             {

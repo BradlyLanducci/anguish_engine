@@ -64,13 +64,6 @@ void Object::setParent(Object *p_parent)
 
 //------------------------------------------------------------------//
 
-Object *Object::getParent() const
-{
-    return mp_parent;
-}
-
-//------------------------------------------------------------------//
-
 void Object::idleUpdate(float delta)
 {
 }
@@ -83,36 +76,36 @@ void Object::physicsUpdate(float delta)
 
 //------------------------------------------------------------------//
 
-Rect Object::rect() const
+const Transform &Object::transform() const
 {
-    return m_rect;
+    return m_transform;
 }
 
 //------------------------------------------------------------------//
 
-Rect Object::globalRect() const
+const Transform &Object::globalTransform() const
 {
-    return Rect{ globalPosition(), size(), scale() };
+    return m_transform;
 }
 
 //------------------------------------------------------------------//
 
-Vector2 Object::position() const
+const Vector2 &Object::position() const
 {
-    return m_rect.origin;
+    return m_transform.position;
 }
 
 //------------------------------------------------------------------//
 
 Vector2 Object::globalPosition() const
 {
-    Vector2 gp{ m_rect.origin };
+    Vector2 gp{ m_transform.position };
 
-    auto p_parent{ mp_parent };
+    auto p_parent{ parent() };
     while (p_parent)
     {
-        gp += p_parent->rect().origin;
-        p_parent = p_parent->getParent();
+        gp += p_parent->m_transform.position;
+        p_parent = p_parent->parent();
     }
 
     return gp;
@@ -120,25 +113,25 @@ Vector2 Object::globalPosition() const
 
 //------------------------------------------------------------------//
 
-Vector2 Object::size() const
+Vector2 Object::scale() const
 {
-    return m_rect.size;
+    Vector2 scale{ m_transform.scale };
+
+    auto p_parent{ parent() };
+    while (p_parent)
+    {
+        scale *= p_parent->m_transform.scale;
+        p_parent = p_parent->parent();
+    }
+
+    return scale;
 }
 
 //------------------------------------------------------------------//
 
-Vector2 Object::scale() const
+const Vector2 &Object::size() const
 {
-    Vector2 scale{ m_scale };
-
-    auto p_parent{ mp_parent };
-    while (p_parent)
-    {
-        scale *= p_parent->m_scale;
-        p_parent = p_parent->getParent();
-    }
-
-    return scale;
+    return m_size;
 }
 
 //------------------------------------------------------------------//
@@ -150,12 +143,11 @@ Object *Object::parent() const
 
 //------------------------------------------------------------------//
 
-void Object::setRect(const Rect &rect)
+void Object::setTransform(const Transform &transform)
 {
-    m_rect = rect;
+    m_transform = transform;
 
     moved.emit();
-    resized.emit();
     scaled.emit();
 }
 
@@ -163,7 +155,7 @@ void Object::setRect(const Rect &rect)
 
 void Object::setPosition(Vector2 position)
 {
-    m_rect.origin = position;
+    m_transform.position = position;
     moved.emit();
 }
 
@@ -171,24 +163,24 @@ void Object::setPosition(Vector2 position)
 
 void Object::setGlobalPosition(Vector2 globalPosition)
 {
-    m_rect.origin = globalPosition;
+    m_transform.position = globalPosition;
     moved.emit();
-}
-
-//------------------------------------------------------------------//
-
-void Object::setSize(const Vector2 &size)
-{
-    m_rect.size = size;
-    resized.emit();
 }
 
 //------------------------------------------------------------------//
 
 void Object::setScale(const Vector2 &scale)
 {
-    m_scale = scale;
+    m_transform.scale = scale;
     scaled.emit();
+}
+
+//------------------------------------------------------------------//
+
+void Object::setSize(const Vector2 &size)
+{
+    m_size = size;
+    resized.emit();
 }
 
 //------------------------------------------------------------------//
