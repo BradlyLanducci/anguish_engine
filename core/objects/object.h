@@ -24,6 +24,7 @@ public:
     [[nodiscard]] const Transform &globalTransform() const;
     [[nodiscard]] const Vector2 &position() const;
     [[nodiscard]] Vector2 globalPosition() const;
+    [[nodiscard]] float rotation() const;
     [[nodiscard]] const Vector2 &size() const;
     [[nodiscard]] Vector2 scale() const;
     [[nodiscard]] Object *parent() const;
@@ -31,12 +32,14 @@ public:
     void setTransform(const Transform &transform);
     void setPosition(Vector2 position);
     void setGlobalPosition(Vector2 globalPosition);
+    void setRotation(float rotation);
     void setSize(const Vector2 &size);
     void setScale(const Vector2 &scale);
     void setParent(Object *p_parent);
 
     Signal moved;
     Signal resized;
+    Signal rotated;
     Signal scaled;
 
 private:

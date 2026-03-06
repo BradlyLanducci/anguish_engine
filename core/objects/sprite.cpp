@@ -70,9 +70,12 @@ void Sprite::setViewMatrix(const glm::mat4 &view) const
 
 void Sprite::draw()
 {
-    m_shaderProgram.p_vertexShader->setMat4("model", m_model);
-    m_shaderProgram.p_vertexShader->setVec2("globalPos", globalPosition());
-    m_shaderProgram.p_vertexShader->setVec2("spriteSize", size() * scale());
+    auto translatedModel{ glm::translate(m_model, glm::vec3(globalPosition().x, globalPosition().y, 1.f)) };
+    auto rotatedModel{ glm::rotate(translatedModel, rotation(), glm::vec3(0.f, 0.f, 1.f)) };
+    auto scaledModel{ glm::scale(rotatedModel, glm::vec3(size().x * scale().x, size().y * scale().y, 1.f)) };
+
+    m_shaderProgram.p_vertexShader->setMat4("model", scaledModel);
+
     glUseProgram(m_shaderProgram.get());
     glBindVertexArray(m_vao.get());
     m_texture.bind();

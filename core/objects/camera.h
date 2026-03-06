@@ -11,7 +11,7 @@ class Camera : public Object
 public:
     Camera();
 
-    glm::mat4 view() const;
+    const glm::mat4 &view() const;
 
     void follow(Object *p_object);
 

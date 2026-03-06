@@ -9,7 +9,7 @@ Camera::Camera()
 
 //------------------------------------------------------------------//
 
-glm::mat4 Camera::view() const
+const glm::mat4 &Camera::view() const
 {
     return m_view;
 }

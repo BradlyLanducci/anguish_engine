@@ -8,7 +8,7 @@ class Transform
 {
 public:
     Vector2 position;
-    Vector2 rotation;
+    float rotation{};
     Vector2 scale{ 1.f, 1.f };
 };
 

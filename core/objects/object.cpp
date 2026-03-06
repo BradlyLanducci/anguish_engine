@@ -113,6 +113,22 @@ Vector2 Object::globalPosition() const
 
 //------------------------------------------------------------------//
 
+float Object::rotation() const
+{
+    float rot{ m_transform.rotation };
+
+    auto p_parent{ parent() };
+    while (p_parent)
+    {
+        rot += p_parent->m_transform.rotation;
+        p_parent = p_parent->parent();
+    }
+
+    return rot;
+}
+
+//------------------------------------------------------------------//
+
 Vector2 Object::scale() const
 {
     Vector2 scale{ m_transform.scale };
@@ -165,6 +181,14 @@ void Object::setGlobalPosition(Vector2 globalPosition)
 {
     m_transform.position = globalPosition;
     moved.emit();
+}
+
+//------------------------------------------------------------------//
+
+void Object::setRotation(float rotation)
+{
+    m_transform.rotation = rotation;
+    rotated.emit();
 }
 
 //------------------------------------------------------------------//
