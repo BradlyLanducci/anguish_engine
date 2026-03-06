@@ -1,7 +1,6 @@
 #pragma once
 
-#include <utilities/vector2.h>
-#include <utilities/matrix.h>
+#include <math/vector2.h>
 
 //------------------------------------------------------------------//
 

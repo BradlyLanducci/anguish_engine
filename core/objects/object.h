@@ -1,9 +1,9 @@
 #pragma once
 
 #include <objects/item.h>
-#include <utilities/rect.h>
+#include <math/rect.h>
 #include <utilities/signal.h>
-#include <utilities/transform.h>
+#include <math/transform.h>
 
 #include <functional>
 

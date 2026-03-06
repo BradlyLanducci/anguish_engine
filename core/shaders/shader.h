@@ -3,8 +3,8 @@
 //------------------------------------------------------------------//
 
 #include <ogl/gl_object.h>
-#include <utilities/vector2.h>
-#include <utilities/vector2i.h>
+#include <math/vector2.h>
+#include <math/vector2i.h>
 
 #include <string>
 #include <glad/glad.h>

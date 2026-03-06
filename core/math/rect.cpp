@@ -1,4 +1,4 @@
-#include <utilities/rect.h>
+#include <math/rect.h>
 
 //------------------------------------------------------------------//
 Rect::Rect(Vector2 _origin, Vector2 _size)
