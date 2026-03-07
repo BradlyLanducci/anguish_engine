@@ -37,10 +37,10 @@ public:
     void setScale(const Vector2 &scale);
     void setParent(Object *p_parent);
 
-    Signal moved;
-    Signal resized;
-    Signal rotated;
-    Signal scaled;
+    Signal<Vector2> moved;
+    Signal<Vector2> resized;
+    Signal<float> rotated;
+    Signal<Vector2> scaled;
 
 private:
     bool m_idleObject{ true };

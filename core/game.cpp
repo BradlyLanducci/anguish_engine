@@ -3,8 +3,9 @@
 #include <physics/physics_manager.h>
 #include <renderer/rendering_manager.h>
 #include <scenes/scene.h>
-
+#include <utilities/time.h>
 #include <utilities/logger.h>
+
 #include <glad/glad.h>
 
 //------------------------------------------------------------------//
@@ -41,7 +42,7 @@ int Game::run()
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        float currentTime = static_cast<float>(glfwGetTime());
+        double currentTime = static_cast<double>(Time::now_s());
         IdleManager::get().update(currentTime);
         PhysicsManager::get().update(currentTime);
         RenderingManager::get().update(currentTime);

@@ -4,6 +4,7 @@
 
 Camera::Camera()
     : Object(true, false)
+    , m_followObject([this](Vector2 newPosition) { setGlobalPosition(newPosition); })
 {
 }
 
@@ -20,17 +21,10 @@ void Camera::follow(Object *p_object)
 {
     if (mp_objectToFollow)
     {
-        mp_objectToFollow->moved.disconnect(m_objectMovedHandle);
+        mp_objectToFollow->moved.disconnect(m_followObject);
     }
     mp_objectToFollow = p_object;
-    m_objectMovedHandle = p_object->moved.connect([this]() { followObject(); });
-}
-
-//------------------------------------------------------------------//
-
-void Camera::followObject()
-{
-    setGlobalPosition(mp_objectToFollow->globalPosition());
+    p_object->moved.connect(m_followObject);
 }
 
 //------------------------------------------------------------------//

@@ -23,7 +23,7 @@ public:
     void addObject(Object *p_object);
     void removeCollisionObject(Object *p_object);
     void removeObject(Object *p_object);
-    void update(float currentTime);
+    void update(double currentTime);
 
     PhysicsManager(const PhysicsManager &) = delete;
     PhysicsManager &operator=(const PhysicsManager &) = delete;

@@ -20,7 +20,7 @@ public:
 
     void addSprite(Sprite *p_sprite);
     void removeSprite(Sprite *p_sprite);
-    void update(float currentTime);
+    void update(double currentTime);
 
     void setViewMatrix(const glm::mat4 &view);
 

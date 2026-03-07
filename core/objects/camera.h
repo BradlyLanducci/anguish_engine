@@ -16,7 +16,7 @@ public:
     void follow(Object *p_object);
 
 private:
-    void followObject();
+    Slot<Vector2> m_followObject;
 
     uint32_t m_objectMovedHandle;
 

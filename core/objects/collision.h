@@ -11,7 +11,7 @@ public:
     Collision();
     ~Collision() override;
 
-    Signal collided;
+    Signal<Vector2> collided;
 };
 
 //------------------------------------------------------------------//

@@ -48,7 +48,7 @@ void RenderingManager::removeSprite(Sprite *p_sprite)
 
 //------------------------------------------------------------------//
 
-void RenderingManager::update(float currentTime)
+void RenderingManager::update(double currentTime)
 {
     for (const auto &sprite : m_sprites)
     {

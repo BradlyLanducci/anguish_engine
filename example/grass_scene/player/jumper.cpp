@@ -5,15 +5,19 @@
 Jumper::Jumper(Object *p_subject, Collision *p_subject_collision)
     : mp_subject(p_subject)
     , mp_subjectCollision(p_subject_collision)
+    , m_collided(
+          [this](Vector2 offset)
+          {
+              if (offset.y != 0.f)
+              {
+                  if (state == State::Falling)
+                  {
+                      state = State::Idle;
+                  }
+              }
+          })
 {
-    (void)mp_subjectCollision->collided.connect(
-        [this]()
-        {
-            if (state == State::Falling)
-            {
-                state = State::Idle;
-            }
-        });
+    mp_subjectCollision->collided.connect(m_collided);
 }
 
 //------------------------------------------------------------------//

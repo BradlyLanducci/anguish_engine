@@ -12,8 +12,10 @@ public:
     void setCurrent(Camera *p_camera);
 
 private:
-    CameraManager() = default;
+    CameraManager();
     ~CameraManager() = default;
+
+    Slot<Vector2> m_cameraMoved;
 
     Camera *mp_camera{ nullptr };
 };

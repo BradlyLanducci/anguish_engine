@@ -1,46 +1,89 @@
 #pragma once
 
+#include <vector>
 #include <functional>
-#include <unordered_map>
 
 //------------------------------------------------------------------//
 
-struct Signal
+/*
+    Modified from https://medium.com/brakulla/signal-slot-implementation-part-1-adb458454f05
+*/
+
+template <typename... Args>
+class Slot
 {
-    /*
-        Ugly temporary solution for the ability to disconnect slots from signals.
-    */
-    [[nodiscard]] uint32_t connect(const std::function<void()> &slot)
-    {
-        m_slots.try_emplace(m_handleIndex, slot);
+public:
+    Slot(const Slot &) = delete;
+    Slot(Slot &&) = delete;
+    Slot &operator=(const Slot &) = delete;
 
-        uint32_t handleIndex{ m_handleIndex };
-        m_handleIndex++;
-        return handleIndex;
+    explicit Slot(std::function<void(Args...)> cb)
+        : m_cb(cb)
+    {
     }
 
-    void disconnect(uint32_t signalHandle)
+    void operator()(Args... args)
     {
-        m_slots.erase(signalHandle);
+        call(args...);
     }
 
-    void emit() const
+    void call(Args... args)
     {
-        for (const auto &[_, slot] : m_slots)
+        m_cb(args...);
+    }
+
+private:
+    bool m_initiated{ false };
+    std::function<void(Args...)> m_cb;
+};
+
+//------------------------------------------------------------------//
+
+template <typename... Args>
+class Signal
+{
+public:
+    Signal(const Signal &) = delete;
+    Signal(Signal &&) = delete;
+    Signal &operator=(const Signal &) = delete;
+
+    Signal() = default;
+
+    void connect(Slot<Args...> &slot)
+    {
+        m_slots.push_back(&slot);
+    }
+
+    void disconnect(Slot<Args...> &slot)
+    {
+        for (auto it = m_slots.begin(); it != m_slots.end();)
         {
-            slot();
+            if (*it == &slot)
+            {
+                it = m_slots.erase(it);
+            }
+            else
+            {
+                it++;
+            }
         }
     }
 
-    void removeConnections()
+    void disconnectAll()
     {
         m_slots.clear();
     }
 
+    void emit(Args... args)
+    {
+        for (auto &slot : m_slots)
+        {
+            (*slot)(args...);
+        }
+    }
+
 private:
-    uint32_t m_handleIndex{};
-    using Slot = std::function<void()>;
-    std::unordered_map<uint32_t, Slot> m_slots;
+    std::vector<Slot<Args...> *> m_slots;
 };
 
 //------------------------------------------------------------------//

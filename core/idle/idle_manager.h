@@ -20,7 +20,7 @@ public:
 
     void addObject(Object *p_object);
     void removeObject(Object *p_object);
-    void update(float currentTime);
+    void update(double currentTime);
 
     IdleManager(const IdleManager &) = delete;
     IdleManager &operator=(const IdleManager &) = delete;

@@ -1,7 +1,7 @@
 #include <physics/physics_manager.h>
 #include <objects/collision.h>
 #include <physics/aabb.h>
-
+#include <utilities/time.h>
 #include <utilities/logger.h>
 
 //------------------------------------------------------------------//
@@ -68,12 +68,12 @@ void PhysicsManager::removeCollisionObject(Object *p_object)
 
 //------------------------------------------------------------------//
 
-void PhysicsManager::update(float currentTime)
+void PhysicsManager::update(double currentTime)
 {
-    static float lastTime{};
-    static float dtAccumulator{};
+    static double lastTime{ static_cast<double>(Time::now_s()) };
+    static double dtAccumulator{};
 
-    float deltaTime{ currentTime - lastTime };
+    double deltaTime{ currentTime - lastTime };
     lastTime = currentTime;
 
     dtAccumulator += deltaTime;
@@ -131,7 +131,7 @@ void PhysicsManager::update(float currentTime)
 
             Vector2 offset{ AABB::collide(r1, r2) };
             Object *parent{ co1->parent() };
-            co1->collided.emit();
+            co1->collided.emit(offset);
             if (parent)
             {
                 Vector2 offsetPos{ co1->globalPosition() + offset };

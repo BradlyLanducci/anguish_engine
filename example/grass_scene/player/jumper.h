@@ -24,6 +24,8 @@ private:
     Object *mp_subject{ nullptr };
     Collision *mp_subjectCollision{ nullptr };
 
+    Slot<Vector2> m_collided;
+
     float m_accumulator{};
     float m_jumpForce{};
     float m_jumpSeconds{};

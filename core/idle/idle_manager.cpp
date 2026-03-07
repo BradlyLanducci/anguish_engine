@@ -41,11 +41,11 @@ void IdleManager::removeObject(Object *p_object)
 
 //------------------------------------------------------------------//
 
-void IdleManager::update(float currentTime)
+void IdleManager::update(double currentTime)
 {
-    static float lastTime = 0.f;
+    static double lastTime = 0.f;
 
-    const float delta{ currentTime - lastTime };
+    const double delta{ currentTime - lastTime };
     lastTime = currentTime;
     for (const auto &o : m_objects)
     {

@@ -163,8 +163,8 @@ void Object::setTransform(const Transform &transform)
 {
     m_transform = transform;
 
-    moved.emit();
-    scaled.emit();
+    moved.emit(transform.position);
+    scaled.emit(transform.scale);
 }
 
 //------------------------------------------------------------------//
@@ -172,7 +172,7 @@ void Object::setTransform(const Transform &transform)
 void Object::setPosition(Vector2 position)
 {
     m_transform.position = position;
-    moved.emit();
+    moved.emit(position);
 }
 
 //------------------------------------------------------------------//
@@ -180,7 +180,7 @@ void Object::setPosition(Vector2 position)
 void Object::setGlobalPosition(Vector2 globalPosition)
 {
     m_transform.position = globalPosition;
-    moved.emit();
+    moved.emit(globalPosition);
 }
 
 //------------------------------------------------------------------//
@@ -188,7 +188,7 @@ void Object::setGlobalPosition(Vector2 globalPosition)
 void Object::setRotation(float rotation)
 {
     m_transform.rotation = rotation;
-    rotated.emit();
+    rotated.emit(rotation);
 }
 
 //------------------------------------------------------------------//
@@ -196,7 +196,7 @@ void Object::setRotation(float rotation)
 void Object::setScale(const Vector2 &scale)
 {
     m_transform.scale = scale;
-    scaled.emit();
+    scaled.emit(scale);
 }
 
 //------------------------------------------------------------------//
@@ -204,7 +204,7 @@ void Object::setScale(const Vector2 &scale)
 void Object::setSize(const Vector2 &size)
 {
     m_size = size;
-    resized.emit();
+    resized.emit(size);
 }
 
 //------------------------------------------------------------------//

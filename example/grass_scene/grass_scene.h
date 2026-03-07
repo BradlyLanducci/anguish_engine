@@ -17,7 +17,8 @@ public:
 private:
     Camera *mp_camera;
     Character *mp_character{ nullptr };
-    Grass *mp_grass{ nullptr };
+    Grass *mp_grass1{ nullptr };
+    Grass *mp_grass2{ nullptr };
 };
 
 //------------------------------------------------------------------//
