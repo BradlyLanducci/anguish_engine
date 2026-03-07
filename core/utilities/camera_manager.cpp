@@ -18,9 +18,9 @@ CameraManager::CameraManager()
           {
               Vector2 gp{ mp_camera->globalPosition() };
               Vector2 windowSize{ Window::size() };
-              glm::mat4 translate{ glm::translate(mp_camera->view(),
-                                                  { -gp.x + static_cast<float>(windowSize.x) / 2.f,
-                                                    -gp.y + static_cast<float>(windowSize.y) / 2.f, 0.0f }) };
+              glm::dmat4 translate{ glm::translate(mp_camera->view(),
+                                                   { -gp.x + static_cast<double>(windowSize.x) / 2.f,
+                                                     -gp.y + static_cast<double>(windowSize.y) / 2.f, 0.0f }) };
               RenderingManager::get().setViewMatrix(translate);
           })
 {

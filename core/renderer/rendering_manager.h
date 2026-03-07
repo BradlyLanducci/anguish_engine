@@ -22,7 +22,7 @@ public:
     void removeSprite(Sprite *p_sprite);
     void update(double currentTime);
 
-    void setViewMatrix(const glm::mat4 &view);
+    void setViewMatrix(const glm::dmat4 &view);
 
     RenderingManager(const RenderingManager &) = delete;
     RenderingManager &operator=(const RenderingManager &) = delete;
@@ -31,8 +31,8 @@ private:
     RenderingManager() = default;
 
     static std::vector<Sprite *> m_sprites;
-    static glm::mat4 m_projection;
-    static glm::mat4 m_view;
+    static glm::dmat4 m_projection;
+    static glm::dmat4 m_view;
 };
 
 //------------------------------------------------------------------//

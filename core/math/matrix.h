@@ -8,8 +8,8 @@ template <int Size>
 class Matrix
 {
 private:
-    using Row = std::array<float, Size>;
-    std::array<std::array<float, Size>, Size> m_rows;
+    using Row = std::array<double, Size>;
+    std::array<std::array<double, Size>, Size> m_rows;
 
 public:
     constexpr Matrix(std::array<Row, Size> d)

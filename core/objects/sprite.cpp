@@ -54,14 +54,14 @@ void Sprite::setTexture(const std::string &texturePath)
 
 //------------------------------------------------------------------//
 
-void Sprite::setProjectionMatrix(const glm::mat4 &projection) const
+void Sprite::setProjectionMatrix(const glm::dmat4 &projection) const
 {
     m_shaderProgram.p_vertexShader->setMat4("projection", projection);
 }
 
 //------------------------------------------------------------------//
 
-void Sprite::setViewMatrix(const glm::mat4 &view) const
+void Sprite::setViewMatrix(const glm::dmat4 &view) const
 {
     m_shaderProgram.p_vertexShader->setMat4("view", view);
 }
@@ -70,9 +70,9 @@ void Sprite::setViewMatrix(const glm::mat4 &view) const
 
 void Sprite::draw()
 {
-    auto translatedModel{ glm::translate(m_model, glm::vec3(globalPosition().x, globalPosition().y, 1.f)) };
-    auto rotatedModel{ glm::rotate(translatedModel, rotation(), glm::vec3(0.f, 0.f, 1.f)) };
-    auto scaledModel{ glm::scale(rotatedModel, glm::vec3(size().x * scale().x, size().y * scale().y, 1.f)) };
+    auto translatedModel{ glm::translate(m_model, glm::dvec3(globalPosition().x, globalPosition().y, 1.0)) };
+    auto rotatedModel{ glm::rotate(translatedModel, rotation(), glm::dvec3(0.0, 0.0, 1.0)) };
+    auto scaledModel{ glm::scale(rotatedModel, glm::dvec3(size().x * scale().x, size().y * scale().y, 1.0)) };
 
     m_shaderProgram.p_vertexShader->setMat4("model", scaledModel);
 

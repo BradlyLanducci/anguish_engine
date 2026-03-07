@@ -17,14 +17,14 @@ public:
 
     void addChild(Object *p_child);
 
-    virtual void idleUpdate(float delta);
-    virtual void physicsUpdate(float delta);
+    virtual void idleUpdate(double delta);
+    virtual void physicsUpdate(double delta);
 
     [[nodiscard]] const Transform &transform() const;
     [[nodiscard]] const Transform &globalTransform() const;
     [[nodiscard]] const Vector2 &position() const;
     [[nodiscard]] Vector2 globalPosition() const;
-    [[nodiscard]] float rotation() const;
+    [[nodiscard]] double rotation() const;
     [[nodiscard]] const Vector2 &size() const;
     [[nodiscard]] Vector2 scale() const;
     [[nodiscard]] Object *parent() const;
@@ -32,14 +32,14 @@ public:
     void setTransform(const Transform &transform);
     void setPosition(Vector2 position);
     void setGlobalPosition(Vector2 globalPosition);
-    void setRotation(float rotation);
+    void setRotation(double rotation);
     void setSize(const Vector2 &size);
     void setScale(const Vector2 &scale);
     void setParent(Object *p_parent);
 
     Signal<Vector2> moved;
     Signal<Vector2> resized;
-    Signal<float> rotated;
+    Signal<double> rotated;
     Signal<Vector2> scaled;
 
 private:

@@ -10,11 +10,11 @@ struct Vector2i;
 
 struct Vector2
 {
-    Vector2(float _x, float _y);
+    Vector2(double _x, double _y);
     explicit Vector2(Vector2i vi);
     Vector2() = default;
 
-    Vector2 operator*(float f) const;
+    Vector2 operator*(double d) const;
     Vector2 operator*(const Vector2 &other) const;
     Vector2 operator*(const Vector2i &other) const;
     Vector2 &operator*=(const Vector2 &other);
@@ -26,8 +26,8 @@ struct Vector2
 
     void roundToInt();
 
-    float x{ 0.f };
-    float y{ 0.f };
+    double x{ 0.f };
+    double y{ 0.f };
 };
 
 //------------------------------------------------------------------//

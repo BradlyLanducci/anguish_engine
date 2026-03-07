@@ -19,8 +19,8 @@ void Window::frameBufferSizeCallback(GLFWwindow *_window, int width, int height)
 {
     (void)_window;
     glViewport(0, 0, width, height);
-    m_windowSize.x = static_cast<float>(width);
-    m_windowSize.y = static_cast<float>(height);
+    m_windowSize.x = static_cast<double>(width);
+    m_windowSize.y = static_cast<double>(height);
 }
 
 //------------------------------------------------------------------//

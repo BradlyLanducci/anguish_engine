@@ -64,13 +64,13 @@ void Object::setParent(Object *p_parent)
 
 //------------------------------------------------------------------//
 
-void Object::idleUpdate(float delta)
+void Object::idleUpdate(double delta)
 {
 }
 
 //------------------------------------------------------------------//
 
-void Object::physicsUpdate(float delta)
+void Object::physicsUpdate(double delta)
 {
 }
 
@@ -113,9 +113,9 @@ Vector2 Object::globalPosition() const
 
 //------------------------------------------------------------------//
 
-float Object::rotation() const
+double Object::rotation() const
 {
-    float rot{ m_transform.rotation };
+    double rot{ m_transform.rotation };
 
     auto p_parent{ parent() };
     while (p_parent)
@@ -185,7 +185,7 @@ void Object::setGlobalPosition(Vector2 globalPosition)
 
 //------------------------------------------------------------------//
 
-void Object::setRotation(float rotation)
+void Object::setRotation(double rotation)
 {
     m_transform.rotation = rotation;
     rotated.emit(rotation);

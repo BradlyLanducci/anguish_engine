@@ -24,16 +24,16 @@ Character::Character()
 
 //------------------------------------------------------------------//
 
-void Character::physicsUpdate(float delta)
+void Character::physicsUpdate(double delta)
 {
     Vector2 gp{ globalPosition() };
     if (m_jumper.state != Jumper::State::Jumping)
     {
-        float gravity{ 300.f * delta };
+        double gravity{ 300.0 * (double)delta };
         gp.y += gravity;
     }
 
-    float amountToMove{ 200.f * delta };
+    double amountToMove{ 200.0 * (double)delta };
 
     if (Keyboard::isPressed(Keyboard::Key::Left))
     {
@@ -41,7 +41,7 @@ void Character::physicsUpdate(float delta)
     }
     if (Keyboard::isPressed(Keyboard::Key::Up))
     {
-        m_jumper.begin(0.3f, 300.f);
+        m_jumper.begin(0.3, 300.0);
     }
     if (Keyboard::isPressed(Keyboard::Key::Right))
     {

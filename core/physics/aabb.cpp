@@ -24,8 +24,8 @@ Vector2 AABB::collide(const Rect &r1, const Rect &r2)
     bool horizontal{ (tlR1.x < brR2.x) && (brR1.x > tlR2.x) };
     bool vertical{ (tlR1.y < brR2.y) && (brR1.y > tlR2.y) };
 
-    float horizontalOffset{ horizontal ? tlR2.x - brR1.x : 0.f };
-    float verticalOffset{ vertical ? tlR2.y - brR1.y : 0.f };
+    double horizontalOffset{ horizontal ? tlR2.x - brR1.x : 0.0 };
+    double verticalOffset{ vertical ? tlR2.y - brR1.y : 0.0 };
 
     /*
         We want to resolve for the smaller penetration
@@ -34,11 +34,11 @@ Vector2 AABB::collide(const Rect &r1, const Rect &r2)
     if (resolveHorizontal)
     {
         horizontalOffset = std::ceil(horizontalOffset);
-        verticalOffset = 0.f;
+        verticalOffset = 0.0;
     }
     else
     {
-        horizontalOffset = 0.f;
+        horizontalOffset = 0.0;
         verticalOffset = std::ceil(verticalOffset);
     }
 

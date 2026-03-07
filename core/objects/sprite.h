@@ -16,8 +16,8 @@ public:
     Sprite();
     ~Sprite();
 
-    void setProjectionMatrix(const glm::mat4 &projection) const;
-    void setViewMatrix(const glm::mat4 &view) const;
+    void setProjectionMatrix(const glm::dmat4 &projection) const;
+    void setViewMatrix(const glm::dmat4 &view) const;
 
     void setTexture(const std::string &texturePath);
 
@@ -30,7 +30,7 @@ protected:
     VBO m_vbo;
     EBO m_ebo;
     ShaderProgram m_shaderProgram;
-    glm::mat4 m_model{ 1.f };
+    glm::dmat4 m_model{ 1.f };
 };
 
 //------------------------------------------------------------------//

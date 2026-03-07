@@ -8,7 +8,7 @@ Jumper::Jumper(Object *p_subject, Collision *p_subject_collision)
     , m_collided(
           [this](Vector2 offset)
           {
-              if (offset.y != 0.f)
+              if (offset.y != 0.0)
               {
                   if (state == State::Falling)
                   {
@@ -22,11 +22,11 @@ Jumper::Jumper(Object *p_subject, Collision *p_subject_collision)
 
 //------------------------------------------------------------------//
 
-void Jumper::begin(float jumpSeconds, float jumpForce)
+void Jumper::begin(double jumpSeconds, double jumpForce)
 {
     if (state == State::Idle)
     {
-        m_accumulator = 0.f;
+        m_accumulator = 0.0;
         m_jumpSeconds = jumpSeconds;
         m_jumpForce = jumpForce;
         state = State::Jumping;
@@ -35,7 +35,7 @@ void Jumper::begin(float jumpSeconds, float jumpForce)
 
 //------------------------------------------------------------------//
 
-void Jumper::physicsUpdate(float delta)
+void Jumper::physicsUpdate(double delta)
 {
     if (state == State::Jumping)
     {
@@ -43,7 +43,7 @@ void Jumper::physicsUpdate(float delta)
 
         if (m_accumulator <= m_jumpSeconds)
         {
-            float progress{ 1.f - (m_accumulator / m_jumpSeconds) };
+            double progress{ 1.f - (m_accumulator / m_jumpSeconds) };
             auto gp{ mp_subject->globalPosition() };
             gp.y -= m_jumpForce * delta * progress;
             mp_subject->setGlobalPosition(gp);

@@ -11,7 +11,7 @@ class Camera : public Object
 public:
     Camera();
 
-    const glm::mat4 &view() const;
+    const glm::dmat4 &view() const;
 
     void follow(Object *p_object);
 
@@ -22,7 +22,7 @@ private:
 
     Object *mp_objectToFollow{ nullptr };
 
-    glm::mat4 m_view{ 1.f };
+    glm::dmat4 m_view{ 1.f };
 };
 
 //------------------------------------------------------------------//

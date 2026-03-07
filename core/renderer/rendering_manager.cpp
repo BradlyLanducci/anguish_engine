@@ -6,13 +6,9 @@
 
 //------------------------------------------------------------------//
 
-constexpr float PHYSICS_INTERVAL = 1.f / 60.f;
-
-//------------------------------------------------------------------//
-
 std::vector<Sprite *> RenderingManager::m_sprites;
-glm::mat4 RenderingManager::m_projection{ 1.f };
-glm::mat4 RenderingManager::m_view{ 1.f };
+glm::dmat4 RenderingManager::m_projection{ 1.f };
+glm::dmat4 RenderingManager::m_view{ 1.f };
 
 //------------------------------------------------------------------//
 
@@ -53,7 +49,7 @@ void RenderingManager::update(double currentTime)
     for (const auto &sprite : m_sprites)
     {
         Vector2 windowSize{ Window::size() };
-        m_projection = glm::ortho(0.0f, windowSize.x, windowSize.y, 0.0f);
+        m_projection = glm::ortho(0.0, windowSize.x, windowSize.y, 0.0);
         sprite->setProjectionMatrix(m_projection);
         /// TODO: Batching.. this is very inefficient
         sprite->setViewMatrix(m_view);
@@ -63,7 +59,7 @@ void RenderingManager::update(double currentTime)
 
 //------------------------------------------------------------------//
 
-void RenderingManager::setViewMatrix(const glm::mat4 &view)
+void RenderingManager::setViewMatrix(const glm::dmat4 &view)
 {
     m_view = view;
 }

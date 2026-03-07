@@ -20,11 +20,11 @@ Vector2i Vector2i::operator*(uint32_t i)
 
 //------------------------------------------------------------------//
 
-Vector2 Vector2i::operator*(float f) const
+Vector2 Vector2i::operator*(double d) const
 {
     Vector2 result;
-    result.x = static_cast<float>(this->x) * f;
-    result.y = static_cast<float>(this->y) * f;
+    result.x = static_cast<double>(this->x) * d;
+    result.y = static_cast<double>(this->y) * d;
     return result;
 }
 
@@ -33,8 +33,8 @@ Vector2 Vector2i::operator*(float f) const
 Vector2 Vector2i::operator*(const Vector2 &other) const
 {
     Vector2 result;
-    result.x = static_cast<float>(this->x) * other.x;
-    result.y = static_cast<float>(this->y) * other.y;
+    result.x = static_cast<double>(this->x) * other.x;
+    result.y = static_cast<double>(this->y) * other.y;
     return result;
 }
 

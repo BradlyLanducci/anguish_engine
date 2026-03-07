@@ -15,7 +15,7 @@ public:
     Character();
     ~Character() override = default;
 
-    void physicsUpdate(float delta) override;
+    void physicsUpdate(double delta) override;
 
 private:
     Sprite *mp_sprite;

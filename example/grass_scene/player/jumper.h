@@ -16,19 +16,19 @@ public:
         Falling
     } state{ State::Idle };
 
-    void begin(float jumpTime, float jumpForce);
+    void begin(double jumpTime, double jumpForce);
 
 private:
-    void physicsUpdate(float delta);
+    void physicsUpdate(double delta);
 
     Object *mp_subject{ nullptr };
     Collision *mp_subjectCollision{ nullptr };
 
     Slot<Vector2> m_collided;
 
-    float m_accumulator{};
-    float m_jumpForce{};
-    float m_jumpSeconds{};
+    double m_accumulator{};
+    double m_jumpForce{};
+    double m_jumpSeconds{};
 };
 
 //------------------------------------------------------------------//

@@ -16,13 +16,13 @@ Grass::Grass()
 
 //------------------------------------------------------------------//
 
-void Grass::idleUpdate(float delta)
+void Grass::idleUpdate(double delta)
 {
 }
 
 //------------------------------------------------------------------//
 
-void Grass::physicsUpdate(float delta)
+void Grass::physicsUpdate(double delta)
 {
 }
 

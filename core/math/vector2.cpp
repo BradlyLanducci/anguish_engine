@@ -3,7 +3,7 @@
 
 //------------------------------------------------------------------//
 
-Vector2::Vector2(float _x, float _y)
+Vector2::Vector2(double _x, double _y)
     : x(_x)
     , y(_y)
 {
@@ -12,18 +12,18 @@ Vector2::Vector2(float _x, float _y)
 //------------------------------------------------------------------//
 
 Vector2::Vector2(Vector2i vi)
-    : x(static_cast<float>(vi.x))
-    , y(static_cast<float>(vi.y))
+    : x(static_cast<double>(vi.x))
+    , y(static_cast<double>(vi.y))
 {
 }
 
 //------------------------------------------------------------------//
 
-Vector2 Vector2::operator*(float f) const
+Vector2 Vector2::operator*(double d) const
 {
     Vector2 result;
-    result.x = this->x * f;
-    result.y = this->y * f;
+    result.x = x * d;
+    result.y = y * d;
     return result;
 }
 
@@ -89,8 +89,8 @@ Vector2 Vector2::operator-(const Vector2 &other) const
 
 void Vector2::roundToInt()
 {
-    x = (float)(static_cast<int32_t>(x));
-    y = (float)(static_cast<int32_t>(y));
+    x = (double)(static_cast<int32_t>(x));
+    y = (double)(static_cast<int32_t>(y));
 }
 
 //------------------------------------------------------------------//

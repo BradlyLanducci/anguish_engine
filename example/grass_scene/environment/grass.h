@@ -13,8 +13,8 @@ public:
     Grass();
     ~Grass() override = default;
 
-    void idleUpdate(float delta) override;
-    void physicsUpdate(float delta) override;
+    void idleUpdate(double delta) override;
+    void physicsUpdate(double delta) override;
 
 private:
     Sprite *m_sprite;
