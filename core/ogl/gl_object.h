@@ -18,6 +18,9 @@ public:
 
     virtual ~GlObject() = default;
 
+    GlObject(const GlObject &other) = delete;
+    GlObject &operator=(const GlObject &other) = delete;
+
     [[nodiscard]] uint32_t get() const
     {
         return m_id;
