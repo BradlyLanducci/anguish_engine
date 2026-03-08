@@ -22,7 +22,7 @@ private:
 
     Object *mp_objectToFollow{ nullptr };
 
-    glm::dmat4 m_view{ 1.f };
+    glm::dmat4 m_view{ 1.0 };
 };
 
 //------------------------------------------------------------------//

@@ -1,11 +1,9 @@
 #include <idle/idle_manager.h>
 #include <objects/object.h>
-
+#include <utilities/time.h>
 #include <utilities/logger.h>
 
-//------------------------------------------------------------------//
-
-std::vector<Object *> IdleManager::m_objects;
+#include <algorithm>
 
 //------------------------------------------------------------------//
 
@@ -43,13 +41,13 @@ void IdleManager::removeObject(Object *p_object)
 
 void IdleManager::update(double currentTime)
 {
-    static double lastTime = 0.f;
+    static double lastTime{ Time::now_s() };
 
-    const double delta{ currentTime - lastTime };
+    double deltaTime{ std::clamp(currentTime - lastTime, 0.0, 0.1) };
     lastTime = currentTime;
     for (const auto &o : m_objects)
     {
-        o->idleUpdate(delta);
+        o->idleUpdate(deltaTime);
     }
 }
 

@@ -28,7 +28,7 @@ public:
 private:
     IdleManager() = default;
 
-    static std::vector<Object *> m_objects;
+    static inline std::vector<Object *> m_objects;
 };
 
 //------------------------------------------------------------------//

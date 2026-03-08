@@ -4,6 +4,8 @@
 #include <utilities/time.h>
 #include <utilities/logger.h>
 
+#include <algorithm>
+
 //------------------------------------------------------------------//
 
 RenderingManager &RenderingManager::get()
@@ -38,12 +40,19 @@ void RenderingManager::removeObject(RenderedObject *p_object)
 
 //------------------------------------------------------------------//
 
+void RenderingManager::setViewMatrix(const glm::dmat4 &view)
+{
+    m_view = view;
+}
+
+//------------------------------------------------------------------//
+
 void RenderingManager::update(double currentTime)
 {
-    static double lastTime{ static_cast<double>(Time::now_s()) };
+    static double lastTime{ Time::now_s() };
     static double dtAccumulator{};
 
-    double deltaTime{ currentTime - lastTime };
+    double deltaTime{ std::clamp(currentTime - lastTime, 0.0, 0.1) };
     lastTime = currentTime;
 
     dtAccumulator += deltaTime;
@@ -58,13 +67,6 @@ void RenderingManager::update(double currentTime)
         sprite->setViewMatrix(m_view);
         sprite->draw(deltaTime);
     }
-}
-
-//------------------------------------------------------------------//
-
-void RenderingManager::setViewMatrix(const glm::dmat4 &view)
-{
-    m_view = view;
 }
 
 //------------------------------------------------------------------//

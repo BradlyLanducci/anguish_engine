@@ -14,7 +14,9 @@ class Texture : public GlObject
 public:
     Texture();
     explicit Texture(const std::string &path);
-    ~Texture() override = default;
+    ~Texture() override;
+
+    Texture operator=(const Texture &other) = delete;
 
     [[nodiscard]] Vector2i size() const;
     void setSize(Vector2i size);
@@ -28,6 +30,9 @@ protected:
     Vector2i m_originalSize;
     Vector2i m_size;
     int m_channels{ 0 };
+
+private:
+    void deallocate();
 };
 
 //------------------------------------------------------------------//

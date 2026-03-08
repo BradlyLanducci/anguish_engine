@@ -34,6 +34,24 @@ Texture::Texture(const std::string &path)
 
 //------------------------------------------------------------------//
 
+Texture::~Texture()
+{
+    deallocate();
+}
+
+//------------------------------------------------------------------//
+
+void Texture::deallocate()
+{
+    if (mp_data)
+    {
+        free(mp_data);
+        mp_data = nullptr;
+    }
+}
+
+//------------------------------------------------------------------//
+
 Vector2i Texture::size() const
 {
     return m_size;
@@ -50,6 +68,8 @@ void Texture::setSize(Vector2i size)
 
 void Texture::load(const std::string &path)
 {
+    deallocate();
+
     int &x{ reinterpret_cast<int &>(m_originalSize.x) };
     int &y{ reinterpret_cast<int &>(m_originalSize.y) };
 
@@ -66,7 +86,7 @@ void Texture::load(const std::string &path)
         glGenerateMipmap(GL_TEXTURE_2D);
         checkGLError();
 
-        stbi_image_free(mp_data);
+        deallocate();
     }
     else
     {

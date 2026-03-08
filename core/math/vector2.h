@@ -26,8 +26,8 @@ struct Vector2
 
     void roundToInt();
 
-    double x{ 0.f };
-    double y{ 0.f };
+    double x{ 0.0 };
+    double y{ 0.0 };
 };
 
 //------------------------------------------------------------------//

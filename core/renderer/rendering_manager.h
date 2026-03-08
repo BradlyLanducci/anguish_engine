@@ -31,8 +31,8 @@ private:
     RenderingManager() = default;
 
     static inline std::vector<RenderedObject *> m_objects;
-    static inline glm::dmat4 m_projection{ 1.f };
-    static inline glm::dmat4 m_view{ 1.f };
+    static inline glm::dmat4 m_projection{ 1.0 };
+    static inline glm::dmat4 m_view{ 1.0 };
 };
 
 //------------------------------------------------------------------//

@@ -22,6 +22,8 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(magic_enum)
 
+add_compile_options("-Werror")
+
 add_definitions(-DGLFW_INCLUDE_NONE=1)
 
 add_library(glfw3

@@ -16,26 +16,23 @@ class RenderedObject : public Object
 {
 public:
     explicit RenderedObject(bool doIdle, bool doPhysics);
-    ~RenderedObject();
+    virtual ~RenderedObject();
 
     void setProjectionMatrix(const glm::dmat4 &projection) const;
     void setViewMatrix(const glm::dmat4 &view) const;
-    void draw(double deltaTime);
+    virtual void draw(double deltaTime) = 0;
 
     ShaderProgram &shader();
 
     void setTexture(const std::string &texturePath);
 
-private:
-    glm::dmat4 m_model{ 1.f };
-
+protected:
     Texture m_texture;
-
+    glm::dmat4 m_model{ 1.0 };
+    ShaderProgram m_shaderProgram;
     VAO m_vao;
     VBO m_vbo;
     EBO m_ebo;
-
-    ShaderProgram m_shaderProgram;
 };
 
 //------------------------------------------------------------------//
