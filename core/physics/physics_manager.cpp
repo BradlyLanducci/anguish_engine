@@ -130,14 +130,7 @@ void PhysicsManager::update(double currentTime)
             Rect r2{ co2->globalPosition(), co2->size() };
 
             Vector2 offset{ AABB::collide(r1, r2) };
-            Object *parent{ co1->parent() };
             co1->collided.emit(offset);
-            if (parent)
-            {
-                Vector2 offsetPos{ co1->globalPosition() + offset };
-                Vector2 roundedPos{ Vector2(std::round(offsetPos.x), std::round(offsetPos.y)) };
-                parent->setGlobalPosition(roundedPos);
-            }
         }
 
         dtAccumulator -= PHYSICS_INTERVAL;

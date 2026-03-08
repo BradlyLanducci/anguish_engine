@@ -1,4 +1,4 @@
-#include <grass_scene/player/character.h>
+#include <grass_scene/player/player.h>
 #include <utilities/keyboard.h>
 #include <utilities/camera_manager.h>
 
@@ -6,18 +6,17 @@
 
 //------------------------------------------------------------------//
 
-Character::Character()
-    : Object(false, true)
+Player::Player()
+    : Character(new Collision())
     , mp_sprite(new AnimatedSprite())
-    , mp_collision(new Collision())
-    , m_jumper(this, mp_collision)
+    , m_jumper(this, collision())
 {
     /// TODO: The scaling of animated spritesheets is effected by the dimensions of the spritesheet
     /// so for example in this case there's 2 frames so the x needs to be half of the y to avoid stretching
     setScale({ 0.0625f, 0.125 });
 
     addChild(mp_sprite);
-    addChild(mp_collision);
+    addChild(collision());
 
     const uint32_t numFrames{ 24 };
     const uint32_t rows{ 4 };
@@ -32,12 +31,12 @@ Character::Character()
     mp_sprite->addAnimation("walkLeft", walkLeft);
     mp_sprite->addAnimation("walkRight", walkRight);
 
-    mp_collision->setSize(mp_sprite->size() * mp_sprite->scale());
+    collision()->setSize(mp_sprite->size() * mp_sprite->scale());
 }
 
 //------------------------------------------------------------------//
 
-void Character::physicsUpdate(double delta)
+void Player::physicsUpdate(double delta)
 {
     Vector2 gp{ globalPosition() };
     if (m_jumper.state != Jumper::State::Jumping)

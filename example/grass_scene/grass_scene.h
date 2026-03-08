@@ -1,7 +1,7 @@
 #pragma once
 
 #include <grass_scene/environment/grass.h>
-#include <grass_scene/player/character.h>
+#include <grass_scene/player/player.h>
 
 #include <objects/camera.h>
 #include <scenes/scene.h>
@@ -16,7 +16,7 @@ public:
 
 private:
     Camera *mp_camera;
-    Character *mp_character{ nullptr };
+    Player *mp_player{ nullptr };
     Grass *mp_grass1{ nullptr };
     Grass *mp_grass2{ nullptr };
 };
