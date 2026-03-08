@@ -15,9 +15,8 @@ public:
     Player();
     ~Player() override = default;
 
-    void physicsUpdate(double delta);
-
 private:
+    void physicsUpdate(double deltaTime);
     AnimatedSprite *mp_sprite;
     Jumper m_jumper;
 };

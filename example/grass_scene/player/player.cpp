@@ -11,7 +11,7 @@ Player::Player()
     , mp_sprite(new AnimatedSprite())
     , m_jumper(this, collision())
 {
-    addPhysicsCb([this](double deltaTime) { physicsUpdate(deltaTime); });
+    addPhysicsCb([this](double deltaTimeTime) { physicsUpdate(deltaTimeTime); });
 
     /// TODO: The scaling of animated spritesheets is effected by the dimensions of the spritesheet
     /// so for example in this case there's 2 frames so the x needs to be half of the y to avoid stretching
@@ -38,30 +38,35 @@ Player::Player()
 
 //------------------------------------------------------------------//
 
-void Player::physicsUpdate(double delta)
+void Player::physicsUpdate(double deltaTime)
 {
     Vector2 gp{ globalPosition() };
     if (m_jumper.state != Jumper::State::Jumping)
     {
-        double gravity{ 300.0 * (double)delta };
+        double gravity{ 300.0 * (double)deltaTime };
         gp.y += gravity;
     }
 
-    double amountToMove{ 200.0 * (double)delta };
+    double amountToMove{ 200.0 };
 
     if (Keyboard::isPressed(Keyboard::Key::Left))
     {
         mp_sprite->playAnimation("walkLeft");
-        gp.x -= amountToMove;
+        setVelocity({ -amountToMove, 0.0 });
     }
+    else if (Keyboard::isPressed(Keyboard::Key::Right))
+    {
+        mp_sprite->playAnimation("walkRight");
+        setVelocity({ amountToMove, 0.0 });
+    }
+    else
+    {
+        setVelocity({ 0.0, 0.0 });
+    }
+
     if (Keyboard::isPressed(Keyboard::Key::Up))
     {
         m_jumper.begin(0.3, 300.0);
-    }
-    if (Keyboard::isPressed(Keyboard::Key::Right))
-    {
-        mp_sprite->playAnimation("walkRight");
-        gp.x += amountToMove;
     }
 
     setGlobalPosition(gp);

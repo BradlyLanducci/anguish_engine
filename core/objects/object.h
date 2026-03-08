@@ -43,6 +43,8 @@ public:
     Signal<Vector2> scaled;
 
 private:
+    /// TODO: I wonder if it's reasonable to have these just be signals/slots from the managers themselves?
+    /// It seems a little jank, but it would be more conistent maybe.
     friend class PhysicsManager;
     friend class IdleManager;
     void idleUpdate(double deltaTime);
