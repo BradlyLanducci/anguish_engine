@@ -3,8 +3,7 @@
 //------------------------------------------------------------------//
 
 Character::Character()
-    : Object(true, true)
-    , m_resolveCollision([this](Vector2 offset) { setGlobalPosition(globalPosition() + offset); })
+    : m_resolveCollision([this](Vector2 offset) { setGlobalPosition(globalPosition() + offset); })
 {
 }
 

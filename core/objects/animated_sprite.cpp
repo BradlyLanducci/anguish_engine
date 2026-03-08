@@ -7,8 +7,8 @@
 //------------------------------------------------------------------//
 
 AnimatedSprite::AnimatedSprite()
-    : RenderedObject(true, false)
 {
+    addIdleCb([this](double deltaTime) { idleUpdate(deltaTime); });
     shader().setVertexShader("core/shaders/anim_vert.glsl");
 }
 

@@ -16,7 +16,7 @@ class AnimatedSprite : public RenderedObject
 public:
     AnimatedSprite();
 
-    void idleUpdate(double deltaTime) override;
+    void idleUpdate(double deltaTime);
 
     void addAnimation(const std::string &animation, Shared<Spritesheet> spritesheet);
     void playAnimation(const std::string &animation);

@@ -6,7 +6,7 @@
 
 //------------------------------------------------------------------//
 
-RenderedObject::RenderedObject(bool doIdle, bool doPhysics)
+RenderedObject::RenderedObject()
     : m_shaderProgram("core/shaders/vert.glsl", "core/shaders/frag.glsl")
 {
     RenderingManager::get().addObject(this);

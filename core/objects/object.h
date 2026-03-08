@@ -11,14 +11,14 @@
 
 class Object : public Item
 {
+    using UpdateCb = std::function<void(double)>;
+
 public:
-    explicit Object(bool doIdle = true, bool doPhysics = true);
     ~Object() override;
 
+    void addIdleCb(const UpdateCb &cb);
+    void addPhysicsCb(const UpdateCb &cb);
     void addChild(Object *p_child);
-
-    virtual void idleUpdate(double delta);
-    virtual void physicsUpdate(double delta);
 
     [[nodiscard]] const Transform &transform() const;
     [[nodiscard]] const Transform &globalTransform() const;
@@ -43,8 +43,14 @@ public:
     Signal<Vector2> scaled;
 
 private:
-    bool m_idleObject{ true };
-    bool m_physicsObject{ true };
+    friend class PhysicsManager;
+    friend class IdleManager;
+    void idleUpdate(double deltaTime);
+    void physicsUpdate(double deltaTime);
+
+    std::vector<UpdateCb> m_idleCbs;
+    std::vector<UpdateCb> m_physicsCbs;
+
     Object *mp_parent{ nullptr };
     Vector2 m_size;
     Transform m_transform;

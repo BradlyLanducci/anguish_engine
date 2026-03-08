@@ -4,7 +4,6 @@
 //------------------------------------------------------------------//
 
 Collision::Collision()
-    : Object(false, false)
 {
     PhysicsManager::get().addCollisionObject(this);
 }

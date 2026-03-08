@@ -15,7 +15,7 @@ public:
     Player();
     ~Player() override = default;
 
-    void physicsUpdate(double delta) override;
+    void physicsUpdate(double delta);
 
 private:
     AnimatedSprite *mp_sprite;

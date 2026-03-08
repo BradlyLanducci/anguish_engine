@@ -3,8 +3,7 @@
 //------------------------------------------------------------------//
 
 Camera::Camera()
-    : Object(true, false)
-    , m_followObject([this](Vector2 newPosition) { setGlobalPosition(newPosition); })
+    : m_followObject([this](Vector2 newPosition) { setGlobalPosition(newPosition); })
 {
 }
 

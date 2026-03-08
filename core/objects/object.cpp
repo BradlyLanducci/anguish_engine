@@ -6,23 +6,6 @@
 
 //------------------------------------------------------------------//
 
-Object::Object(bool doIdle, bool doPhysics)
-    : m_idleObject(doIdle)
-    , m_physicsObject(doPhysics)
-{
-    if (doIdle)
-    {
-        IdleManager::get().addObject(this);
-    }
-
-    if (doPhysics)
-    {
-        PhysicsManager::get().addObject(this);
-    }
-}
-
-//------------------------------------------------------------------//
-
 Object::~Object()
 {
     for (auto &c : m_children)
@@ -36,15 +19,37 @@ Object::~Object()
 
     m_children.clear();
 
-    if (m_idleObject)
+    if (m_idleCbs.size() > 0)
     {
         IdleManager::get().removeObject(this);
     }
 
-    if (m_physicsObject)
+    if (m_physicsCbs.size() > 0)
     {
         PhysicsManager::get().removeObject(this);
     }
+}
+
+//------------------------------------------------------------------//
+
+void Object::addIdleCb(const UpdateCb &cb)
+{
+    if (m_idleCbs.size() == 0)
+    {
+        IdleManager::get().addObject(this);
+    }
+    m_idleCbs.push_back(cb);
+}
+
+//------------------------------------------------------------------//
+
+void Object::addPhysicsCb(const UpdateCb &cb)
+{
+    if (m_idleCbs.size() == 0)
+    {
+        PhysicsManager::get().addObject(this);
+    }
+    m_physicsCbs.push_back(cb);
 }
 
 //------------------------------------------------------------------//
@@ -64,14 +69,22 @@ void Object::setParent(Object *p_parent)
 
 //------------------------------------------------------------------//
 
-void Object::idleUpdate(double delta)
+void Object::idleUpdate(double deltaTime)
 {
+    for (const auto &cb : m_idleCbs)
+    {
+        cb(deltaTime);
+    }
 }
 
 //------------------------------------------------------------------//
 
-void Object::physicsUpdate(double delta)
+void Object::physicsUpdate(double deltaTime)
 {
+    for (const auto &cb : m_physicsCbs)
+    {
+        cb(deltaTime);
+    }
 }
 
 //------------------------------------------------------------------//

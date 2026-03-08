@@ -18,6 +18,7 @@ Jumper::Jumper(Object *p_subject, Collision *p_subject_collision)
           })
 {
     mp_subjectCollision->collided.connect(m_collided);
+    addPhysicsCb([this](double deltaTime) { physicsUpdate(deltaTime); });
 }
 
 //------------------------------------------------------------------//

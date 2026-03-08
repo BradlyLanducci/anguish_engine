@@ -11,6 +11,8 @@ Player::Player()
     , mp_sprite(new AnimatedSprite())
     , m_jumper(this, collision())
 {
+    addPhysicsCb([this](double deltaTime) { physicsUpdate(deltaTime); });
+
     /// TODO: The scaling of animated spritesheets is effected by the dimensions of the spritesheet
     /// so for example in this case there's 2 frames so the x needs to be half of the y to avoid stretching
     setScale({ 0.0625f, 0.125 });

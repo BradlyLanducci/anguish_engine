@@ -15,7 +15,7 @@
 class RenderedObject : public Object
 {
 public:
-    explicit RenderedObject(bool doIdle, bool doPhysics);
+    RenderedObject();
     virtual ~RenderedObject();
 
     void setProjectionMatrix(const glm::dmat4 &projection) const;
