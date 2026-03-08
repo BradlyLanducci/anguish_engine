@@ -36,16 +36,5 @@ set_target_properties(glfw3
         IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/Dependencies/lib/glfw3.lib
 )
 
-add_library(assimp
-        SHARED
-        IMPORTED
-)
-
-set_target_properties(assimp
-        PROPERTIES
-        IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/builds/Debug/assimp-vc143-mt.dll
-        IMPORTED_IMPLIB ${PROJECT_SOURCE_DIR}/Dependencies/lib/assimp-vc143-mt.lib
-)
-
 add_subdirectory(core)
 add_subdirectory(example)

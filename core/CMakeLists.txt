@@ -34,6 +34,5 @@ target_link_libraries(${PROJECT_NAME}
     PUBLIC
         glfw3
         glm::glm
-        assimp
         magic_enum        
 )
