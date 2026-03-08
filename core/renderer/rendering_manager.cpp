@@ -1,14 +1,8 @@
 #include <renderer/rendering_manager.h>
 #include <objects/sprite.h>
 #include <utilities/window.h>
-
+#include <utilities/time.h>
 #include <utilities/logger.h>
-
-//------------------------------------------------------------------//
-
-std::vector<Sprite *> RenderingManager::m_sprites;
-glm::dmat4 RenderingManager::m_projection{ 1.f };
-glm::dmat4 RenderingManager::m_view{ 1.f };
 
 //------------------------------------------------------------------//
 
@@ -22,7 +16,7 @@ RenderingManager &RenderingManager::get()
 
 RenderingManager::~RenderingManager()
 {
-    for (const auto &p_sprite : m_sprites)
+    for (const auto &p_sprite : m_objects)
     {
         Log(Error) << "Leaked sprite " << p_sprite;
     }
@@ -30,30 +24,39 @@ RenderingManager::~RenderingManager()
 
 //------------------------------------------------------------------//
 
-void RenderingManager::addSprite(Sprite *p_sprite)
+void RenderingManager::addObject(RenderedObject *p_object)
 {
-    m_sprites.push_back(p_sprite);
+    m_objects.push_back(p_object);
 }
 
 //------------------------------------------------------------------//
 
-void RenderingManager::removeSprite(Sprite *p_sprite)
+void RenderingManager::removeObject(RenderedObject *p_object)
 {
-    std::erase(m_sprites, p_sprite);
+    std::erase(m_objects, p_object);
 }
 
 //------------------------------------------------------------------//
 
 void RenderingManager::update(double currentTime)
 {
-    for (const auto &sprite : m_sprites)
+    static double lastTime{ static_cast<double>(Time::now_s()) };
+    static double dtAccumulator{};
+
+    double deltaTime{ currentTime - lastTime };
+    lastTime = currentTime;
+
+    dtAccumulator += deltaTime;
+
+    Vector2 windowSize{ Window::size() };
+    m_projection = glm::ortho(0.0, windowSize.x, windowSize.y, 0.0);
+
+    for (const auto &sprite : m_objects)
     {
-        Vector2 windowSize{ Window::size() };
-        m_projection = glm::ortho(0.0, windowSize.x, windowSize.y, 0.0);
-        sprite->setProjectionMatrix(m_projection);
         /// TODO: Batching.. this is very inefficient
+        sprite->setProjectionMatrix(m_projection);
         sprite->setViewMatrix(m_view);
-        sprite->draw();
+        sprite->draw(deltaTime);
     }
 }
 

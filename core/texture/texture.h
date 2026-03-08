@@ -1,7 +1,5 @@
 #pragma once
 
-//------------------------------------------------------------------//
-
 #include <math/vector2i.h>
 #include <shaders/shader_program.h>
 
@@ -15,6 +13,7 @@ class Texture : public GlObject
 {
 public:
     Texture();
+    explicit Texture(const std::string &path);
     ~Texture() override = default;
 
     [[nodiscard]] Vector2i size() const;

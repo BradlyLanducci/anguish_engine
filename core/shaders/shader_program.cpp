@@ -6,9 +6,11 @@
 
 //------------------------------------------------------------------//
 
-ShaderProgram::ShaderProgram()
+ShaderProgram::ShaderProgram(const std::string &vertexShaderPath, const std::string &fragmentShaderPath)
+    : GlObject(glCreateProgram())
 {
-    m_id = glCreateProgram();
+    setVertexShader(vertexShaderPath);
+    setFragmentShader(fragmentShaderPath);
 }
 
 //------------------------------------------------------------------//
@@ -30,20 +32,23 @@ ShaderProgram::~ShaderProgram()
 }
 
 //------------------------------------------------------------------//
+
 void ShaderProgram::setVertexShader(const std::string &path)
 {
     if (p_vertexShader)
     {
+        glDetachShader(m_id, p_vertexShader->get());
+        checkGLError();
         p_vertexShader->setShader(path, GL_VERTEX_SHADER);
     }
     else
     {
         p_vertexShader = std::make_unique<Shader>(m_id, path, GL_VERTEX_SHADER);
-        glAttachShader(m_id, p_vertexShader->get());
-        checkGLError();
-        glLinkProgram(m_id);
-        checkGLError();
     }
+    glAttachShader(m_id, p_vertexShader->get());
+    checkGLError();
+    glLinkProgram(m_id);
+    checkGLError();
 }
 
 //------------------------------------------------------------------//

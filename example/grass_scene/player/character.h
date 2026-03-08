@@ -5,7 +5,7 @@
 #include <grass_scene/player/jumper.h>
 
 #include <objects/collision.h>
-#include <objects/sprite.h>
+#include <objects/animated_sprite.h>
 
 //------------------------------------------------------------------//
 
@@ -18,7 +18,7 @@ public:
     void physicsUpdate(double delta) override;
 
 private:
-    Sprite *mp_sprite;
+    AnimatedSprite *mp_sprite;
     Collision *mp_collision;
     Jumper m_jumper;
 };

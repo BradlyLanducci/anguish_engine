@@ -17,7 +17,7 @@ class ShaderProgram : public GlObject
 {
 public:
     /// @brief Creates a shader program. Internally holds a single vertex and fragment shader at one time
-    ShaderProgram();
+    explicit ShaderProgram(const std::string &vertexShaderPath, const std::string &fragmentShaderPath);
     ~ShaderProgram() override;
 
     void setVertexShader(const std::string &path);

@@ -26,6 +26,14 @@ Texture::Texture()
 
 //------------------------------------------------------------------//
 
+Texture::Texture(const std::string &path)
+    : Texture()
+{
+    load(path);
+}
+
+//------------------------------------------------------------------//
+
 Vector2i Texture::size() const
 {
     return m_size;

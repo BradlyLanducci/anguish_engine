@@ -8,16 +8,18 @@
 
 Character::Character()
     : Object(false, true)
-    , mp_sprite(new Sprite())
+    , mp_sprite(new AnimatedSprite())
     , mp_collision(new Collision())
     , m_jumper(this, mp_collision)
 {
-    setScale({ 0.125f, 0.125f });
+    /// TODO: The scaling of animated spritesheets is effected by the dimensions of the spritesheet
+    /// so for example in this case there's 2 frames so the x needs to be half of the y to avoid stretching
+    setScale({ 0.0625f, 0.125f });
 
     addChild(mp_sprite);
     addChild(mp_collision);
 
-    mp_sprite->setTexture("example/grass_scene/textures/bananaman.png");
+    mp_sprite->setTexture("example/grass_scene/textures/bananaman_anim-Sheet.png");
 
     mp_collision->setSize(mp_sprite->size() * mp_sprite->scale());
 }

@@ -7,7 +7,7 @@
 
 //------------------------------------------------------------------//
 
-class Sprite;
+class RenderedObject;
 
 //------------------------------------------------------------------//
 
@@ -18,8 +18,8 @@ public:
     static RenderingManager &get();
     ~RenderingManager();
 
-    void addSprite(Sprite *p_sprite);
-    void removeSprite(Sprite *p_sprite);
+    void addObject(RenderedObject *p_object);
+    void removeObject(RenderedObject *p_object);
     void update(double currentTime);
 
     void setViewMatrix(const glm::dmat4 &view);
@@ -30,9 +30,9 @@ public:
 private:
     RenderingManager() = default;
 
-    static std::vector<Sprite *> m_sprites;
-    static glm::dmat4 m_projection;
-    static glm::dmat4 m_view;
+    static inline std::vector<RenderedObject *> m_objects;
+    static inline glm::dmat4 m_projection{ 1.f };
+    static inline glm::dmat4 m_view{ 1.f };
 };
 
 //------------------------------------------------------------------//

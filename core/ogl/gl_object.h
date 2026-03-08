@@ -10,15 +10,21 @@
 class GlObject
 {
 public:
-	GlObject() = default;
-	virtual ~GlObject() = default;
+    GlObject() = default;
+    GlObject(uint32_t id)
+        : m_id(id)
+    {
+    }
 
-	[[nodiscard]] uint32_t get() const
-	{
-		return m_id;
-	}
+    virtual ~GlObject() = default;
 
-	uint32_t m_id{0};
+    [[nodiscard]] uint32_t get() const
+    {
+        return m_id;
+    }
+
+protected:
+    uint32_t m_id{ 0 };
 };
 
 //------------------------------------------------------------------//
