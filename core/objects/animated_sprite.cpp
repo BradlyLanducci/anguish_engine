@@ -75,6 +75,17 @@ void AnimatedSprite::playAnimation(const std::string &animation)
 
 //------------------------------------------------------------------//
 
+void AnimatedSprite::stopAnimation()
+{
+    if (!m_currentAnimation.empty())
+    {
+        auto &sheet{ m_animations.at(m_currentAnimation) };
+        sheet->stop();
+    }
+}
+
+//------------------------------------------------------------------//
+
 void AnimatedSprite::draw(double deltaTime)
 {
     if (!m_currentAnimation.empty())

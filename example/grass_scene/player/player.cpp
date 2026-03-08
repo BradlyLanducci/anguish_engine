@@ -61,6 +61,7 @@ void Player::physicsUpdate(double deltaTime)
     }
     else
     {
+        mp_sprite->stopAnimation();
         setVelocity({ 0.0, 0.0 });
     }
 
