@@ -1,5 +1,6 @@
 #include <game.h>
 #include <idle/idle_manager.h>
+#include <memory/memory_manager.h>
 #include <physics/physics_manager.h>
 #include <renderer/rendering_manager.h>
 #include <scenes/scene.h>
@@ -46,6 +47,7 @@ int Game::run()
         IdleManager::get().update(currentTime);
         PhysicsManager::get().update(currentTime);
         RenderingManager::get().update(currentTime);
+        MemoryManager::get().process();
 
         glfwSwapBuffers(mp_window);
         glfwPollEvents();

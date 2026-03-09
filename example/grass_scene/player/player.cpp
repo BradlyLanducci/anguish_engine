@@ -1,7 +1,8 @@
 #include <grass_scene/player/player.h>
+#include <grass_scene/player/projectile.h>
+
 #include <utilities/keyboard.h>
 #include <utilities/camera_manager.h>
-
 #include <utilities/logger.h>
 
 //------------------------------------------------------------------//
@@ -63,6 +64,23 @@ void Player::physicsUpdate(double deltaTime)
     {
         mp_sprite->stopAnimation();
         setVelocity({ 0.0, 0.0 });
+    }
+
+    if (Keyboard::isPressed(Keyboard::Key::Enter) && !m_mouseDown)
+    {
+        m_mouseDown = true;
+        auto p_parent{ parent() };
+        if (p_parent)
+        {
+            Projectile *p_projectile{ new Projectile(Vector2(), 1.0) };
+            p_projectile->setGlobalPosition(globalPosition() + Vector2(200, 0));
+            p_projectile->setTexture("example/grass_scene/textures/banana.png");
+            p_parent->addChild(p_projectile);
+        }
+    }
+    else if (!Keyboard::isPressed(Keyboard::Key::Enter))
+    {
+        m_mouseDown = false;
     }
 
     if (Keyboard::isPressed(Keyboard::Key::Up))

@@ -16,9 +16,13 @@ class Object : public Item
 public:
     ~Object() override;
 
+    static void *operator new(std::size_t size);
+
     void addIdleCb(const UpdateCb &cb);
     void addPhysicsCb(const UpdateCb &cb);
     void addChild(Object *p_child);
+
+    void removeChild(Object *p_child);
 
     [[nodiscard]] const Transform &transform() const;
     [[nodiscard]] const Transform &globalTransform() const;

@@ -32,6 +32,21 @@ Object::~Object()
 
 //------------------------------------------------------------------//
 
+void *Object::operator new(std::size_t size)
+{
+    void *p{ std::malloc(size) };
+    if (!p)
+    {
+        throw std::bad_alloc();
+    }
+
+    MemoryManager::get().addItem(static_cast<Object *>(p));
+
+    return p;
+}
+
+//------------------------------------------------------------------//
+
 void Object::addIdleCb(const UpdateCb &cb)
 {
     if (m_idleCbs.size() == 0)
@@ -58,6 +73,13 @@ void Object::addChild(Object *p_child)
 {
     p_child->setParent(this);
     m_children.push_back(p_child);
+}
+
+//------------------------------------------------------------------//
+
+void Object::removeChild(Object *p_child)
+{
+    std::erase(m_children, p_child);
 }
 
 //------------------------------------------------------------------//

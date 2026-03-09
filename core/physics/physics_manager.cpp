@@ -10,11 +10,6 @@ constexpr double PHYSICS_INTERVAL{ 1.0 / 60.0 };
 
 //------------------------------------------------------------------//
 
-std::vector<Object *> PhysicsManager::m_objects;
-std::vector<Collision *> PhysicsManager::m_collisionObjects;
-
-//------------------------------------------------------------------//
-
 PhysicsManager &PhysicsManager::get()
 {
     static PhysicsManager p;
@@ -42,14 +37,14 @@ const std::vector<Collision *> &PhysicsManager::getCollisionObjects()
 
 void PhysicsManager::addCollisionObject(Collision *p_collisionObject)
 {
-    m_collisionObjects.push_back(p_collisionObject);
+    m_collisionObjectsQueue.push_back(p_collisionObject);
 }
 
 //------------------------------------------------------------------//
 
 void PhysicsManager::addObject(Object *p_object)
 {
-    m_objects.push_back(p_object);
+    m_objectsQueue.push_back(p_object);
 }
 
 //------------------------------------------------------------------//
@@ -130,10 +125,26 @@ void PhysicsManager::update(double currentTime)
             Rect r2{ co2->globalPosition(), co2->size() };
 
             Vector2 offset{ AABB::collide(r1, r2) };
+
             co1->collided.emit(offset);
+            co2->collided.emit(offset);
         }
 
         dtAccumulator -= PHYSICS_INTERVAL;
+
+        for (const auto &p_object : m_objectsQueue)
+        {
+            m_objects.push_back(p_object);
+        }
+
+        m_objectsQueue.clear();
+
+        for (const auto &p_object : m_collisionObjectsQueue)
+        {
+            m_collisionObjects.push_back(p_object);
+        }
+
+        m_collisionObjectsQueue.clear();
     }
 }
 

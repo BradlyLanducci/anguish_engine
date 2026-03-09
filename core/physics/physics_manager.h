@@ -31,8 +31,11 @@ public:
 private:
     PhysicsManager() = default;
 
-    static std::vector<Collision *> m_collisionObjects;
-    static std::vector<Object *> m_objects;
+    static inline std::vector<Collision *> m_collisionObjectsQueue;
+    static inline std::vector<Collision *> m_collisionObjects;
+
+    static inline std::vector<Object *> m_objectsQueue;
+    static inline std::vector<Object *> m_objects;
 };
 
 //------------------------------------------------------------------//

@@ -11,7 +11,7 @@ struct Vector2i;
 struct Vector2
 {
     Vector2(double _x, double _y);
-    explicit Vector2(Vector2i vi);
+    Vector2(Vector2i vi);
     Vector2() = default;
 
     Vector2 operator*(double d) const;

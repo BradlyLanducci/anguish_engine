@@ -24,7 +24,7 @@ public:
 
     ShaderProgram &shader();
 
-    void setTexture(const std::string &texturePath);
+    virtual void setTexture(const std::string &texturePath);
 
 protected:
     Texture m_texture;

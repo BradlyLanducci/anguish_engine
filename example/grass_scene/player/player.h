@@ -19,6 +19,8 @@ private:
     void physicsUpdate(double deltaTime);
     AnimatedSprite *mp_sprite;
     Jumper m_jumper;
+
+    bool m_mouseDown{ true };
 };
 
 //------------------------------------------------------------------//
