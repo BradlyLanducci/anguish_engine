@@ -1,23 +1,22 @@
 #include <grass_scene/player/jumper.h>
+#include <physics/aabb.h>
 
 //------------------------------------------------------------------//
 
-Jumper::Jumper(Object *p_subject, Collision *p_subject_collision)
+Jumper::Jumper(Character *p_subject, Collision *p_subject_collision)
     : mp_subject(p_subject)
     , mp_subjectCollision(p_subject_collision)
-    , m_collided(
-          [this](Vector2 offset)
+    , m_onFloorChanged(
+          [this](bool isOnFloor)
           {
-              if (offset.y != 0.0)
+              if (state == State::Falling)
               {
-                  if (state == State::Falling)
-                  {
-                      state = State::Idle;
-                  }
+                  state = State::Idle;
               }
           })
 {
-    mp_subjectCollision->collided.connect(m_collided);
+    mp_subject->onFloorChanged.connect(m_onFloorChanged);
+
     addPhysicsCb([this](double deltaTime) { physicsUpdate(deltaTime); });
 }
 

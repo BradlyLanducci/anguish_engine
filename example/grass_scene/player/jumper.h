@@ -1,5 +1,6 @@
 #pragma once
 
+#include <objects/character.h>
 #include <objects/collision.h>
 
 //------------------------------------------------------------------//
@@ -7,7 +8,7 @@
 class Jumper : public Object
 {
 public:
-    Jumper(Object *p_subject, Collision *p_subject_collision);
+    Jumper(Character *p_subject, Collision *p_subject_collision);
 
     enum class State : uint32_t
     {
@@ -21,10 +22,9 @@ public:
 private:
     void physicsUpdate(double delta);
 
-    Object *mp_subject{ nullptr };
+    Character *mp_subject{ nullptr };
     Collision *mp_subjectCollision{ nullptr };
-
-    Slot<Vector2> m_collided;
+    Slot<bool> m_onFloorChanged;
 
     double m_accumulator{};
     double m_jumpForce{};

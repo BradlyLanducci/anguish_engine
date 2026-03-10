@@ -6,7 +6,14 @@
 
 Projectile::Projectile(Vector2 direction, double speed)
     : mp_collision(new Collision())
-    , m_collided([this](Vector2 offset) { MemoryManager::get().queueDelete(this); })
+    , m_collided(
+          [this](Collision *p_collision)
+          {
+              if (!dynamic_cast<Projectile *>(p_collision->parent()))
+              {
+                  MemoryManager::get().queueDelete(this);
+              }
+          })
 {
     addChild(mp_collision);
     addPhysicsCb([this, direction, speed](double deltaTime)

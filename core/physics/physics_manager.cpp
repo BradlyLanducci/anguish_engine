@@ -78,7 +78,6 @@ void PhysicsManager::update(double currentTime)
     */
     while (dtAccumulator >= PHYSICS_INTERVAL)
     {
-        // Call physics update
         for (const auto &o : m_objects)
         {
             o->physicsUpdate(PHYSICS_INTERVAL);
@@ -86,31 +85,23 @@ void PhysicsManager::update(double currentTime)
 
         // Collect collisions
         std::vector<std::pair<Collision *, Collision *>> collisions;
-        for (const auto &co1 : m_collisionObjects)
+        size_t numObjects{ m_collisionObjects.size() };
+        for (size_t i = 0; i < numObjects; i++)
         {
-            for (const auto &co2 : m_collisionObjects)
+            for (size_t j = i + 1; j < numObjects; j++)
             {
+                auto co1{ m_collisionObjects[i] };
+                auto co2{ m_collisionObjects[j] };
                 if (co1 != co2)
                 {
-                    Rect r1{ co1->globalPosition(), co1->size() };
-                    Rect r2{ co2->globalPosition(), co2->size() };
-
-                    if (AABB::aabb(r1, r2))
+                    auto collisionIt{ std::find_if(collisions.begin(), collisions.end(), [&co1, &co2](auto collision)
+                                                   { return collision.first == co1 && collision.second == co2; }) };
+                    if (collisionIt == collisions.end())
                     {
-                        /// TODO: This seems really inefficient lol
-                        bool duplicate = false;
-                        for (const auto &collision : collisions)
-                        {
-                            if (collision.first == co1 && collision.second == co2)
-                            {
-                                duplicate = true;
-                            }
-                            else if (collision.second == co1 && collision.first == co2)
-                            {
-                                duplicate = true;
-                            }
-                        }
-                        if (!duplicate)
+                        Rect r1{ co1->globalPosition(), co1->size() };
+                        Rect r2{ co2->globalPosition(), co2->size() };
+
+                        if (AABB::aabb(r1, r2))
                         {
                             collisions.push_back(std::pair(co1, co2));
                         }
@@ -121,16 +112,9 @@ void PhysicsManager::update(double currentTime)
 
         for (auto &[co1, co2] : collisions)
         {
-            Rect r1{ co1->globalPosition(), co1->size() };
-            Rect r2{ co2->globalPosition(), co2->size() };
-
-            Vector2 offset{ AABB::collide(r1, r2) };
-
-            co1->collided.emit(offset);
-            co2->collided.emit(offset);
+            co1->collided.emit(co2);
+            co2->collided.emit(co1);
         }
-
-        dtAccumulator -= PHYSICS_INTERVAL;
 
         for (const auto &p_object : m_objectsQueue)
         {
@@ -145,6 +129,8 @@ void PhysicsManager::update(double currentTime)
         }
 
         m_collisionObjectsQueue.clear();
+
+        dtAccumulator -= PHYSICS_INTERVAL;
     }
 }
 

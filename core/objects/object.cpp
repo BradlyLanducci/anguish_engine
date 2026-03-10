@@ -111,6 +111,13 @@ void Object::physicsUpdate(double deltaTime)
 
 //------------------------------------------------------------------//
 
+Rect Object::rect() const
+{
+    return { globalPosition(), size() };
+}
+
+//------------------------------------------------------------------//
+
 const Transform &Object::transform() const
 {
     return m_transform;

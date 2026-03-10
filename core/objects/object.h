@@ -24,6 +24,7 @@ public:
 
     void removeChild(Object *p_child);
 
+    Rect rect() const;
     [[nodiscard]] const Transform &transform() const;
     [[nodiscard]] const Transform &globalTransform() const;
     [[nodiscard]] const Vector2 &position() const;

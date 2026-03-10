@@ -1,9 +1,33 @@
 #include <objects/character.h>
+#include <physics/aabb.h>
 
 //------------------------------------------------------------------//
 
 Character::Character()
-    : m_resolveCollision([this](Vector2 offset) { setGlobalPosition(globalPosition() + offset); })
+    : m_resolveCollision(
+          [this](Collision *p_collision)
+          {
+              Rect r1{ mp_collision->rect() };
+              Rect r2{ p_collision->rect() };
+              Vector2 offset{ AABB::collide(r1, r2) };
+
+              bool resolveHorizontal{ offset.x > offset.y };
+
+              if (resolveHorizontal)
+              {
+                  offset.y = 0.0;
+              }
+              else
+              {
+                  offset.x = 0.0;
+              }
+
+              setGlobalPosition(globalPosition() + offset);
+              if (offset.y != 0.0)
+              {
+                  setIsOnFloor(true);
+              }
+          })
 {
     addPhysicsCb([this](double deltaTime) { physicsUpdate(deltaTime); });
 }
@@ -14,6 +38,13 @@ Character::Character(Collision *p_collision)
     : Character()
 {
     setCollision(p_collision);
+}
+
+//------------------------------------------------------------------//
+
+bool Character::isOnFloor() const
+{
+    return m_isOnFloor;
 }
 
 //------------------------------------------------------------------//
@@ -45,9 +76,22 @@ void Character::setVelocity(const Vector2 &velocity)
 
 //------------------------------------------------------------------//
 
+void Character::setIsOnFloor(bool isOnFloor)
+{
+    m_isOnFloor = isOnFloor;
+    onFloorChanged.emit(isOnFloor);
+}
+
+//------------------------------------------------------------------//
+
 void Character::physicsUpdate(double deltaTime)
 {
     setGlobalPosition(globalPosition() + m_velocity * deltaTime);
+
+    if (m_velocity.y > 0.0)
+    {
+        setIsOnFloor(false);
+    }
 }
 
 //------------------------------------------------------------------//

@@ -112,6 +112,16 @@ Vector2 Vector2::operator/(double d) const
 
 //------------------------------------------------------------------//
 
+Vector2 &Vector2::operator/=(double d)
+{
+    assert(d > 0.0);
+    this->x /= d;
+    this->y /= d;
+    return *this;
+}
+
+//------------------------------------------------------------------//
+
 void Vector2::roundToInt()
 {
     x = (double)(static_cast<int32_t>(x));

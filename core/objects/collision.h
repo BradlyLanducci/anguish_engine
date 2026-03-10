@@ -11,7 +11,12 @@ public:
     Collision();
     ~Collision() override;
 
-    Signal<Vector2> collided;
+    struct Event
+    {
+        std::vector<Collision *> collisions;
+    };
+
+    Signal<Collision *> collided;
 };
 
 //------------------------------------------------------------------//

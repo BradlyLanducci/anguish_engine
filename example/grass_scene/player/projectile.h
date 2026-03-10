@@ -17,7 +17,7 @@ public:
 
 private:
     Collision *mp_collision{ nullptr };
-    Slot<Vector2> m_collided;
+    Slot<Collision *> m_collided;
 };
 
 //------------------------------------------------------------------//

@@ -82,6 +82,11 @@ public:
         }
     }
 
+    size_t numConnections() const
+    {
+        return m_slots.size();
+    }
+
 private:
     std::vector<Slot<Args...> *> m_slots;
 };

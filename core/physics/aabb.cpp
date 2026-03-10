@@ -27,21 +27,6 @@ Vector2 AABB::collide(const Rect &r1, const Rect &r2)
     double horizontalOffset{ horizontal ? tlR2.x - brR1.x : 0.0 };
     double verticalOffset{ vertical ? tlR2.y - brR1.y : 0.0 };
 
-    /*
-        We want to resolve for the smaller penetration
-    */
-    bool resolveHorizontal{ horizontalOffset > verticalOffset };
-    if (resolveHorizontal)
-    {
-        horizontalOffset = std::ceil(horizontalOffset);
-        verticalOffset = 0.0;
-    }
-    else
-    {
-        horizontalOffset = 0.0;
-        verticalOffset = std::ceil(verticalOffset);
-    }
-
     return Vector2(horizontalOffset, verticalOffset);
 }
 
