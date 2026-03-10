@@ -4,12 +4,6 @@
 
 //------------------------------------------------------------------//
 
-Sprite::Sprite()
-{
-}
-
-//------------------------------------------------------------------//
-
 void Sprite::draw(double deltaTime)
 {
     auto translatedModel{ glm::translate(m_model, glm::dvec3(globalPosition().x, globalPosition().y, 1.0)) };
