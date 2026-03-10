@@ -1,10 +1,12 @@
 #pragma once
 
+//------------------------------------------------------------------//
+
 #include <utilities/window.h>
 
 //------------------------------------------------------------------//
 
-class Scene;
+class Object;
 
 //------------------------------------------------------------------//
 
@@ -15,12 +17,12 @@ public:
     ~Game();
 
     int run();
-    void setScene(Scene *p_scene);
+    void setRoot(Object *p_object);
 
 private:
     GLFWwindow *mp_window;
 
-    Scene *mp_scene{ nullptr };
+    Object *mp_root{ nullptr };
 };
 
 //------------------------------------------------------------------//

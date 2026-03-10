@@ -1,5 +1,7 @@
 #pragma once
 
+//------------------------------------------------------------------//
+
 #include <objects/object.h>
 #include <utilities/signal.h>
 

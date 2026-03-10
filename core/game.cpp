@@ -3,7 +3,7 @@
 #include <memory/memory_manager.h>
 #include <physics/physics_manager.h>
 #include <renderer/rendering_manager.h>
-#include <scenes/scene.h>
+#include <objects/object.h>
 #include <utilities/time.h>
 #include <utilities/logger.h>
 
@@ -20,10 +20,10 @@ Game::Game()
 
 Game::~Game()
 {
-    if (mp_scene)
+    if (mp_root)
     {
-        delete mp_scene;
-        mp_scene = nullptr;
+        delete mp_root;
+        mp_root = nullptr;
     }
 
     glUseProgram(0);
@@ -58,14 +58,14 @@ int Game::run()
 
 //------------------------------------------------------------------//
 
-void Game::setScene(Scene *s)
+void Game::setRoot(Object *p_object)
 {
-    if (mp_scene)
+    if (mp_root)
     {
-        delete mp_scene;
+        delete mp_root;
     }
 
-    mp_scene = s;
+    mp_root = p_object;
 }
 
 //------------------------------------------------------------------//

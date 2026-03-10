@@ -1,5 +1,7 @@
 #pragma once
 
+//------------------------------------------------------------------//
+
 #include <objects/item.h>
 #include <math/rect.h>
 #include <utilities/signal.h>

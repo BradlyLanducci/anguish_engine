@@ -7,7 +7,7 @@
 int main(int argc, char *argv[])
 {
     Game g;
-    g.setScene(new GrassScene);
+    g.setRoot(new GrassScene);
     return g.run();
 }
 

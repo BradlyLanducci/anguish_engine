@@ -42,3 +42,5 @@ std::ostream &operator<<(std::ostream &os, const Vector2 &vector)
     os << "(" << vector.x << ", " << vector.y << ")";
     return os;
 }
+
+//------------------------------------------------------------------//

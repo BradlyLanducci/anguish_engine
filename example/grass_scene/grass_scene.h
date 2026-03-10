@@ -4,11 +4,10 @@
 #include <grass_scene/player/player.h>
 
 #include <objects/camera.h>
-#include <scenes/scene.h>
 
 //------------------------------------------------------------------//
 
-class GrassScene : public Scene
+class GrassScene : public Object
 {
 public:
     GrassScene();
