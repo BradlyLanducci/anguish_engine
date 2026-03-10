@@ -46,8 +46,8 @@ void MemoryManager::process()
             {
                 p_parent->removeChild(toDelete);
             }
-            delete toDelete;
             std::erase(m_items, toDelete);
+            delete toDelete;
         }
     }
     m_itemsToDelete.clear();
