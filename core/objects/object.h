@@ -42,6 +42,8 @@ public:
     void setScale(const Vector2 &scale);
     void setParent(Object *p_parent);
 
+    void queueDelete();
+
     Signal<Vector2> moved;
     Signal<Vector2> resized;
     Signal<double> rotated;

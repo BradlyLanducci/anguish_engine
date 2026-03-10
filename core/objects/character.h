@@ -18,7 +18,7 @@ public:
     void setCollision(Collision *p_collision);
     void setVelocity(const Vector2 &velocity);
 
-    Signal<bool> onFloorChanged;
+    Signal<bool> isOnFloorChanged;
 
 private:
     void setIsOnFloor(bool isOnFloor);

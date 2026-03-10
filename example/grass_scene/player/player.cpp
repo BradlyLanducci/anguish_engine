@@ -27,14 +27,17 @@ Player::Player()
     const uint32_t fps{ 8 };
     const bool loops{ false };
 
+    Shared<Spritesheet> idle{ std::make_shared<Spritesheet>("example/grass_scene/textures/idle.png", 1, 1, 1, 1,
+                                                            true) };
     Shared<Spritesheet> walkLeft{ std::make_shared<Spritesheet>("example/grass_scene/textures/walk_left.png", numFrames,
                                                                 rows, columns, fps, loops) };
     Shared<Spritesheet> walkRight{ std::make_shared<Spritesheet>("example/grass_scene/textures/walk_right.png",
                                                                  numFrames, rows, columns, fps, loops) };
+    mp_sprite->addAnimation("idle", idle);
     mp_sprite->addAnimation("walkLeft", walkLeft);
     mp_sprite->addAnimation("walkRight", walkRight);
 
-    collision()->setSize(mp_sprite->size() * mp_sprite->scale());
+    collision()->setSize(Vector2(75, 175));
 }
 
 //------------------------------------------------------------------//
@@ -54,33 +57,37 @@ void Player::physicsUpdate(double deltaTime)
     {
         mp_sprite->playAnimation("walkLeft");
         setVelocity({ -amountToMove, 0.0 });
+        m_facingRight = false;
     }
     else if (Keyboard::isPressed(Keyboard::Key::Right))
     {
         mp_sprite->playAnimation("walkRight");
         setVelocity({ amountToMove, 0.0 });
+        m_facingRight = true;
     }
     else
     {
-        mp_sprite->stopAnimation();
+        mp_sprite->playAnimation("idle");
         setVelocity({ 0.0, 0.0 });
     }
 
-    if (Keyboard::isPressed(Keyboard::Key::Enter) && !m_mouseDown)
+    if (Keyboard::isPressed(Keyboard::Key::Enter) && !m_enterPressed)
     {
-        m_mouseDown = true;
+        m_enterPressed = true;
         auto p_parent{ parent() };
         if (p_parent)
         {
-            Projectile *p_projectile{ new Projectile(Vector2(), 1.0) };
-            p_projectile->setGlobalPosition(globalPosition() + Vector2(200, 0));
-            p_projectile->setTexture("example/grass_scene/textures/banana.png");
+            Vector2 direction{ m_facingRight ? Vector2(1.0, 0.0) : Vector2(-1.0, 0.0) };
+            double speed{ 1000.0 };
+            Projectile *p_projectile{ new Projectile(direction, speed) };
+            Vector2 initialPosition{ globalPosition() + (m_facingRight ? Vector2(200, 0) : Vector2()) };
+            p_projectile->setGlobalPosition(initialPosition);
             p_parent->addChild(p_projectile);
         }
     }
     else if (!Keyboard::isPressed(Keyboard::Key::Enter))
     {
-        m_mouseDown = false;
+        m_enterPressed = false;
     }
 
     if (Keyboard::isPressed(Keyboard::Key::Up))

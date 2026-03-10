@@ -35,13 +35,6 @@ void AnimatedSprite::idleUpdate(double deltaTime)
 
 void AnimatedSprite::addAnimation(const std::string &animation, Shared<Spritesheet> spritesheet)
 {
-    ShaderProgram &s{ shader() };
-    s.p_vertexShader->setVec2i("dimensions", { spritesheet->columns(), spritesheet->rows() });
-    s.p_vertexShader->setInt("numFrames", spritesheet->numFrames());
-    s.p_vertexShader->setVec2("frameSize", spritesheet->frameSize());
-
-    setSize(spritesheet->texture().size() * spritesheet->frameSize());
-
     m_animations.try_emplace(animation, spritesheet);
 }
 
@@ -65,6 +58,14 @@ void AnimatedSprite::playAnimation(const std::string &animation)
         m_currentAnimation = animation;
 
         auto &sheet{ m_animations.at(m_currentAnimation) };
+
+        ShaderProgram &s{ shader() };
+        s.p_vertexShader->setVec2i("dimensions", { sheet->columns(), sheet->rows() });
+        s.p_vertexShader->setInt("numFrames", sheet->numFrames());
+        s.p_vertexShader->setVec2("frameSize", sheet->frameSize());
+
+        setSize(sheet->texture().size() * sheet->frameSize());
+
         sheet->start();
     }
     else

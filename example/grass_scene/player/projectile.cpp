@@ -11,21 +11,16 @@ Projectile::Projectile(Vector2 direction, double speed)
           {
               if (!dynamic_cast<Projectile *>(p_collision->parent()))
               {
-                  MemoryManager::get().queueDelete(this);
+                  queueDelete();
               }
           })
 {
     addChild(mp_collision);
     addPhysicsCb([this, direction, speed](double deltaTime)
-                 { setGlobalPosition(globalPosition() + Vector2(1.0, 0.0) * 200.0 * deltaTime); });
+                 { setGlobalPosition(globalPosition() + direction * speed * deltaTime); });
     mp_collision->collided.connect(m_collided);
-}
 
-//------------------------------------------------------------------//
-
-void Projectile::setTexture(const std::string &texturePath)
-{
-    Sprite::setTexture("example/grass_scene/textures/banana.png");
+    setTexture("example/grass_scene/textures/banana.png");
     mp_collision->setSize({ m_texture.size() });
 }
 

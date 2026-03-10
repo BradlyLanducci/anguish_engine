@@ -1,7 +1,7 @@
 #include <objects/object.h>
 #include <idle/idle_manager.h>
 #include <physics/physics_manager.h>
-
+#include <memory/memory_manager.h>
 #include <utilities/logger.h>
 
 //------------------------------------------------------------------//
@@ -87,6 +87,13 @@ void Object::removeChild(Object *p_child)
 void Object::setParent(Object *p_parent)
 {
     mp_parent = p_parent;
+}
+
+//------------------------------------------------------------------//
+
+void Object::queueDelete()
+{
+    MemoryManager::get().queueDelete(this);
 }
 
 //------------------------------------------------------------------//

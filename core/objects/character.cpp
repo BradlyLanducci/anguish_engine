@@ -79,7 +79,7 @@ void Character::setVelocity(const Vector2 &velocity)
 void Character::setIsOnFloor(bool isOnFloor)
 {
     m_isOnFloor = isOnFloor;
-    onFloorChanged.emit(isOnFloor);
+    isOnFloorChanged.emit(isOnFloor);
 }
 
 //------------------------------------------------------------------//

@@ -15,7 +15,7 @@ Jumper::Jumper(Character *p_subject, Collision *p_subject_collision)
               }
           })
 {
-    mp_subject->onFloorChanged.connect(m_onFloorChanged);
+    mp_subject->isOnFloorChanged.connect(m_onFloorChanged);
 
     addPhysicsCb([this](double deltaTime) { physicsUpdate(deltaTime); });
 }

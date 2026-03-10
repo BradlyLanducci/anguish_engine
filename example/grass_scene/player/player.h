@@ -20,7 +20,9 @@ private:
     AnimatedSprite *mp_sprite;
     Jumper m_jumper;
 
-    bool m_mouseDown{ true };
+    bool m_facingRight{ true };
+
+    bool m_enterPressed{ true };
 };
 
 //------------------------------------------------------------------//
