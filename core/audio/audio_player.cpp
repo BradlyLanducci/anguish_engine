@@ -29,12 +29,13 @@ void AudioPlayer::setFile(const std::string &audioFilePath)
 
 //------------------------------------------------------------------//
 
-void AudioPlayer::play()
+void AudioPlayer::play(bool loop)
 {
     initDevice();
 
     if (ma_device_start(&m_device) == MA_SUCCESS)
     {
+        ma_data_source_set_looping(&m_decoder, static_cast<ma_bool32>(loop));
         reset();
         m_decoders[&m_decoder] = MA_TRUE;
     }
@@ -144,7 +145,7 @@ void AudioPlayer::dataCallback(ma_device *p_device, void *p_output, const void *
         {
             if (playing)
             {
-                ma_decoder_read_pcm_frames(decoder, m_tempBuffer.data(), frameCount, &framesRead);
+                ma_data_source_read_pcm_frames(decoder, m_tempBuffer.data(), frameCount, &framesRead);
 
                 if (framesRead < frameCount)
                 {

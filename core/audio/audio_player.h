@@ -15,7 +15,7 @@ public:
 
     void setFile(const std::string &audioFilePath);
 
-    void play();
+    void play(bool loop = false);
     void reset();
     void stop();
 
