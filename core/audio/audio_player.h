@@ -16,6 +16,7 @@ public:
     void setFile(const std::string &audioFilePath);
 
     void play();
+    void reset();
     void stop();
 
 private:
@@ -37,7 +38,6 @@ private:
 
     std::string m_audioFilePath;
 
-    ma_bool32 m_initialized{ false };
     ma_decoder m_decoder;
 };
 

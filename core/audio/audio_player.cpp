@@ -9,6 +9,7 @@ AudioPlayer::AudioPlayer(const std::string &audioFilePath)
     : m_audioFilePath(audioFilePath)
 {
     initDecoder();
+    m_decoders.try_emplace(&m_decoder, MA_FALSE);
 }
 
 //------------------------------------------------------------------//
@@ -30,17 +31,11 @@ void AudioPlayer::setFile(const std::string &audioFilePath)
 
 void AudioPlayer::play()
 {
-    if (!m_initialized)
-    {
-        m_initialized = true;
-        m_decoders.try_emplace(&m_decoder, MA_TRUE);
-    }
-
     initDevice();
 
     if (ma_device_start(&m_device) == MA_SUCCESS)
     {
-        ma_decoder_seek_to_pcm_frame(&m_decoder, 0);
+        reset();
         m_decoders[&m_decoder] = MA_TRUE;
     }
     else
@@ -51,10 +46,18 @@ void AudioPlayer::play()
 
 //------------------------------------------------------------------//
 
+void AudioPlayer::reset()
+{
+    ma_decoder_seek_to_pcm_frame(&m_decoder, 0);
+}
+
+//------------------------------------------------------------------//
+
 void AudioPlayer::stop()
 {
+    reset();
+
     m_decoders[&m_decoder] = MA_FALSE;
-    ma_decoder_seek_to_pcm_frame(&m_decoder, 0);
 
     ma_bool32 isPlaying{ MA_FALSE };
     for (const auto &[decoder, playing] : m_decoders)
