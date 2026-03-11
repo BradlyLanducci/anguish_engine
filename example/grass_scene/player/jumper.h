@@ -2,6 +2,7 @@
 
 #include <objects/character.h>
 #include <objects/collision.h>
+#include <audio/audio_player.h>
 
 //------------------------------------------------------------------//
 
@@ -25,6 +26,7 @@ private:
     Character *mp_subject{ nullptr };
     Collision *mp_subjectCollision{ nullptr };
     Slot<bool> m_onFloorChanged;
+    AudioPlayer m_jumpSfx;
 
     double m_accumulator{};
     double m_jumpForce{};

@@ -22,19 +22,27 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(magic_enum)
 
+FetchContent_Declare(
+        glfw
+        GIT_REPOSITORY https://github.com/glfw/glfw.git
+        GIT_TAG 3.3.8
+        SOURCE_DIR ${CMAKE_BINARY_DIR}/glfw
+        BINARY_DIR ${CMAKE_BINARY_DIR}/glfw_build
+)
+FetchContent_MakeAvailable(glfw)
+
+FetchContent_Declare(
+        miniaudio
+        GIT_REPOSITORY https://github.com/mackron/miniaudio
+        GIT_TAG master
+        SOURCE_DIR ${CMAKE_BINARY_DIR}/miniaudio
+        BINARY_DIR ${CMAKE_BINARY_DIR}/miniaudio_build
+)
+FetchContent_MakeAvailable(miniaudio)
+
 add_compile_options("-Werror")
 
 add_definitions(-DGLFW_INCLUDE_NONE=1)
-
-add_library(glfw3
-        STATIC
-        IMPORTED
-)
-
-set_target_properties(glfw3
-        PROPERTIES
-        IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/Dependencies/lib/glfw3.lib
-)
 
 add_subdirectory(core)
 add_subdirectory(example)

@@ -32,7 +32,8 @@ target_include_directories(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
-        glfw3
+        glfw
         glm::glm
-        magic_enum        
+        magic_enum
+        miniaudio
 )

@@ -11,6 +11,7 @@ Player::Player()
     : Character(new Collision())
     , mp_sprite(new AnimatedSprite())
     , m_jumper(this, collision())
+    , m_shootSfx("example/grass_scene/audio/shoot.wav")
 {
     addPhysicsCb([this](double deltaTimeTime) { physicsUpdate(deltaTimeTime); });
 
@@ -71,6 +72,7 @@ void Player::physicsUpdate(double deltaTime)
 
     if (Keyboard::isPressed(Keyboard::Key::Enter) && !m_enterPressed)
     {
+        m_shootSfx.play();
         m_enterPressed = true;
         auto p_parent{ parent() };
         if (p_parent)
