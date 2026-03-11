@@ -1,21 +1,21 @@
 #include <ogl/ebo.h>
 #include <ogl/gl_error.h>
 
-#include <glad/glad.h>
+#include <glad/gl.h>
 
 //------------------------------------------------------------------//
 
 EBO::EBO()
 {
-	glGenBuffers(1, &m_id);
-	checkGLError();
+    glGenBuffers(1, &m_id);
+    checkGLError();
 }
 
 //------------------------------------------------------------------//
 
 EBO::~EBO()
 {
-	glDeleteBuffers(1, &m_id);
+    glDeleteBuffers(1, &m_id);
 }
 
 //------------------------------------------------------------------//

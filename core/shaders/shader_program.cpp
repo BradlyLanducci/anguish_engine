@@ -2,7 +2,7 @@
 #include <shaders/shader.h>
 #include <ogl/gl_error.h>
 
-#include <glad/glad.h>
+#include <glad/gl.h>
 
 //------------------------------------------------------------------//
 

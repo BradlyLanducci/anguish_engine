@@ -1,21 +1,21 @@
 #include <ogl/vbo.h>
 #include <ogl/gl_error.h>
 
-#include <glad/glad.h>
+#include <glad/gl.h>
 
 //------------------------------------------------------------------//
 
 VBO::VBO()
 {
-	glGenBuffers(1, &m_id);
-	checkGLError();
+    glGenBuffers(1, &m_id);
+    checkGLError();
 }
 
 //------------------------------------------------------------------//
 
 VBO::~VBO()
 {
-	glDeleteBuffers(1, &m_id);
+    glDeleteBuffers(1, &m_id);
 }
 
 //------------------------------------------------------------------//

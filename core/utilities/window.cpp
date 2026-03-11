@@ -4,7 +4,6 @@
 
 #include <cstdint>
 #include <cassert>
-#include <glad/glad.h>
 
 //------------------------------------------------------------------//
 
@@ -37,8 +36,7 @@ void Window::createWindow(uint32_t width, uint32_t height)
     assert(mp_window);
 
     glfwMakeContextCurrent(mp_window);
-
-    assert(gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)));
+    assert(gladLoadGL(reinterpret_cast<GLADloadfunc>(glfwGetProcAddress)));
 
     glfwSetFramebufferSizeCallback(mp_window, frameBufferSizeCallback);
 

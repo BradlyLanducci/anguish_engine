@@ -4,6 +4,7 @@
 
 #include <math/vector2.h>
 
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
 //------------------------------------------------------------------//

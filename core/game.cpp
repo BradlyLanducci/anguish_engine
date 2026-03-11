@@ -7,7 +7,7 @@
 #include <utilities/time.h>
 #include <utilities/logger.h>
 
-#include <glad/glad.h>
+#include <glad/gl.h>
 
 //------------------------------------------------------------------//
 
