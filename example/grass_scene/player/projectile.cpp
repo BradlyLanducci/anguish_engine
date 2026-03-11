@@ -1,4 +1,5 @@
 #include <grass_scene/player/projectile.h>
+#include <grass_scene/enemies/cabbage_boy.h>
 
 #include <memory/memory_manager.h>
 
@@ -11,6 +12,11 @@ Projectile::Projectile(Vector2 direction, double speed)
           {
               if (!dynamic_cast<Projectile *>(p_collision->parent()))
               {
+                  if (dynamic_cast<CabbageBoy *>(p_collision->parent()))
+                  {
+                      p_collision->parent()->queueDelete();
+                  }
+
                   queueDelete();
               }
           })

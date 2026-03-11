@@ -9,19 +9,14 @@
 
 //------------------------------------------------------------------//
 
-class Player : public Character
+class CabbageBoy : public Character
 {
 public:
-    Player();
+    CabbageBoy();
 
 private:
     void physicsUpdate(double deltaTime);
     AnimatedSprite *mp_sprite;
-    Jumper m_jumper;
-
-    bool m_facingRight{ true };
-
-    bool m_enterPressed{ true };
 };
 
 //------------------------------------------------------------------//

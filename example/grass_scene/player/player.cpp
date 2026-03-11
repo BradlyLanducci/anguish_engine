@@ -14,21 +14,19 @@ Player::Player()
 {
     addPhysicsCb([this](double deltaTimeTime) { physicsUpdate(deltaTimeTime); });
 
-    /// TODO: The scaling of animated spritesheets is effected by the dimensions of the spritesheet
-    /// so for example in this case there's 2 frames so the x needs to be half of the y to avoid stretching
-    setScale({ 0.0625f, 0.125 });
+    setScale({ 0.125, 0.125 });
 
     addChild(mp_sprite);
     addChild(collision());
+
+    Shared<Spritesheet> idle{ std::make_shared<Spritesheet>("example/grass_scene/textures/idle.png", 1, 1, 1, 1,
+                                                            true) };
 
     const uint32_t numFrames{ 24 };
     const uint32_t rows{ 4 };
     const uint32_t columns{ 6 };
     const uint32_t fps{ 8 };
     const bool loops{ false };
-
-    Shared<Spritesheet> idle{ std::make_shared<Spritesheet>("example/grass_scene/textures/idle.png", 1, 1, 1, 1,
-                                                            true) };
     Shared<Spritesheet> walkLeft{ std::make_shared<Spritesheet>("example/grass_scene/textures/walk_left.png", numFrames,
                                                                 rows, columns, fps, loops) };
     Shared<Spritesheet> walkRight{ std::make_shared<Spritesheet>("example/grass_scene/textures/walk_right.png",
@@ -37,7 +35,7 @@ Player::Player()
     mp_sprite->addAnimation("walkLeft", walkLeft);
     mp_sprite->addAnimation("walkRight", walkRight);
 
-    collision()->setSize(Vector2(75, 175));
+    collision()->setSize(Vector2(150, 175));
 }
 
 //------------------------------------------------------------------//
