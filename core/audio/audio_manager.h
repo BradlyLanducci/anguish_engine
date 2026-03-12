@@ -23,7 +23,7 @@ public:
     void addAudioPlayer(AudioPlayer *audioPlayer);
     void removeAudioPlayer(AudioPlayer *audioPlayer);
 
-    ma_device &device();
+    const ma_device &device();
 
     void process();
 

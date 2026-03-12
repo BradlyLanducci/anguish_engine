@@ -57,7 +57,7 @@ void AudioManager::removeAudioPlayer(AudioPlayer *audioPlayer)
 
 //------------------------------------------------------------------//
 
-ma_device &AudioManager::device()
+const ma_device &AudioManager::device()
 {
     return m_device;
 }
