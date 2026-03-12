@@ -15,7 +15,7 @@ public:
     void process(StereoSampleBuffer &buffer) override;
 
 private:
-    double m_volumeLinear{};
+    double m_volumeLinear{ 1.f };
 };
 
 //------------------------------------------------------------------//

@@ -1,5 +1,7 @@
 #include <audio/volume_effect.h>
 
+#include <utilities/logger.h>
+
 #include <cmath>
 
 //------------------------------------------------------------------//

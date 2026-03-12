@@ -11,7 +11,6 @@
 
 AudioPlayer::AudioPlayer(const std::string &audioFilePath)
     : m_audioFilePath(audioFilePath)
-    , m_volume(-15.0)
 {
     initDecoder();
     AudioManager::get().addAudioPlayer(this);
@@ -30,6 +29,13 @@ AudioPlayer::~AudioPlayer()
 void AudioPlayer::setFile(const std::string &audioFilePath)
 {
     m_audioFilePath = audioFilePath;
+}
+
+//------------------------------------------------------------------//
+
+void AudioPlayer::setVolumeDb(double volumeDb)
+{
+    m_volume.setVolumeDb(volumeDb);
 }
 
 //------------------------------------------------------------------//

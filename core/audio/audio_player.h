@@ -20,6 +20,7 @@ public:
     ~AudioPlayer();
 
     void setFile(const std::string &audioFilePath);
+    void setVolumeDb(double volumeDb);
 
     bool isPlaying() const;
 
