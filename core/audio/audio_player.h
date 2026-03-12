@@ -1,9 +1,15 @@
 #pragma once
 
-#include <miniaudio.h>
+#include <audio/audio_manager.h>
+#include <audio/volume_effect.h>
 
+#include <miniaudio.h>
 #include <string>
 #include <unordered_map>
+
+//------------------------------------------------------------------//
+
+struct StereoSampleBuffer;
 
 //------------------------------------------------------------------//
 
@@ -15,30 +21,31 @@ public:
 
     void setFile(const std::string &audioFilePath);
 
+    bool isPlaying() const;
+
     void play(bool loop = false);
     void reset();
     void stop();
 
+    void addEffect(AudioEffect *p_effect);
+
 private:
-    static void dataCallback(ma_device *p_device, void *p_output, const void *p_input, ma_uint32 frameCount);
-
-    void deInitDevice();
-    void initDevice();
-
     void deInitDecoder();
     void initDecoder();
 
-    static inline ma_bool32 m_deviceInitialized{ false };
-    static inline ma_device m_device;
+    ma_decoder &decoder();
+    void process(StereoSampleBuffer &buffer);
 
-    static inline std::unordered_map<ma_decoder *, ma_bool32> m_decoders;
-    static inline ma_device_config m_deviceConfig;
+    friend AudioManager;
 
-    static inline std::vector<float> m_tempBuffer;
+    bool m_isPlaying{ false };
 
     std::string m_audioFilePath;
 
     ma_decoder m_decoder;
+
+    VolumeEffect m_volume;
+    std::vector<AudioEffect *> m_effects;
 };
 
 //------------------------------------------------------------------//

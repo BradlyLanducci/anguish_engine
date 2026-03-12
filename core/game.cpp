@@ -1,5 +1,6 @@
 #include <game.h>
 #include <idle/idle_manager.h>
+#include <audio/audio_manager.h>
 #include <memory/memory_manager.h>
 #include <physics/physics_manager.h>
 #include <renderer/rendering_manager.h>
@@ -39,6 +40,8 @@ int Game::run()
         return -1;
     }
 
+    AudioManager::get().initialize();
+
     while (!glfwWindowShouldClose(mp_window))
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -47,11 +50,15 @@ int Game::run()
         IdleManager::get().update(currentTime);
         PhysicsManager::get().update(currentTime);
         RenderingManager::get().update(currentTime);
+
         MemoryManager::get().process();
+        AudioManager::get().process();
 
         glfwSwapBuffers(mp_window);
         glfwPollEvents();
     }
+
+    AudioManager::get().deInitialize();
 
     return 0;
 }

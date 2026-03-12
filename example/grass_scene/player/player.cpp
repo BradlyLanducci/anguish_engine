@@ -92,7 +92,7 @@ void Player::physicsUpdate(double deltaTime)
 
     if (Keyboard::isPressed(Keyboard::Key::Up))
     {
-        m_jumper.begin(0.3, 300.0);
+        m_jumper.begin(0.3, 2000.0);
     }
 
     setGlobalPosition(gp);
