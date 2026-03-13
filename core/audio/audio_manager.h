@@ -17,8 +17,8 @@ class AudioManager
 public:
     static AudioManager &get();
 
-    void initialize();
-    void deInitialize();
+    /// @brief Deinitializes the audio device.
+    void destroy();
 
     void addAudioPlayer(AudioPlayer *audioPlayer);
     void removeAudioPlayer(AudioPlayer *audioPlayer);
@@ -31,7 +31,10 @@ public:
     AudioManager &operator=(const AudioManager &) = delete;
 
 private:
-    AudioManager() = default;
+    AudioManager();
+
+    void initialize();
+    void deInitialize();
 
     static void dataCallback(ma_device *p_device, void *p_output, const void *p_input, ma_uint32 frameCount);
 

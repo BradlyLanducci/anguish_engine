@@ -56,6 +56,13 @@ Collision *Character::collision() const
 
 //------------------------------------------------------------------//
 
+Vector2 Character::velocity() const
+{
+    return m_velocity;
+}
+
+//------------------------------------------------------------------//
+
 void Character::setCollision(Collision *p_collision)
 {
     if (mp_collision)

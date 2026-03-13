@@ -19,6 +19,20 @@ AudioManager &AudioManager::get()
 
 //------------------------------------------------------------------//
 
+void AudioManager::destroy()
+{
+    deInitialize();
+}
+
+//------------------------------------------------------------------//
+
+AudioManager::AudioManager()
+{
+    initialize();
+}
+
+//------------------------------------------------------------------//
+
 void AudioManager::initialize()
 {
     m_deviceConfig = ma_device_config_init(ma_device_type_playback);

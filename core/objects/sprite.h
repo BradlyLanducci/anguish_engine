@@ -9,7 +9,7 @@
 
 class Sprite : public RenderedObject
 {
-public:
+private:
     void draw(double deltaTime) override;
 };
 

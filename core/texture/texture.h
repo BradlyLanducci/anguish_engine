@@ -23,8 +23,12 @@ public:
     [[nodiscard]] Vector2i size() const;
     void setSize(Vector2i size);
 
+    /// @brief Loads this texture with the provided file path.
+    /// @param path The path to the image to load for this texture.
     void load(const std::string &path);
 
+    /// TODO: I don't want this exposed
+    /// @brief Binds this texture to be drawn
     void bind();
 
 protected:

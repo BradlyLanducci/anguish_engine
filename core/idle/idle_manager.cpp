@@ -15,26 +15,23 @@ IdleManager &IdleManager::get()
 
 //------------------------------------------------------------------//
 
-IdleManager::~IdleManager()
+void IdleManager::destroy()
 {
-    for (const auto &p_object : m_objects)
-    {
-        Log(Error) << "Leaked idle object " << p_object;
-    }
+    m_queue.clear();
 }
 
 //------------------------------------------------------------------//
 
 void IdleManager::addObject(Object *p_object)
 {
-    m_objects.push_back(p_object);
+    m_queue.add(p_object);
 }
 
 //------------------------------------------------------------------//
 
 void IdleManager::removeObject(Object *p_object)
 {
-    std::erase(m_objects, p_object);
+    m_queue.remove(p_object);
 }
 
 //------------------------------------------------------------------//
@@ -45,9 +42,12 @@ void IdleManager::update(double currentTime)
 
     double deltaTime{ std::clamp(currentTime - lastTime, 0.0, 0.1) };
     lastTime = currentTime;
-    for (const auto &o : m_objects)
+
+    m_queue.update();
+
+    for (const auto &p_object : m_queue)
     {
-        o->idleUpdate(deltaTime);
+        p_object->idleUpdate(deltaTime);
     }
 }
 

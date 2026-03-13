@@ -16,26 +16,23 @@ RenderingManager &RenderingManager::get()
 
 //------------------------------------------------------------------//
 
-RenderingManager::~RenderingManager()
+void RenderingManager::destroy()
 {
-    for (const auto &p_sprite : m_objects)
-    {
-        Log(Error) << "Leaked sprite " << p_sprite;
-    }
+    m_queue.clear();
 }
 
 //------------------------------------------------------------------//
 
 void RenderingManager::addObject(RenderedObject *p_object)
 {
-    m_objects.push_back(p_object);
+    m_queue.add(p_object);
 }
 
 //------------------------------------------------------------------//
 
 void RenderingManager::removeObject(RenderedObject *p_object)
 {
-    std::erase(m_objects, p_object);
+    m_queue.remove(p_object);
 }
 
 //------------------------------------------------------------------//
@@ -60,7 +57,9 @@ void RenderingManager::update(double currentTime)
     Vector2 windowSize{ Window::size() };
     m_projection = glm::ortho(0.0, windowSize.x, windowSize.y, 0.0);
 
-    for (const auto &sprite : m_objects)
+    m_queue.update();
+
+    for (const auto &sprite : m_queue)
     {
         /// TODO: Batching.. this is very inefficient
         sprite->setProjectionMatrix(m_projection);

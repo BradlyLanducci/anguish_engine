@@ -21,6 +21,8 @@ public:
     GlObject(const GlObject &other) = delete;
     GlObject &operator=(const GlObject &other) = delete;
 
+    /// @brief The opengl handle for this object.
+    /// @return
     [[nodiscard]] uint32_t get() const
     {
         return m_id;

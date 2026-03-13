@@ -20,7 +20,12 @@ public:
     explicit ShaderProgram(const std::string &vertexShaderPath, const std::string &fragmentShaderPath);
     ~ShaderProgram() override;
 
+    /// @brief Loads the provided path as a vertex shader.
+    /// @param path
     void setVertexShader(const std::string &path);
+
+    /// @brief Loads the provided path as a fragment shader.
+    /// @param path
     void setFragmentShader(const std::string &path);
 
     std::unique_ptr<Shader> p_vertexShader{ nullptr };

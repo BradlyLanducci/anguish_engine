@@ -23,7 +23,12 @@ public:
     Window(const Window &) = delete;
     Window &operator=(const Window &) = delete;
 
+    /// @brief Returns the main window for this application.
+    /// @return
     static GLFWwindow *get();
+
+    /// @brief Returns the applications window size.
+    /// @return
     static Vector2 size();
 
 private:

@@ -8,12 +8,12 @@
 
 //------------------------------------------------------------------//
 
-// Vertex Array Object
+// Element Buffer Object
 class EBO final : public GlObject
 {
 public:
-	EBO();
-	~EBO() override;
+    EBO();
+    ~EBO() override;
 };
 
 //------------------------------------------------------------------//

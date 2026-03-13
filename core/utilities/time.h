@@ -9,12 +9,15 @@
 class Time
 {
 public:
+    /// @brief Now nanoseconds
     static uint64_t now_ns()
     {
         return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch())
             .count();
     }
 
+    /// @brief Now milliseconds
+    /// @return
     static uint64_t now_ms()
     {
         return std::chrono::duration_cast<std::chrono::milliseconds>(
@@ -22,6 +25,8 @@ public:
             .count();
     }
 
+    /// @brief Now seconds
+    /// @return
     static double now_s()
     {
         double ns{ static_cast<double>(now_ns()) };
@@ -29,7 +34,7 @@ public:
     }
 
 private:
-    Time();
+    Time() = delete;
 };
 
 //------------------------------------------------------------------//

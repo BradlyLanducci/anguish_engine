@@ -19,11 +19,19 @@ public:
     explicit Spritesheet(const std::string &spritesheetPath, uint32_t numFrames, uint32_t rows, uint32_t columns,
                          uint32_t fps, bool loops);
 
+    /// @brief Gets the current frame of this animation based off the internal accumulator.
+    /// @param deltaTime Adds this amount of time to the internal accumulator.
+    /// @return
     Vector2i getCurrentFrame(double deltaTime);
 
+    /// @brief Whether this animation has finished or never been started.
+    /// @return
     bool isComplete() const;
 
+    /// @brief Stops this animation.
     void stop();
+
+    /// @brief Starts this animation. This will reset the animation if it's already playing.
     void start();
 
     std::string spritesheetPath() const;

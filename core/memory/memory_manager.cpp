@@ -12,6 +12,13 @@ MemoryManager &MemoryManager::get()
 
 //------------------------------------------------------------------//
 
+void MemoryManager::destroy()
+{
+    // This currently serves no purpose
+}
+
+//------------------------------------------------------------------//
+
 void MemoryManager::addItem(Object *p_object)
 {
     m_items.push_back(p_object);

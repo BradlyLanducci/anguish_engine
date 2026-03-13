@@ -13,8 +13,12 @@ class Camera : public Object
 public:
     Camera();
 
+    /// @brief Returns the view matrix of this camera object.
+    /// @return
     const glm::dmat4 &view() const;
 
+    /// @brief Follows the provided object whenever it moves.
+    /// @param p_object The object to follow.
     void follow(Object *p_object);
 
 private:

@@ -40,25 +40,27 @@ int Game::run()
         return -1;
     }
 
-    AudioManager::get().initialize();
-
     while (!glfwWindowShouldClose(mp_window))
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        MemoryManager::get().process();
+        AudioManager::get().process();
 
         double currentTime = static_cast<double>(Time::now_s());
         IdleManager::get().update(currentTime);
         PhysicsManager::get().update(currentTime);
         RenderingManager::get().update(currentTime);
 
-        MemoryManager::get().process();
-        AudioManager::get().process();
-
         glfwSwapBuffers(mp_window);
         glfwPollEvents();
     }
 
-    AudioManager::get().deInitialize();
+    RenderingManager::get().destroy();
+    PhysicsManager::get().destroy();
+    IdleManager::get().destroy();
+    AudioManager::get().destroy();
+    MemoryManager::get().destroy();
 
     return 0;
 }

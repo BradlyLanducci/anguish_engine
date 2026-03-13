@@ -22,11 +22,11 @@ public:
     void playAnimation(const std::string &animation);
     void stopAnimation();
 
-    void draw(double deltaTime) override;
-
 private:
     using RenderedObject::setSize;
     using RenderedObject::setTexture;
+
+    void draw(double deltaTime) override;
 
     std::unordered_map<std::string, Shared<Spritesheet>> m_animations;
     std::string m_currentAnimation;
