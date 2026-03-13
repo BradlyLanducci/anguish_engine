@@ -1,16 +1,21 @@
-#pragma once
+#include <layers/layer.h>
 
 //------------------------------------------------------------------//
 
-#include <objects/rendered_object.h>
-#include <texture/texture.h>
-
-//------------------------------------------------------------------//
-
-class Sprite : public RenderedObject
+void Layer::destroy()
 {
-private:
-    void draw() override;
-};
+}
+
+//------------------------------------------------------------------//
+
+void Layer::update(double deltaTime)
+{
+}
+
+//------------------------------------------------------------------//
+
+void Layer::render()
+{
+}
 
 //------------------------------------------------------------------//

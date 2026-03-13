@@ -26,7 +26,7 @@ private:
     using RenderedObject::setSize;
     using RenderedObject::setTexture;
 
-    void draw(double deltaTime) override;
+    void draw() override;
 
     std::unordered_map<std::string, Shared<Spritesheet>> m_animations;
     std::string m_currentAnimation;

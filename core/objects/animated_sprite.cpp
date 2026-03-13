@@ -87,7 +87,7 @@ void AnimatedSprite::stopAnimation()
 
 //------------------------------------------------------------------//
 
-void AnimatedSprite::draw(double deltaTime)
+void AnimatedSprite::draw()
 {
     if (!m_currentAnimation.empty())
     {

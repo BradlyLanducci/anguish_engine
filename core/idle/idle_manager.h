@@ -9,7 +9,6 @@
 
 //------------------------------------------------------------------//
 
-class Game;
 class Object;
 
 //------------------------------------------------------------------//
@@ -18,6 +17,9 @@ class Object;
 class IdleManager
 {
 public:
+    IdleManager(const IdleManager &) = delete;
+    IdleManager &operator=(const IdleManager &) = delete;
+
     static IdleManager &get();
 
     /// @brief Releases all objects owned by this manager.
@@ -31,18 +33,13 @@ public:
     /// @param p_object
     void removeObject(Object *p_object);
 
-    IdleManager(const IdleManager &) = delete;
-    IdleManager &operator=(const IdleManager &) = delete;
-
-private:
-    IdleManager() = default;
-
-    friend Game;
-
     /// @brief Main update function for the idle manager. This will be
     /// called once per game frame.
     /// @param currentTime
     void update(double currentTime);
+
+private:
+    IdleManager() = default;
 
     static inline ObjectQueue<Object *> m_queue;
 };

@@ -44,16 +44,8 @@ void RenderingManager::setViewMatrix(const glm::dmat4 &view)
 
 //------------------------------------------------------------------//
 
-void RenderingManager::update(double currentTime)
+void RenderingManager::render()
 {
-    static double lastTime{ Time::now_s() };
-    static double dtAccumulator{};
-
-    double deltaTime{ std::clamp(currentTime - lastTime, 0.0, 0.1) };
-    lastTime = currentTime;
-
-    dtAccumulator += deltaTime;
-
     Vector2 windowSize{ Window::size() };
     m_projection = glm::ortho(0.0, windowSize.x, windowSize.y, 0.0);
 
@@ -64,7 +56,7 @@ void RenderingManager::update(double currentTime)
         /// TODO: Batching.. this is very inefficient
         sprite->setProjectionMatrix(m_projection);
         sprite->setViewMatrix(m_view);
-        sprite->draw(deltaTime);
+        sprite->draw();
     }
 }
 

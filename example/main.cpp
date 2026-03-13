@@ -1,14 +1,15 @@
-#include <game.h>
+#include <app.h>
 
+#include <layers/game_layer.h>
 #include <grass_scene/grass_scene.h>
 
 //------------------------------------------------------------------//
 
 int main(int argc, char *argv[])
 {
-    Game g;
-    g.setRoot(new GrassScene);
-    return g.run();
+    App app;
+    app.addLayer<GameLayer>(new GrassScene());
+    return app.run();
 }
 
 //------------------------------------------------------------------//

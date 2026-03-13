@@ -6,7 +6,7 @@
 
 //------------------------------------------------------------------//
 
-class Game;
+class Layer;
 class Object;
 
 //------------------------------------------------------------------//
@@ -14,20 +14,19 @@ class Object;
 class MemoryManager
 {
 public:
+    MemoryManager(const MemoryManager &) = delete;
+    MemoryManager &operator=(const MemoryManager &) = delete;
+
     static MemoryManager &get();
 
     void destroy();
 
-    MemoryManager(const MemoryManager &) = delete;
-    MemoryManager &operator=(const MemoryManager &) = delete;
+    void process();
 
 private:
     MemoryManager() = default;
 
     friend Object;
-    friend Game;
-
-    void process();
 
     /// @brief Queues an object to be deleted at the beginning of the next
     /// game frame.

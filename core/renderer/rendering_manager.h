@@ -9,7 +9,6 @@
 
 //------------------------------------------------------------------//
 
-class Game;
 class RenderedObject;
 
 //------------------------------------------------------------------//
@@ -17,6 +16,9 @@ class RenderedObject;
 class RenderingManager
 {
 public:
+    RenderingManager(const RenderingManager &) = delete;
+    RenderingManager &operator=(const RenderingManager &) = delete;
+
     static RenderingManager &get();
 
     /// @brief Releases all objects owned by this manager.
@@ -34,17 +36,12 @@ public:
     /// @param view
     void setViewMatrix(const glm::dmat4 &view);
 
-    RenderingManager(const RenderingManager &) = delete;
-    RenderingManager &operator=(const RenderingManager &) = delete;
+    /// @brief Main render function for the rendering manager. This will be
+    /// called once per game frame.
+    void render();
 
 private:
     RenderingManager() = default;
-
-    friend Game;
-
-    /// @brief Main update function for the rendering manager. This will be
-    /// called once per game frame.
-    void update(double currentTime);
 
     static inline ObjectQueue<RenderedObject *> m_queue;
 

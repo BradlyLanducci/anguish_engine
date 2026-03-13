@@ -2,15 +2,23 @@
 
 //------------------------------------------------------------------//
 
-#include <objects/rendered_object.h>
-#include <texture/texture.h>
+class Event;
 
 //------------------------------------------------------------------//
 
-class Sprite : public RenderedObject
+class Layer
 {
-private:
-    void draw() override;
+public:
+    virtual ~Layer() = default;
+
+    virtual void destroy();
+
+    /// @brief
+    /// @param deltaTime
+    virtual void update(double deltaTime);
+
+    /// @brief
+    virtual void render();
 };
 
 //------------------------------------------------------------------//

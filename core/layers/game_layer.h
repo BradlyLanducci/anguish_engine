@@ -3,6 +3,7 @@
 //------------------------------------------------------------------//
 
 #include <utilities/window.h>
+#include <layers/layer.h>
 
 //------------------------------------------------------------------//
 
@@ -10,24 +11,27 @@ class Object;
 
 //------------------------------------------------------------------//
 
-class Game
+class GameLayer : public Layer
 {
 public:
-    Game();
-    ~Game();
+    GameLayer() = default;
 
-    /// @brief Runs the main game loop. Each of these loops is considered
-    /// a 'Game Frame'.
-    /// @return
-    int run();
+    /// @brief Creates a game layer with a root object.
+    /// @param p_object The root of the game layer.
+    GameLayer(Object *p_object);
+
+    ~GameLayer();
+
+    void destroy() override;
+
+    void update(double deltaTime) override;
+    void render() override;
 
     /// @brief Sets the root object of this game.
     /// @param p_object
     void setRoot(Object *p_object);
 
 private:
-    GLFWwindow *mp_window;
-
     Object *mp_root{ nullptr };
 };
 

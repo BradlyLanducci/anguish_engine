@@ -8,7 +8,7 @@
 
 //------------------------------------------------------------------//
 
-class Game;
+class Layer;
 class Object;
 class Collision;
 
@@ -18,6 +18,9 @@ class Collision;
 class PhysicsManager
 {
 public:
+    PhysicsManager(const PhysicsManager &) = delete;
+    PhysicsManager &operator=(const PhysicsManager &) = delete;
+
     static PhysicsManager &get();
 
     /// @brief Releases all objects owned by this manager.
@@ -36,19 +39,14 @@ public:
     /// @brief Removes a object at the beginning of the physics frame.
     void removeObject(Object *p_object);
 
-    PhysicsManager(const PhysicsManager &) = delete;
-    PhysicsManager &operator=(const PhysicsManager &) = delete;
-
-private:
-    PhysicsManager() = default;
-
-    friend Game;
-
     /// @brief Main update function for the physics manager. This will call however
     /// many physics frames need to be called per game frame based on the internal
     /// time accumulator.
     /// @param currentTime
     void update(double currentTime);
+
+private:
+    PhysicsManager() = default;
 
     static inline ObjectQueue<Collision *> m_collisionQueue;
     static inline ObjectQueue<Object *> m_objectsQueue;

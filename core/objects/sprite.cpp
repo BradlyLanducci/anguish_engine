@@ -4,7 +4,7 @@
 
 //------------------------------------------------------------------//
 
-void Sprite::draw(double deltaTime)
+void Sprite::draw()
 {
     auto translatedModel{ glm::translate(m_model, glm::dvec3(globalPosition().x, globalPosition().y, 1.0)) };
     auto rotatedModel{ glm::rotate(translatedModel, rotation(), glm::dvec3(0.0, 0.0, 1.0)) };

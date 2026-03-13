@@ -20,7 +20,7 @@ public:
 
     void setProjectionMatrix(const glm::dmat4 &projection) const;
     void setViewMatrix(const glm::dmat4 &view) const;
-    virtual void draw(double deltaTime) = 0;
+    virtual void draw() = 0;
 
     ShaderProgram &shader();
 
