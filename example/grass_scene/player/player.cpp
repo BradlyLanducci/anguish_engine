@@ -1,7 +1,7 @@
 #include <grass_scene/player/player.h>
 #include <grass_scene/player/projectile.h>
 
-#include <utilities/keyboard.h>
+#include <input/keyboard.h>
 #include <utilities/camera_manager.h>
 #include <utilities/logger.h>
 

@@ -1,6 +1,6 @@
 #include <utilities/window.h>
 #include <math/vector2.h>
-#include <utilities/keyboard.h>
+#include <input/keyboard.h>
 
 #include <cstdint>
 #include <cassert>
