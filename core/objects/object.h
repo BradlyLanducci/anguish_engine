@@ -18,6 +18,10 @@ class Object : public Item
 public:
     ~Object() override;
 
+    /// @brief All objects allocated on the heap have their memory registered
+    /// in the memory manager.
+    /// @param size
+    /// @return
     static void *operator new(std::size_t size);
 
     /// @brief Adds an idle frame callback. This is called every frame

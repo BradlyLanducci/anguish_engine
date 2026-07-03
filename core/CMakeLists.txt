@@ -19,7 +19,7 @@ add_library(${PROJECT_NAME}
 
 target_compile_features(${PROJECT_NAME} 
     PRIVATE 
-        cxx_std_20
+        cxx_std_23
 )
 
 glad_add_library(glad_gl_core_33 REPRODUCIBLE API gl:core=3.3)

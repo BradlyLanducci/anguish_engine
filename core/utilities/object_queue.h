@@ -12,7 +12,6 @@ public:
     /// @param object The object to delete.
     void remove(ObjectType object)
     {
-
         m_removeQueue.push_back(object);
     }
 
