@@ -7,7 +7,6 @@
 #include <ogl/vao.h>
 #include <ogl/vbo.h>
 #include <ogl/ebo.h>
-#include <utilities/shared.h>
 
 //------------------------------------------------------------------//
 

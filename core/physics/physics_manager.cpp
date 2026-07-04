@@ -2,7 +2,6 @@
 #include <objects/collision.h>
 #include <physics/aabb.h>
 #include <utilities/time.h>
-#include <utilities/logger.h>
 
 //------------------------------------------------------------------//
 

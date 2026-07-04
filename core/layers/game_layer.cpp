@@ -5,7 +5,10 @@
 #include <memory/memory_manager.h>
 #include <physics/physics_manager.h>
 #include <renderer/rendering_manager.h>
+#include <input/input_manager.h>
 #include <objects/object.h>
+
+#include <input/mouse.h>
 
 //------------------------------------------------------------------//
 
@@ -29,6 +32,7 @@ GameLayer::~GameLayer()
 
 void GameLayer::destroy()
 {
+    InputManager::get().destroy();
     RenderingManager::get().destroy();
     PhysicsManager::get().destroy();
     IdleManager::get().destroy();
@@ -54,6 +58,8 @@ void GameLayer::update(double deltaTime)
 {
     MemoryManager::get().process();
     AudioManager::get().process();
+
+    InputManager::get().process();
 
     IdleManager::get().update(deltaTime);
     PhysicsManager::get().update(deltaTime);

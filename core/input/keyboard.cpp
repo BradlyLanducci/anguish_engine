@@ -1,11 +1,8 @@
 #include <input/keyboard.h>
-
-//------------------------------------------------------------------//
-
+#include <input/input_event.h>
 #include <utilities/logger.h>
-#include <magic_enum/magic_enum.hpp>
 
-// #define LOG_KEYS
+#include <magic_enum/magic_enum.hpp>
 
 //------------------------------------------------------------------//
 
@@ -26,22 +23,14 @@ bool Keyboard::isPressed(Key key)
 void Keyboard::processInput(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
     Key k{ static_cast<Key>(key) };
-    if (action == GLFW_PRESS)
-    {
-        m_keyboard[k] = true;
+    bool pressed{ action == GLFW_PRESS || action == GLFW_REPEAT };
 
-#ifdef LOG_KEYS
-        Log(Info) << key << " : " << " pressed";
-#endif
-    }
-    else if (action == GLFW_RELEASE)
-    {
-        m_keyboard[k] = false;
+    m_keyboard[k] = pressed;
 
-#ifdef LOG_KEYS
-        Log(Info) << key << " : " << " released";
-#endif
-    }
+    Shared<KeyboardEvent> p_event{ std::shared_ptr<KeyboardEvent>(new KeyboardEvent()) };
+    p_event->key = static_cast<Key>(key);
+    p_event->pressed = pressed;
+    InputManager::get().addEvent(p_event);
 }
 
 //------------------------------------------------------------------//

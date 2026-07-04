@@ -1,6 +1,7 @@
 #include <grass_scene/player/player.h>
 #include <grass_scene/player/projectile.h>
 
+#include <input/input_event.h>
 #include <input/keyboard.h>
 #include <utilities/camera_manager.h>
 #include <utilities/logger.h>
@@ -37,6 +38,23 @@ Player::Player()
     mp_sprite->addAnimation("walkRight", walkRight);
 
     collision()->setSize(Vector2(150, 175));
+
+    addInputCb(
+        [this](Shared<InputEvent> event)
+        {
+            Shared<MouseClickEvent> p_clickEvent{ InputEvent::GetType<MouseClickEvent>(event) };
+
+            if (p_clickEvent)
+            {
+                bool isLeftClick{ p_clickEvent->buttonType == Mouse::ButtonType::Left };
+                bool isPressed{ p_clickEvent->pressed };
+
+                if (isLeftClick && isPressed)
+                {
+                    shoot();
+                }
+            }
+        });
 }
 
 //------------------------------------------------------------------//
@@ -50,7 +68,16 @@ void Player::physicsUpdate(double deltaTime)
         gp.y += gravity;
     }
 
-    double amountToMove{ 200.0 };
+    handleInput();
+
+    setGlobalPosition(gp);
+}
+
+//------------------------------------------------------------------//
+
+void Player::handleInput()
+{
+    constexpr double amountToMove{ 200.0 };
 
     if (Keyboard::isPressed(Keyboard::Key::Left))
     {
@@ -66,14 +93,34 @@ void Player::physicsUpdate(double deltaTime)
     }
     else
     {
+        Log(Info) << "idling";
         mp_sprite->playAnimation("idle");
         setVelocity({ 0.0, 0.0 });
     }
 
-    if (Keyboard::isPressed(Keyboard::Key::Enter) && !m_enterPressed)
+    if (Keyboard::isPressed(Keyboard::Key::Enter) && !m_shooting)
+    {
+        shoot();
+    }
+    else if (!Keyboard::isPressed(Keyboard::Key::Enter))
+    {
+        m_shooting = false;
+    }
+
+    if (Keyboard::isPressed(Keyboard::Key::Up))
+    {
+        m_jumper.begin(0.3, 2000.0);
+    }
+}
+
+//------------------------------------------------------------------//
+
+void Player::shoot()
+{
+    if (!m_shooting)
     {
         m_shootSfx.play();
-        m_enterPressed = true;
+        m_shooting = true;
         auto p_parent{ parent() };
         if (p_parent)
         {
@@ -85,17 +132,6 @@ void Player::physicsUpdate(double deltaTime)
             p_parent->addChild(p_projectile);
         }
     }
-    else if (!Keyboard::isPressed(Keyboard::Key::Enter))
-    {
-        m_enterPressed = false;
-    }
-
-    if (Keyboard::isPressed(Keyboard::Key::Up))
-    {
-        m_jumper.begin(0.3, 2000.0);
-    }
-
-    setGlobalPosition(gp);
 }
 
 //------------------------------------------------------------------//
