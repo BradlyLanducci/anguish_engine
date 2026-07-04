@@ -1,4 +1,6 @@
 #include <input/mouse.h>
+#include <input/input_manager.h>
+#include <input/input_event.h>
 
 #include <magic_enum/magic_enum.hpp>
 
@@ -23,6 +25,11 @@ bool Mouse::isPressed(ButtonType button)
 void Mouse::processCursorMove(GLFWwindow *window, double xPos, double yPos)
 {
     m_cursorPosition = Vector2{ xPos, yPos };
+
+    InputManager::get().addEvent(std::shared_ptr<MouseInputEvent>(new MouseInputEvent{
+        .position = Vector2{ xPos, yPos },
+          .pressed = false
+    }));
 }
 
 //------------------------------------------------------------------//

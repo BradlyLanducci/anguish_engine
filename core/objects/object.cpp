@@ -2,6 +2,7 @@
 #include <idle/idle_manager.h>
 #include <physics/physics_manager.h>
 #include <memory/memory_manager.h>
+#include <input/input_manager.h>
 #include <utilities/logger.h>
 
 //------------------------------------------------------------------//
@@ -47,7 +48,7 @@ void *Object::operator new(std::size_t size)
 
 //------------------------------------------------------------------//
 
-void Object::addIdleCb(const UpdateCb &cb)
+void Object::addIdleCb(const DeltaUpdateCb &cb)
 {
     if (m_idleCbs.size() == 0)
     {
@@ -58,13 +59,24 @@ void Object::addIdleCb(const UpdateCb &cb)
 
 //------------------------------------------------------------------//
 
-void Object::addPhysicsCb(const UpdateCb &cb)
+void Object::addPhysicsCb(const DeltaUpdateCb &cb)
 {
-    if (m_idleCbs.size() == 0)
+    if (m_physicsCbs.size() == 0)
     {
         PhysicsManager::get().addObject(this);
     }
     m_physicsCbs.push_back(cb);
+}
+
+//------------------------------------------------------------------//
+
+void Object::addInputCb(const InputCb &cb)
+{
+    if (m_inputCbs.size() == 0)
+    {
+        InputManager::get().addObject(this);
+    }
+    m_inputCbs.push_back(cb);
 }
 
 //------------------------------------------------------------------//
@@ -113,6 +125,16 @@ void Object::physicsUpdate(double deltaTime)
     for (const auto &cb : m_physicsCbs)
     {
         cb(deltaTime);
+    }
+}
+
+//------------------------------------------------------------------//
+
+void Object::inputEvent(const InputEvent &event)
+{
+    for (const auto &cb : m_inputCbs)
+    {
+        cb(event);
     }
 }
 

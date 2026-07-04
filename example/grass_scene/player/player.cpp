@@ -1,6 +1,7 @@
 #include <grass_scene/player/player.h>
 #include <grass_scene/player/projectile.h>
 
+#include <input/input_event.h>
 #include <input/keyboard.h>
 #include <utilities/camera_manager.h>
 #include <utilities/logger.h>
@@ -37,6 +38,16 @@ Player::Player()
     mp_sprite->addAnimation("walkRight", walkRight);
 
     collision()->setSize(Vector2(150, 175));
+
+    addInputCb(
+        [this](const InputEvent &event)
+        {
+            const MouseInputEvent *p_mouseEvent{ static_cast<const MouseInputEvent *>(&event) };
+            if (p_mouseEvent)
+            {
+                Log(Info) << p_mouseEvent->position;
+            }
+        });
 }
 
 //------------------------------------------------------------------//

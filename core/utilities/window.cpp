@@ -1,6 +1,7 @@
 #include <utilities/window.h>
 #include <math/vector2.h>
 #include <input/keyboard.h>
+#include <input/mouse.h>
 
 #include <cstdint>
 #include <cassert>
@@ -43,6 +44,7 @@ void Window::createWindow(uint32_t width, uint32_t height)
     glfwSetWindowAspectRatio(mp_window, ASPECT_RATIO_WIDTH, ASPECT_RATIO_HEIGHT);
 
     Keyboard::initialize(mp_window);
+    Mouse::initialize(mp_window);
 
     m_windowSize = Vector2(WINDOW_WIDTH, WINDOW_HEIGHT);
 }

@@ -11,9 +11,14 @@
 
 //------------------------------------------------------------------//
 
+struct InputEvent;
+
+//------------------------------------------------------------------//
+
 class Object : public Item
 {
-    using UpdateCb = std::function<void(double)>;
+    using DeltaUpdateCb = std::function<void(double)>;
+    using InputCb = std::function<void(const InputEvent &)>;
 
 public:
     ~Object() override;
@@ -27,11 +32,14 @@ public:
     /// @brief Adds an idle frame callback. This is called every frame
     /// by the idle manager.
     /// @param cb
-    void addIdleCb(const UpdateCb &cb);
+    void addIdleCb(const DeltaUpdateCb &cb);
 
-    /// @brief Adds an physics frame callback. This is called every frame
-    /// by the physics manager.
-    void addPhysicsCb(const UpdateCb &cb);
+    /// @brief Adds a physics frame callback. This is called every frame by the physics manager.
+    void addPhysicsCb(const DeltaUpdateCb &cb);
+
+    /// @brief Adds an input event callback. This is called every frame by the input manager.
+    /// @param cb
+    void addInputCb(const InputCb &cb);
 
     /// @brief Adds an object to be considered an owned child of this object.
     /// @param p_child The child to add.
@@ -98,12 +106,15 @@ private:
     /// It seems a little jank, but it would be more conistent maybe.
     friend class PhysicsManager;
     friend class IdleManager;
+    friend class InputManager;
 
     void idleUpdate(double deltaTime);
     void physicsUpdate(double deltaTime);
+    void inputEvent(const InputEvent &event);
 
-    std::vector<UpdateCb> m_idleCbs;
-    std::vector<UpdateCb> m_physicsCbs;
+    std::vector<DeltaUpdateCb> m_idleCbs;
+    std::vector<DeltaUpdateCb> m_physicsCbs;
+    std::vector<InputCb> m_inputCbs;
 
     Object *mp_parent{ nullptr };
     Vector2 m_size;
