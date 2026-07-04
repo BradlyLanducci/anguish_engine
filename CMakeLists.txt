@@ -11,4 +11,4 @@ add_compile_options("-Werror")
 add_definitions(-DGLFW_INCLUDE_NONE=1)
 
 add_subdirectory(core)
-add_subdirectory(example)
+add_subdirectory(examples)

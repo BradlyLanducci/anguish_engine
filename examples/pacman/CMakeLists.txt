@@ -1,8 +1,8 @@
 file(GLOB_RECURSE ExampleSourceFiles 
-	${CMAKE_SOURCE_DIR}/example/*.cpp
+	${CMAKE_SOURCE_DIR}/examples/pacman/*.cpp
 )
 
-set(EXAMPLE_PROJECT ${PROJECT_NAME}_example)
+set(EXAMPLE_PROJECT ${PROJECT_NAME}_pacman)
 	
 add_executable(${EXAMPLE_PROJECT}
 	${DependencySourceFiles}
@@ -21,7 +21,7 @@ target_include_directories(${EXAMPLE_PROJECT}
         ${CMAKE_SOURCE_DIR}/Dependencies/
         ${CMAKE_SOURCE_DIR}/Dependencies/include
         ${CMAKE_SOURCE_DIR}/core
-        ${CMAKE_SOURCE_DIR}/example
+        ${CMAKE_SOURCE_DIR}/examples/pacman
 )
 
 target_link_libraries(${EXAMPLE_PROJECT}

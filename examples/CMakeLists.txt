@@ -1,0 +1,2 @@
+add_subdirectory(Pacman)
+add_subdirectory(Platformer)
