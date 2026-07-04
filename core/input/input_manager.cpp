@@ -50,7 +50,7 @@ void InputManager::process()
     {
         for (auto &p_object : m_objectsQueue)
         {
-            p_object->inputEvent(*event.get());
+            p_object->inputEvent(event);
         }
     }
 

@@ -17,13 +17,17 @@ public:
 
 private:
     void physicsUpdate(double deltaTime);
+
+    void handleInput();
+    void shoot();
+
     AnimatedSprite *mp_sprite;
     Jumper m_jumper;
     AudioPlayer m_shootSfx;
 
     bool m_facingRight{ true };
 
-    bool m_enterPressed{ false };
+    bool m_shooting{ false };
 };
 
 //------------------------------------------------------------------//

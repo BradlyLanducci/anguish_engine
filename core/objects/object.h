@@ -4,10 +4,24 @@
 
 #include <objects/item.h>
 #include <math/rect.h>
-#include <utilities/signal.h>
 #include <math/transform.h>
+#include <utilities/signal.h>
 
 #include <functional>
+
+//------------------------------------------------------------------//
+
+/*
+    We only want shared objects to be considered for non objects.
+    This isn't a design pattern I want to encourage throughout, but
+    it's useful for things that are not objects that I'd prefer to
+    not have to be managed.
+*/
+template <typename Type1, typename Type2>
+concept not_same_as = !std::same_as<Type1, Type2>;
+
+template <not_same_as<Object> ValueType>
+using Shared = std::shared_ptr<ValueType>;
 
 //------------------------------------------------------------------//
 
@@ -18,7 +32,7 @@ struct InputEvent;
 class Object : public Item
 {
     using DeltaUpdateCb = std::function<void(double)>;
-    using InputCb = std::function<void(const InputEvent &)>;
+    using InputCb = std::function<void(Shared<InputEvent>)>;
 
 public:
     ~Object() override;
@@ -110,7 +124,7 @@ private:
 
     void idleUpdate(double deltaTime);
     void physicsUpdate(double deltaTime);
-    void inputEvent(const InputEvent &event);
+    void inputEvent(Shared<InputEvent> event);
 
     std::vector<DeltaUpdateCb> m_idleCbs;
     std::vector<DeltaUpdateCb> m_physicsCbs;

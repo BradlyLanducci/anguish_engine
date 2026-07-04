@@ -9,7 +9,6 @@
 void Mouse::initialize(GLFWwindow *window)
 {
     glfwSetCursorPosCallback(window, Mouse::processCursorMove);
-    glfwSetCursorEnterCallback(window, Mouse::processCursorEnter);
     glfwSetMouseButtonCallback(window, Mouse::processCursorClick);
 }
 
@@ -26,24 +25,24 @@ void Mouse::processCursorMove(GLFWwindow *window, double xPos, double yPos)
 {
     m_cursorPosition = Vector2{ xPos, yPos };
 
-    InputManager::get().addEvent(std::shared_ptr<MouseInputEvent>(new MouseInputEvent{
-        .position = Vector2{ xPos, yPos },
-          .pressed = false
-    }));
-}
+    Shared<MouseMoveEvent> p_event{ std::shared_ptr<MouseMoveEvent>(new MouseMoveEvent()) };
 
-//------------------------------------------------------------------//
+    p_event->position = m_cursorPosition;
 
-void Mouse::processCursorEnter(GLFWwindow *window, int entered)
-{
-    m_cursorInWindow = (entered == GLFW_TRUE) ? true : false;
+    InputManager::get().addEvent(p_event);
 }
 
 //------------------------------------------------------------------//
 
 void Mouse::processCursorClick(GLFWwindow *window, int button, int action, int mods)
 {
-    // Send event
+    Shared<MouseClickEvent> p_event{ std::shared_ptr<MouseClickEvent>(new MouseClickEvent()) };
+
+    p_event->position = m_cursorPosition;
+    p_event->pressed = (action == GLFW_PRESS);
+    p_event->buttonType = static_cast<ButtonType>(button);
+
+    InputManager::get().addEvent(p_event);
 }
 
 //------------------------------------------------------------------//

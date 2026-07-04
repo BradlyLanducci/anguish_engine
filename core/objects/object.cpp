@@ -130,7 +130,7 @@ void Object::physicsUpdate(double deltaTime)
 
 //------------------------------------------------------------------//
 
-void Object::inputEvent(const InputEvent &event)
+void Object::inputEvent(Shared<InputEvent> event)
 {
     for (const auto &cb : m_inputCbs)
     {

@@ -3,13 +3,12 @@
 //------------------------------------------------------------------//
 
 #include <utilities/object_queue.h>
-#include <utilities/shared.h>
+#include <objects/object.h>
 
 #include <vector>
 
 //------------------------------------------------------------------//
 
-class Object;
 class InputEvent;
 
 //------------------------------------------------------------------//
