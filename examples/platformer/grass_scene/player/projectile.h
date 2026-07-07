@@ -8,14 +8,14 @@
 
 //------------------------------------------------------------------//
 
-class Projectile : public Sprite
+class Projectile : public AE::Sprite
 {
 public:
-    Projectile(Vector2 direction, double speed);
+    Projectile(AE::Vector2 direction, double speed);
 
 private:
-    Collision *mp_collision{ nullptr };
-    Slot<Collision *> m_collided;
+    AE::Collision *mp_collision{ nullptr };
+    AE::Slot<AE::Collision *> m_collided;
 };
 
 //------------------------------------------------------------------//

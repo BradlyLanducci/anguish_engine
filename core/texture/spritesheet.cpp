@@ -4,6 +4,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 Spritesheet::Spritesheet(const std::string &spritesheetPath, int numFrames, int rows, int columns, int fps, bool loops)
     : m_spritesheetPath(spritesheetPath)
     , m_numFrames(numFrames)
@@ -134,5 +138,9 @@ void Spritesheet::incrementRow()
         }
     }
 }
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

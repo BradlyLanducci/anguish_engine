@@ -6,6 +6,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 VolumeEffect::VolumeEffect(double volumeDb)
 {
     setVolumeDb(volumeDb);
@@ -28,5 +32,9 @@ void VolumeEffect::process(StereoSampleBuffer &buffer)
         s.right *= m_volumeLinear;
     }
 }
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

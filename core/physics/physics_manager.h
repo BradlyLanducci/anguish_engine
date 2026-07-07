@@ -8,6 +8,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 class Layer;
 class Object;
 class Collision;
@@ -51,5 +55,9 @@ private:
     static inline ObjectQueue<Collision *> m_collisionQueue;
     static inline ObjectQueue<Object *> m_objectsQueue;
 };
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

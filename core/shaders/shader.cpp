@@ -6,6 +6,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 Shader::Shader(int shaderProgram, const std::string &path, GLenum shaderType)
     : m_shaderProgram(shaderProgram)
 {
@@ -107,5 +111,9 @@ void Shader::setVec2(const std::string &name, Vector2 value) const
     checkGLError();
     glUseProgram(0);
 }
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

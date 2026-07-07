@@ -8,13 +8,13 @@
 
 //------------------------------------------------------------------//
 
-class GrassScene : public Object
+class GrassScene : public AE::Object
 {
 public:
     GrassScene();
 
 private:
-    Camera *mp_camera;
+    AE::Camera *mp_camera;
     Player *mp_player;
     CabbageBoy *mp_cabbage;
     Grass *mp_grass1;

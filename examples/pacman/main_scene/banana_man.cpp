@@ -8,9 +8,9 @@
 //------------------------------------------------------------------//
 
 BananaMan::BananaMan(std::array<std::array<int, 14>, 18> &board)
-    : Character(new Collision())
+    : AE::Character(new AE::Collision())
     , m_board(board)
-    , mp_sprite(new AnimatedSprite())
+    , mp_sprite(new AE::AnimatedSprite())
 {
     addPhysicsCb([this](double deltaTimeTime) { physicsUpdate(deltaTimeTime); });
 
@@ -22,8 +22,8 @@ BananaMan::BananaMan(std::array<std::array<int, 14>, 18> &board)
     const int columns{ 1 };
     const int fps{ 1 };
     const bool loops{ true };
-    Shared<Spritesheet> walk{ std::make_shared<Spritesheet>("examples/pacman/banana_man.png", numFrames, rows, columns,
-                                                            fps, loops) };
+    auto walk{ std::make_shared<AE::Spritesheet>("examples/pacman/banana_man.png", numFrames, rows, columns, fps,
+                                                 loops) };
     mp_sprite->addAnimation("walk", walk);
     mp_sprite->playAnimation("walk");
 
@@ -41,7 +41,7 @@ void BananaMan::physicsUpdate(double deltaTime)
     constexpr double PPS{ 32.0 };
     double distance{ deltaTime * PPS };
 
-    Vector2 newPosition{ m_pos };
+    AE::Vector2 newPosition{ m_pos };
 
     if (m_direction == Direction::Up)
     {
@@ -60,7 +60,7 @@ void BananaMan::physicsUpdate(double deltaTime)
         newPosition.x += distance;
     }
 
-    Vector2 gp{ newPosition };
+    AE::Vector2 gp{ newPosition };
     gp.x /= 16.0;
     gp.x = std::floor(gp.x);
     gp.y /= 16.0;
@@ -89,19 +89,19 @@ void BananaMan::physicsUpdate(double deltaTime)
 
 void BananaMan::handleInput()
 {
-    if (Keyboard::isPressed(Keyboard::Key::Up))
+    if (AE::Keyboard::isPressed(AE::Keyboard::Key::Up))
     {
         m_direction = Direction::Up;
     }
-    else if (Keyboard::isPressed(Keyboard::Key::Down))
+    else if (AE::Keyboard::isPressed(AE::Keyboard::Key::Down))
     {
         m_direction = Direction::Down;
     }
-    else if (Keyboard::isPressed(Keyboard::Key::Left))
+    else if (AE::Keyboard::isPressed(AE::Keyboard::Key::Left))
     {
         m_direction = Direction::Left;
     }
-    else if (Keyboard::isPressed(Keyboard::Key::Right))
+    else if (AE::Keyboard::isPressed(AE::Keyboard::Key::Right))
     {
         m_direction = Direction::Right;
     }

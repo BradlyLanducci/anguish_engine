@@ -3,7 +3,7 @@
 
 //------------------------------------------------------------------//
 
-Jumper::Jumper(Character *p_subject, Collision *p_subject_collision)
+Jumper::Jumper(AE::Character *p_subject, AE::Collision *p_subject_collision)
     : mp_subject(p_subject)
     , mp_subjectCollision(p_subject_collision)
     , m_onFloorChanged(

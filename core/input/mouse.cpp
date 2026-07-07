@@ -6,6 +6,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 void Mouse::initialize(GLFWwindow *window)
 {
     glfwSetCursorPosCallback(window, Mouse::processCursorMove);
@@ -44,5 +48,9 @@ void Mouse::processCursorClick(GLFWwindow *window, int button, int action, int m
 
     InputManager::get().addEvent(p_event);
 }
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

@@ -10,6 +10,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 constexpr int DEFAULT_WINDOW_WIDTH{ 960 };
 constexpr int DEFAULT_WINDOW_HEIGHT{ 1280 };
 
@@ -56,5 +60,9 @@ private:
     static inline Vector2 m_windowSize;
     static inline Vector2 m_aspectRatio;
 };
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

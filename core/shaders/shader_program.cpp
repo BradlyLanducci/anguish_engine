@@ -6,6 +6,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 ShaderProgram::ShaderProgram(const std::string &vertexShaderPath, const std::string &fragmentShaderPath)
     : GlObject(glCreateProgram())
 {
@@ -68,5 +72,9 @@ void ShaderProgram::setFragmentShader(const std::string &path)
         checkGLError();
     }
 }
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

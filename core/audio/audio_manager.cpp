@@ -5,6 +5,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 constexpr ma_format sampleFormat{ ma_format_f32 };
 constexpr ma_uint32 channels{ 2 };
 constexpr ma_uint32 sampleRate{ 48'000 };
@@ -136,5 +140,9 @@ void AudioManager::dataCallback(ma_device *p_device, void *p_output, const void 
         }
     }
 }
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//
