@@ -17,7 +17,7 @@
 
 struct InputEvent
 {
-    enum class Type : uint32_t
+    enum class Type : int
     {
         Mouse,
         Keyboard

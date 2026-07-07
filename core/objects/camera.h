@@ -31,8 +31,6 @@ public:
 private:
     Slot<Vector2> m_followObject;
 
-    uint32_t m_objectMovedHandle;
-
     Object *mp_objectToFollow{ nullptr };
 
     glm::dmat4 m_view{ 1.0 };

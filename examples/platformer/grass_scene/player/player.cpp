@@ -24,10 +24,10 @@ Player::Player()
     Shared<Spritesheet> idle{ std::make_shared<Spritesheet>("examples/platformer/grass_scene/textures/idle.png", 1, 1,
                                                             1, 1, true) };
 
-    const uint32_t numFrames{ 24 };
-    const uint32_t rows{ 4 };
-    const uint32_t columns{ 6 };
-    const uint32_t fps{ 8 };
+    const int numFrames{ 24 };
+    const int rows{ 4 };
+    const int columns{ 6 };
+    const int fps{ 8 };
     const bool loops{ false };
     Shared<Spritesheet> walkLeft{ std::make_shared<Spritesheet>(
         "examples/platformer/grass_scene/textures/walk_left.png", numFrames, rows, columns, fps, loops) };

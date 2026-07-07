@@ -13,7 +13,7 @@ class InputEvent;
 
 //------------------------------------------------------------------//
 
-/// @brief Manages all physics objects in the engine
+/// @brief Manages all input events in the engine
 class InputManager
 {
 public:
@@ -25,12 +25,14 @@ public:
     /// @brief Releases all objects owned by this manager.
     void destroy();
 
-    /// @brief Adds a object at the beginning of the physics frame.
+    /// @brief Adds a object at the beginning of the current main loop.
     void addObject(Object *p_object);
 
-    /// @brief Removes a object at the beginning of the physics frame.
+    /// @brief Removes a object at the beginning of the current main loop.
     void removeObject(Object *p_object);
 
+    /// @brief Adds an event to be processed at the next call of process.
+    /// @param event The input event to process.
     void addEvent(Shared<InputEvent> event);
 
     /// @brief Processes all input events.

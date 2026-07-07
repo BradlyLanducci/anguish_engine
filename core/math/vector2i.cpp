@@ -3,7 +3,7 @@
 
 //------------------------------------------------------------------//
 
-Vector2i::Vector2i(uint32_t _x, uint32_t _y)
+Vector2i::Vector2i(int _x, int _y)
     : x(_x)
     , y(_y)
 {
@@ -11,7 +11,7 @@ Vector2i::Vector2i(uint32_t _x, uint32_t _y)
 
 //------------------------------------------------------------------//
 
-Vector2i Vector2i::operator*(uint32_t i)
+Vector2i Vector2i::operator*(int i)
 {
     this->x *= i;
     this->y *= i;

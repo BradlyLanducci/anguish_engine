@@ -17,10 +17,10 @@ BananaMan::BananaMan(std::array<std::array<int, 14>, 18> &board)
     addChild(mp_sprite);
     addChild(collision());
 
-    const uint32_t numFrames{ 1 };
-    const uint32_t rows{ 1 };
-    const uint32_t columns{ 1 };
-    const uint32_t fps{ 1 };
+    const int numFrames{ 1 };
+    const int rows{ 1 };
+    const int columns{ 1 };
+    const int fps{ 1 };
     const bool loops{ true };
     Shared<Spritesheet> walk{ std::make_shared<Spritesheet>("examples/pacman/banana_man.png", numFrames, rows, columns,
                                                             fps, loops) };

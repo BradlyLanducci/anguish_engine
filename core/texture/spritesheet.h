@@ -16,8 +16,7 @@ class Spritesheet
 {
 public:
     Spritesheet() = default;
-    explicit Spritesheet(const std::string &spritesheetPath, uint32_t numFrames, uint32_t rows, uint32_t columns,
-                         uint32_t fps, bool loops);
+    explicit Spritesheet(const std::string &spritesheetPath, int numFrames, int rows, int columns, int fps, bool loops);
 
     /// @brief Gets the current frame of this animation based off the internal accumulator.
     /// @param deltaTime Adds this amount of time to the internal accumulator.
@@ -35,9 +34,9 @@ public:
     void start();
 
     std::string spritesheetPath() const;
-    uint32_t rows() const;
-    uint32_t columns() const;
-    uint32_t numFrames() const;
+    int rows() const;
+    int columns() const;
+    int numFrames() const;
     Vector2 frameSize() const;
 
     Texture &texture();
@@ -49,14 +48,14 @@ private:
     void incrementRow();
 
     std::string m_spritesheetPath;
-    uint32_t m_numFrames{};
-    uint32_t m_rows{};
-    uint32_t m_columns{};
-    uint32_t m_fps{};
+    int m_numFrames{};
+    int m_rows{};
+    int m_columns{};
+    int m_fps{};
 
     double m_frameDuration{};
-    uint32_t m_currentRow{};
-    uint32_t m_currentColumn{};
+    int m_currentRow{};
+    int m_currentColumn{};
     double m_accumulator{};
 
     bool m_loops{ false };

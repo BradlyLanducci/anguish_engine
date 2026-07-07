@@ -11,7 +11,7 @@ class Jumper : public Object
 public:
     Jumper(Character *p_subject, Collision *p_subject_collision);
 
-    enum class State : uint32_t
+    enum class State : int
     {
         Idle,
         Jumping,

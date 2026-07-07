@@ -4,8 +4,7 @@
 
 //------------------------------------------------------------------//
 
-Spritesheet::Spritesheet(const std::string &spritesheetPath, uint32_t numFrames, uint32_t rows, uint32_t columns,
-                         uint32_t fps, bool loops)
+Spritesheet::Spritesheet(const std::string &spritesheetPath, int numFrames, int rows, int columns, int fps, bool loops)
     : m_spritesheetPath(spritesheetPath)
     , m_numFrames(numFrames)
     , m_rows(rows)
@@ -76,21 +75,21 @@ std::string Spritesheet::spritesheetPath() const
 
 //------------------------------------------------------------------//
 
-uint32_t Spritesheet::rows() const
+int Spritesheet::rows() const
 {
     return m_rows;
 }
 
 //------------------------------------------------------------------//
 
-uint32_t Spritesheet::columns() const
+int Spritesheet::columns() const
 {
     return m_columns;
 }
 
 //------------------------------------------------------------------//
 
-uint32_t Spritesheet::numFrames() const
+int Spritesheet::numFrames() const
 {
     return m_numFrames;
 }

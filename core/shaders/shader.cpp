@@ -6,7 +6,7 @@
 
 //------------------------------------------------------------------//
 
-Shader::Shader(uint32_t shaderProgram, const std::string &path, GLenum shaderType)
+Shader::Shader(int shaderProgram, const std::string &path, GLenum shaderType)
     : m_shaderProgram(shaderProgram)
 {
     setShader(path, shaderType);

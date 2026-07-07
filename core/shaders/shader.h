@@ -20,7 +20,7 @@ public:
     /// @param shaderProgram Shader program id
     /// @param path Path to shader
     /// @param shaderType Type of shader
-    Shader(uint32_t shaderProgram, const std::string &path, GLenum shaderType);
+    Shader(int shaderProgram, const std::string &path, GLenum shaderType);
     ~Shader() override;
 
     /// @brief Sets and compiles new shader
@@ -37,7 +37,7 @@ public:
     void setVec2(const std::string &name, Vector2 value) const;
 
 private:
-    uint32_t m_shaderProgram{ 0 };
+    int m_shaderProgram{ 0 };
 };
 
 //------------------------------------------------------------------//

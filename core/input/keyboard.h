@@ -11,7 +11,7 @@
 class Keyboard
 {
 public:
-    enum class Key : uint32_t
+    enum class Key : int
     {
         Backspace = GLFW_KEY_BACKSPACE,
         Tab = GLFW_KEY_TAB,

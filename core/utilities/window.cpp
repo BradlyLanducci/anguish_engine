@@ -24,7 +24,7 @@ void Window::frameBufferSizeCallback(GLFWwindow *p_window, int width, int height
 
 //------------------------------------------------------------------//
 
-void Window::createWindow(uint32_t width, uint32_t height)
+void Window::createWindow(const Vector2i &size)
 {
     assert(glfwInit());
 
@@ -32,7 +32,8 @@ void Window::createWindow(uint32_t width, uint32_t height)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    mp_window = glfwCreateWindow(static_cast<int>(width), static_cast<int>(height), "Anguish Engine", nullptr, nullptr);
+    mp_window =
+        glfwCreateWindow(static_cast<int>(size.x), static_cast<int>(size.y), "Anguish Engine", nullptr, nullptr);
     assert(mp_window);
 
     glfwMakeContextCurrent(mp_window);
@@ -45,7 +46,7 @@ void Window::createWindow(uint32_t width, uint32_t height)
     Keyboard::initialize(mp_window);
     Mouse::initialize(mp_window);
 
-    m_windowSize = Vector2(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+    m_windowSize = size;
 }
 
 //------------------------------------------------------------------//
@@ -64,6 +65,14 @@ Vector2 Window::size()
 
 //------------------------------------------------------------------//
 
+void Window::setAspectRatio(const Vector2i &aspectRatio)
+{
+    m_aspectRatio = aspectRatio;
+    glfwSetWindowAspectRatio(mp_window, aspectRatio.x, aspectRatio.y);
+}
+
+//------------------------------------------------------------------//
+
 void Window::setWindowSize(const Vector2i &size)
 {
     m_windowSize = Vector2{ static_cast<double>(size.x), static_cast<double>(size.y) };
@@ -74,8 +83,15 @@ void Window::setWindowSize(const Vector2i &size)
 
 GLFWwindow *Window::get()
 {
-    createWindow(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+    createWindow(Vector2i{ DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT });
     return mp_window;
+}
+
+//------------------------------------------------------------------//
+
+Vector2 Window::aspectRatio()
+{
+    return m_aspectRatio;
 }
 
 //------------------------------------------------------------------//

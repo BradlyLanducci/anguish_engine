@@ -14,7 +14,7 @@ constexpr float QUAD_VERTICES[24] = {
     0.0f, 0.0f, 0.0f, 0.0f, 
     1.0f, 1.0f, 1.0f, 1.0f, 
     0.0f, 1.0f, 0.0f, 1.0f};
-constexpr uint32_t QUAD_INDICES[6] = {0, 1, 2, 3, 4, 5};
+constexpr int QUAD_INDICES[6] = {0, 1, 2, 3, 4, 5};
 
 //------------------------------------------------------------------//
 

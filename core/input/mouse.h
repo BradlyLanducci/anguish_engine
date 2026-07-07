@@ -13,7 +13,7 @@
 class Mouse
 {
 public:
-    enum class ButtonType : uint32_t
+    enum class ButtonType : int
     {
         None = 8, // Outside range of GLFW buttons
         Left = GLFW_MOUSE_BUTTON_LEFT,

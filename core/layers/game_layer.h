@@ -11,6 +11,9 @@ class Object;
 
 //------------------------------------------------------------------//
 
+/// @brief This class brings in all managers. You can go off the rails and make your own "GameLayer", but using this as
+/// a template is ideal. For example, if you're making pacman you may not want a physics server, so you can validate
+/// moves via some "board".
 class GameLayer : public Layer
 {
 public:

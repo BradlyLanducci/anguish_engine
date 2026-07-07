@@ -10,14 +10,15 @@
 
 //------------------------------------------------------------------//
 
-constexpr uint32_t DEFAULT_WINDOW_WIDTH{ 960 };
-constexpr uint32_t DEFAULT_WINDOW_HEIGHT{ 1280 };
+constexpr int DEFAULT_WINDOW_WIDTH{ 960 };
+constexpr int DEFAULT_WINDOW_HEIGHT{ 1280 };
 
-constexpr uint32_t DEFAULT_ASPECT_RATIO_WIDTH{ 3 };
-constexpr uint32_t DEFAULT_ASPECT_RATIO_HEIGHT{ 4 };
+constexpr int DEFAULT_ASPECT_RATIO_WIDTH{ 3 };
+constexpr int DEFAULT_ASPECT_RATIO_HEIGHT{ 4 };
 
 //------------------------------------------------------------------//
 
+/// @brief The current state of this project expects there to be only one window.
 class Window
 {
 public:
@@ -28,11 +29,17 @@ public:
     /// @return
     static GLFWwindow *get();
 
+    static Vector2 aspectRatio();
+
     /// @brief Returns the applications window size.
     /// @return
     static Vector2 size();
 
-    /// @brief Sets the windows current size
+    /// @brief Sets the windows current aspect ratio.
+    /// @param aspectRatio A 2D vector representing the windows new x/y aspect ratio.
+    static void setAspectRatio(const Vector2i &aspectRatio);
+
+    /// @brief Sets the windows current size.
     /// @param size A 2D vector representing the windows new width and height.
     static void setWindowSize(const Vector2i &size);
 
@@ -42,11 +49,12 @@ private:
 
     static void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
 
-    static void createWindow(uint32_t width, uint32_t height);
+    static void createWindow(const Vector2i &size);
     static void destroy();
 
     static inline GLFWwindow *mp_window{ nullptr };
     static inline Vector2 m_windowSize;
+    static inline Vector2 m_aspectRatio;
 };
 
 //------------------------------------------------------------------//

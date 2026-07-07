@@ -17,7 +17,7 @@ private:
     void physicsUpdate(double deltaTime);
     void handleInput();
 
-    enum class Direction : uint32_t
+    enum class Direction : int
     {
         Up,
         Down,
