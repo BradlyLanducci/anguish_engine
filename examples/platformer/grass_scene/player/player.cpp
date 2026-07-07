@@ -12,7 +12,7 @@ Player::Player()
     : Character(new Collision())
     , mp_sprite(new AnimatedSprite())
     , m_jumper(this, collision())
-    , m_shootSfx("example/grass_scene/audio/shoot.wav")
+    , m_shootSfx("examples/platformer/grass_scene/audio/shoot.wav")
 {
     addPhysicsCb([this](double deltaTimeTime) { physicsUpdate(deltaTimeTime); });
 
@@ -21,18 +21,18 @@ Player::Player()
     addChild(mp_sprite);
     addChild(collision());
 
-    Shared<Spritesheet> idle{ std::make_shared<Spritesheet>("example/grass_scene/textures/idle.png", 1, 1, 1, 1,
-                                                            true) };
+    Shared<Spritesheet> idle{ std::make_shared<Spritesheet>("examples/platformer/grass_scene/textures/idle.png", 1, 1,
+                                                            1, 1, true) };
 
     const uint32_t numFrames{ 24 };
     const uint32_t rows{ 4 };
     const uint32_t columns{ 6 };
     const uint32_t fps{ 8 };
     const bool loops{ false };
-    Shared<Spritesheet> walkLeft{ std::make_shared<Spritesheet>("example/grass_scene/textures/walk_left.png", numFrames,
-                                                                rows, columns, fps, loops) };
-    Shared<Spritesheet> walkRight{ std::make_shared<Spritesheet>("example/grass_scene/textures/walk_right.png",
-                                                                 numFrames, rows, columns, fps, loops) };
+    Shared<Spritesheet> walkLeft{ std::make_shared<Spritesheet>(
+        "examples/platformer/grass_scene/textures/walk_left.png", numFrames, rows, columns, fps, loops) };
+    Shared<Spritesheet> walkRight{ std::make_shared<Spritesheet>(
+        "examples/platformer/grass_scene/textures/walk_right.png", numFrames, rows, columns, fps, loops) };
     mp_sprite->addAnimation("idle", idle);
     mp_sprite->addAnimation("walkLeft", walkLeft);
     mp_sprite->addAnimation("walkRight", walkRight);

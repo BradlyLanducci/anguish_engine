@@ -9,7 +9,7 @@ Grass::Grass()
 {
     addChild(m_sprite);
     addChild(m_collision);
-    m_sprite->setTexture("example/grass_scene/textures/grass.png");
+    m_sprite->setTexture("examples/platformer/grass_scene/textures/grass.png");
     setSize(m_sprite->size());
     m_collision->setSize(size());
 }

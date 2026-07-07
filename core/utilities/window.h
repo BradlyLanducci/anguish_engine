@@ -2,6 +2,7 @@
 
 //------------------------------------------------------------------//
 
+#include <math/vector2i.h>
 #include <math/vector2.h>
 
 #include <glad/gl.h>
@@ -9,11 +10,11 @@
 
 //------------------------------------------------------------------//
 
-constexpr uint32_t WINDOW_WIDTH{ 1920 };
-constexpr uint32_t WINDOW_HEIGHT{ 1080 };
+constexpr uint32_t DEFAULT_WINDOW_WIDTH{ 960 };
+constexpr uint32_t DEFAULT_WINDOW_HEIGHT{ 1280 };
 
-constexpr uint32_t ASPECT_RATIO_WIDTH{ 16 };
-constexpr uint32_t ASPECT_RATIO_HEIGHT{ 9 };
+constexpr uint32_t DEFAULT_ASPECT_RATIO_WIDTH{ 3 };
+constexpr uint32_t DEFAULT_ASPECT_RATIO_HEIGHT{ 4 };
 
 //------------------------------------------------------------------//
 
@@ -30,6 +31,10 @@ public:
     /// @brief Returns the applications window size.
     /// @return
     static Vector2 size();
+
+    /// @brief Sets the windows current size
+    /// @param size A 2D vector representing the windows new width and height.
+    static void setWindowSize(const Vector2i &size);
 
 private:
     Window() = default;

@@ -26,7 +26,7 @@ Projectile::Projectile(Vector2 direction, double speed)
                  { setGlobalPosition(globalPosition() + direction * speed * deltaTime); });
     mp_collision->collided.connect(m_collided);
 
-    setTexture("example/grass_scene/textures/banana.png");
+    setTexture("examples/platformer/grass_scene/textures/banana.png");
     mp_collision->setSize({ m_texture.size() });
 }
 

@@ -13,8 +13,8 @@ CabbageBoy::CabbageBoy()
     addChild(mp_sprite);
     addChild(collision());
 
-    Shared<Spritesheet> idle{ std::make_shared<Spritesheet>("example/grass_scene/textures/idle.png", 1, 1, 1, 1,
-                                                            true) };
+    Shared<Spritesheet> idle{ std::make_shared<Spritesheet>("examples/platformer/grass_scene/textures/idle.png", 1, 1,
+                                                            1, 1, true) };
     mp_sprite->addAnimation("idle", idle);
 
     collision()->setSize(Vector2(150, 175));

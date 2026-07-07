@@ -18,6 +18,7 @@ private:
     ~CameraManager() = default;
 
     Slot<Vector2> m_cameraMoved;
+    Slot<glm::mat4> m_cameraViewChanged;
 
     Camera *mp_camera{ nullptr };
 };

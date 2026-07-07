@@ -15,12 +15,11 @@ Window::~Window()
 
 //------------------------------------------------------------------//
 
-void Window::frameBufferSizeCallback(GLFWwindow *_window, int width, int height)
+void Window::frameBufferSizeCallback(GLFWwindow *p_window, int width, int height)
 {
-    (void)_window;
+    (void)p_window;
     glViewport(0, 0, width, height);
-    m_windowSize.x = static_cast<double>(width);
-    m_windowSize.y = static_cast<double>(height);
+    m_windowSize = Vector2{ static_cast<double>(width), static_cast<double>(height) };
 }
 
 //------------------------------------------------------------------//
@@ -41,12 +40,12 @@ void Window::createWindow(uint32_t width, uint32_t height)
 
     glfwSetFramebufferSizeCallback(mp_window, frameBufferSizeCallback);
 
-    glfwSetWindowAspectRatio(mp_window, ASPECT_RATIO_WIDTH, ASPECT_RATIO_HEIGHT);
+    glfwSetWindowAspectRatio(mp_window, DEFAULT_ASPECT_RATIO_WIDTH, DEFAULT_ASPECT_RATIO_HEIGHT);
 
     Keyboard::initialize(mp_window);
     Mouse::initialize(mp_window);
 
-    m_windowSize = Vector2(WINDOW_WIDTH, WINDOW_HEIGHT);
+    m_windowSize = Vector2(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
 }
 
 //------------------------------------------------------------------//
@@ -65,9 +64,17 @@ Vector2 Window::size()
 
 //------------------------------------------------------------------//
 
+void Window::setWindowSize(const Vector2i &size)
+{
+    m_windowSize = Vector2{ static_cast<double>(size.x), static_cast<double>(size.y) };
+    glfwSetWindowSize(mp_window, size.x, size.y);
+}
+
+//------------------------------------------------------------------//
+
 GLFWwindow *Window::get()
 {
-    createWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
+    createWindow(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
     return mp_window;
 }
 
