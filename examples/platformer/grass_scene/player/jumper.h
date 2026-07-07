@@ -6,10 +6,10 @@
 
 //------------------------------------------------------------------//
 
-class Jumper : public Object
+class Jumper : public AE::Object
 {
 public:
-    Jumper(Character *p_subject, Collision *p_subject_collision);
+    Jumper(AE::Character *p_subject, AE::Collision *p_subject_collision);
 
     enum class State : int
     {
@@ -23,10 +23,10 @@ public:
 private:
     void physicsUpdate(double delta);
 
-    Character *mp_subject{ nullptr };
-    Collision *mp_subjectCollision{ nullptr };
-    Slot<bool> m_onFloorChanged;
-    AudioPlayer m_jumpSfx;
+    AE::Character *mp_subject{ nullptr };
+    AE::Collision *mp_subjectCollision{ nullptr };
+    AE::Slot<bool> m_onFloorChanged;
+    AE::AudioPlayer m_jumpSfx;
 
     double m_accumulator{};
     double m_jumpForce{};

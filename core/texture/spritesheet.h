@@ -8,6 +8,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 /*
     This utility class contains metadata about a spritesheet and can receive time
     to get the next frame based on it's own internal time accumualator.
@@ -63,5 +67,9 @@ private:
 
     Texture m_texture;
 };
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

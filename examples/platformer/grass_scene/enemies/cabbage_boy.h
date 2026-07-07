@@ -9,14 +9,14 @@
 
 //------------------------------------------------------------------//
 
-class CabbageBoy : public Character
+class CabbageBoy : public AE::Character
 {
 public:
     CabbageBoy();
 
 private:
     void physicsUpdate(double deltaTime);
-    AnimatedSprite *mp_sprite;
+    AE::AnimatedSprite *mp_sprite;
 };
 
 //------------------------------------------------------------------//

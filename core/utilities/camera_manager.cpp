@@ -4,6 +4,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 CameraManager &CameraManager::get()
 {
     static CameraManager c;
@@ -42,5 +46,9 @@ void CameraManager::setCurrent(Camera *p_camera)
     mp_camera->moved.connect(m_cameraMoved);
     mp_camera->viewChanged.connect(m_cameraViewChanged);
 }
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

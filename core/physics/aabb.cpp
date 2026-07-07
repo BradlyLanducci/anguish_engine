@@ -3,6 +3,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 bool AABB::aabb(const Rect &r1, const Rect &r2)
 {
     Vector2 tlR1{ r1.topLeft() };
@@ -29,5 +33,9 @@ Vector2 AABB::collide(const Rect &r1, const Rect &r2)
 
     return Vector2(horizontalOffset, verticalOffset);
 }
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

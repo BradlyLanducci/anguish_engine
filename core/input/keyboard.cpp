@@ -6,6 +6,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 void Keyboard::initialize(GLFWwindow *window)
 {
     glfwSetKeyCallback(window, Keyboard::processInput);
@@ -32,5 +36,9 @@ void Keyboard::processInput(GLFWwindow *window, int key, int scancode, int actio
     p_event->pressed = pressed;
     InputManager::get().addEvent(p_event);
 }
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

@@ -5,10 +5,10 @@
 
 //------------------------------------------------------------------//
 
-Projectile::Projectile(Vector2 direction, double speed)
-    : mp_collision(new Collision())
+Projectile::Projectile(AE::Vector2 direction, double speed)
+    : mp_collision(new AE::Collision())
     , m_collided(
-          [this](Collision *p_collision)
+          [this](AE::Collision *p_collision)
           {
               if (!dynamic_cast<Projectile *>(p_collision->parent()))
               {

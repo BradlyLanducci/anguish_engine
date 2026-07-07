@@ -6,6 +6,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 RenderedObject::RenderedObject()
     : m_shaderProgram("core/shaders/vert.glsl", "core/shaders/frag.glsl")
 {
@@ -68,5 +72,9 @@ void RenderedObject::setTexture(const std::string &texturePath)
     m_texture.load(texturePath);
     setSize(Vector2(m_texture.size()));
 }
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

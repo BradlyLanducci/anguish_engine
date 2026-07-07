@@ -10,7 +10,7 @@
 
 //------------------------------------------------------------------//
 
-class Player : public Character
+class Player : public AE::Character
 {
 public:
     Player();
@@ -21,9 +21,9 @@ private:
     void handleInput();
     void shoot();
 
-    AnimatedSprite *mp_sprite;
+    AE::AnimatedSprite *mp_sprite;
     Jumper m_jumper;
-    AudioPlayer m_shootSfx;
+    AE::AudioPlayer m_shootSfx;
 
     bool m_facingRight{ true };
 

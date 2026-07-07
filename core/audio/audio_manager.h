@@ -2,9 +2,14 @@
 
 //------------------------------------------------------------------//
 
-#include <miniaudio.h>
+#include <ae_core.h>
 
+#include <miniaudio.h>
 #include <vector>
+
+//------------------------------------------------------------------//
+
+BEGIN_AE_NAMESPACE
 
 //------------------------------------------------------------------//
 
@@ -51,5 +56,9 @@ private:
     static inline std::vector<AudioPlayer *> m_audioPlayers;
     static inline ma_device_config m_deviceConfig;
 };
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

@@ -11,6 +11,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 /*
     We only want shared objects to be considered for non objects.
     This isn't a design pattern I want to encourage throughout, but
@@ -135,5 +139,9 @@ private:
     Transform m_transform;
     std::vector<Object *> m_children;
 };
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

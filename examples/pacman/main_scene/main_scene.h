@@ -6,17 +6,25 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 class Camera;
 
 //------------------------------------------------------------------//
 
-class MainScene : public Object
+END_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
+class MainScene : public AE::Object
 {
 public:
     MainScene();
 
 private:
-    Camera *mp_camera;
+    AE::Camera *mp_camera;
     BananaMan *mp_player;
 
     std::array<std::array<int, 14>, 18> m_board{

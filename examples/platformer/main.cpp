@@ -7,8 +7,8 @@
 
 int main(int argc, char *argv[])
 {
-    App app;
-    app.addLayer<GameLayer>(new GrassScene());
+    AE::App app;
+    app.addLayer<AE::GameLayer>(new GrassScene());
     return app.run();
 }
 

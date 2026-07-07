@@ -2,6 +2,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 Camera::Camera()
     : m_followObject([this](Vector2 newPosition) { setGlobalPosition(newPosition); })
 {
@@ -33,5 +37,9 @@ void Camera::setZoom(Vector2 zoom)
     m_view = glm::scale(glm::dmat4(1.0), { zoom.x, zoom.y, 1.f });
     viewChanged.emit(m_view);
 }
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

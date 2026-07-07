@@ -8,7 +8,7 @@
 
 //------------------------------------------------------------------//
 
-class BananaMan : public Character
+class BananaMan : public AE::Character
 {
 public:
     BananaMan(std::array<std::array<int, 14>, 18> &board);
@@ -27,8 +27,8 @@ private:
 
     std::array<std::array<int, 14>, 18> &m_board;
 
-    AnimatedSprite *mp_sprite;
-    Vector2 m_pos;
+    AE::AnimatedSprite *mp_sprite;
+    AE::Vector2 m_pos;
 };
 
 //------------------------------------------------------------------//

@@ -7,15 +7,15 @@
 
 //------------------------------------------------------------------//
 
-class Grass : public Object
+class Grass : public AE::Object
 {
 public:
     Grass();
     ~Grass() override = default;
 
 private:
-    Sprite *m_sprite;
-    Collision *m_collision;
+    AE::Sprite *m_sprite;
+    AE::Collision *m_collision;
 };
 
 //------------------------------------------------------------------//

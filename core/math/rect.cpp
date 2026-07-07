@@ -1,6 +1,11 @@
 #include <math/rect.h>
 
 //------------------------------------------------------------------//
+
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 Rect::Rect(Vector2 _origin, Vector2 _size)
     : origin(_origin)
     , size(_size)
@@ -42,5 +47,9 @@ std::ostream &operator<<(std::ostream &os, const Vector2 &vector)
     os << "(" << vector.x << ", " << vector.y << ")";
     return os;
 }
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

@@ -3,8 +3,8 @@
 //------------------------------------------------------------------//
 
 CabbageBoy::CabbageBoy()
-    : Character(new Collision())
-    , mp_sprite(new AnimatedSprite())
+    : AE::Character(new AE::Collision())
+    , mp_sprite(new AE::AnimatedSprite())
 {
     addPhysicsCb([this](double deltaTimeTime) { physicsUpdate(deltaTimeTime); });
 
@@ -13,11 +13,11 @@ CabbageBoy::CabbageBoy()
     addChild(mp_sprite);
     addChild(collision());
 
-    Shared<Spritesheet> idle{ std::make_shared<Spritesheet>("examples/platformer/grass_scene/textures/idle.png", 1, 1,
-                                                            1, 1, true) };
+    auto idle{ std::make_shared<AE::Spritesheet>("examples/platformer/grass_scene/textures/idle.png", 1, 1, 1, 1,
+                                                 true) };
     mp_sprite->addAnimation("idle", idle);
 
-    collision()->setSize(Vector2(150, 175));
+    collision()->setSize(AE::Vector2(150, 175));
 
     mp_sprite->playAnimation("idle");
 }
@@ -26,7 +26,7 @@ CabbageBoy::CabbageBoy()
 
 void CabbageBoy::physicsUpdate(double deltaTime)
 {
-    Vector2 gp{ globalPosition() };
+    AE::Vector2 gp{ globalPosition() };
     double gravity{ 300.0 * (double)deltaTime };
     gp.y += gravity;
     setGlobalPosition(gp);

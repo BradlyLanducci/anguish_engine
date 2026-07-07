@@ -10,6 +10,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 class AnimatedSprite : public RenderedObject
 {
 public:
@@ -30,5 +34,9 @@ private:
     std::unordered_map<std::string, Shared<Spritesheet>> m_animations;
     std::string m_currentAnimation;
 };
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

@@ -10,7 +10,7 @@
 //------------------------------------------------------------------//
 
 MainScene::MainScene()
-    : mp_camera(new Camera())
+    : mp_camera(new AE::Camera())
     , mp_player(new BananaMan(m_board))
 {
     constexpr int BaseWidth{ 224 };
@@ -21,8 +21,8 @@ MainScene::MainScene()
     constexpr int ScaledHeight{ Scalar * BaseHeight };
 
     addChild(mp_camera);
-    CameraManager::get().setCurrent(mp_camera);
-    Window::setWindowSize(Vector2i{ ScaledWidth, ScaledHeight });
+    AE::CameraManager::get().setCurrent(mp_camera);
+    AE::Window::setWindowSize(AE::Vector2i{ ScaledWidth, ScaledHeight });
     mp_camera->setZoom({ 3.f, 3.f });
 
     addChild(mp_player);
@@ -34,9 +34,9 @@ MainScene::MainScene()
         {
             if (m_board[r][c])
             {
-                Sprite *p_sprite{ new Sprite() };
+                AE::Sprite *p_sprite{ new AE::Sprite() };
 
-                Collision *p_collision{ new Collision() };
+                AE::Collision *p_collision{ new AE::Collision() };
                 p_collision->setSize({ SquareSide, SquareSide });
 
                 p_sprite->addChild(p_collision);
@@ -49,8 +49,6 @@ MainScene::MainScene()
             }
         }
     }
-
-    CameraManager::get().setCurrent(mp_camera);
 }
 
 //------------------------------------------------------------------//

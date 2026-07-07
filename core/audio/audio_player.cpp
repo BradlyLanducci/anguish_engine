@@ -9,6 +9,10 @@
 
 //------------------------------------------------------------------//
 
+BEGIN_AE_NAMESPACE
+
+//------------------------------------------------------------------//
+
 AudioPlayer::AudioPlayer(const std::string &audioFilePath)
     : m_audioFilePath(audioFilePath)
 {
@@ -114,5 +118,9 @@ void AudioPlayer::process(StereoSampleBuffer &buffer)
         p_effect->process(buffer);
     }
 }
+
+//------------------------------------------------------------------//
+
+END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

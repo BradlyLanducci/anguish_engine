@@ -4,8 +4,8 @@
 
 Grass::Grass()
     : Object()
-    , m_sprite(new Sprite())
-    , m_collision(new Collision())
+    , m_sprite(new AE::Sprite())
+    , m_collision(new AE::Collision())
 {
     addChild(m_sprite);
     addChild(m_collision);
