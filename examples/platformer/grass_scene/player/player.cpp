@@ -93,7 +93,6 @@ void Player::handleInput()
     }
     else
     {
-        Log(Info) << "idling";
         mp_sprite->playAnimation("idle");
         setVelocity({ 0.0, 0.0 });
     }

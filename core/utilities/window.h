@@ -14,11 +14,11 @@ BEGIN_AE_NAMESPACE
 
 //------------------------------------------------------------------//
 
-constexpr int DEFAULT_WINDOW_WIDTH{ 960 };
-constexpr int DEFAULT_WINDOW_HEIGHT{ 1280 };
+constexpr int DEFAULT_WINDOW_WIDTH{ 1920 };
+constexpr int DEFAULT_WINDOW_HEIGHT{ 1080 };
 
-constexpr int DEFAULT_ASPECT_RATIO_WIDTH{ 3 };
-constexpr int DEFAULT_ASPECT_RATIO_HEIGHT{ 4 };
+constexpr int DEFAULT_ASPECT_RATIO_WIDTH{ 16 };
+constexpr int DEFAULT_ASPECT_RATIO_HEIGHT{ 9 };
 
 //------------------------------------------------------------------//
 
