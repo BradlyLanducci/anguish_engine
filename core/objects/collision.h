@@ -17,7 +17,14 @@ public:
     Collision();
     ~Collision() override;
 
+    bool solid() const;
+
+    void setSolid(bool solid);
+
     Signal<Collision *> collided;
+
+private:
+    bool m_solid{ true };
 };
 
 //------------------------------------------------------------------//

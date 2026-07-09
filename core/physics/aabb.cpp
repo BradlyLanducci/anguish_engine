@@ -28,8 +28,14 @@ Vector2 AABB::collide(const Rect &r1, const Rect &r2)
     bool horizontal{ (tlR1.x < brR2.x) && (brR1.x > tlR2.x) };
     bool vertical{ (tlR1.y < brR2.y) && (brR1.y > tlR2.y) };
 
-    double horizontalOffset{ horizontal ? tlR2.x - brR1.x : 0.0 };
-    double verticalOffset{ vertical ? tlR2.y - brR1.y : 0.0 };
+    double horizontalOffsetA{ horizontal ? brR2.x - tlR1.x : 0.0 };
+    double horizontalOffsetB{ horizontal ? tlR2.x - brR1.x : 0.0 };
+    double horizontalOffset{ std::abs(horizontalOffsetA) > std::abs(horizontalOffsetB) ? horizontalOffsetB
+                                                                                       : horizontalOffsetA };
+
+    double verticalOffsetA{ vertical ? brR2.y - tlR1.y : 0.0 };
+    double verticalOffsetB{ vertical ? tlR2.y - brR1.y : 0.0 };
+    double verticalOffset{ std::abs(verticalOffsetA) > std::abs(verticalOffsetB) ? verticalOffsetB : verticalOffsetA };
 
     return Vector2(horizontalOffset, verticalOffset);
 }

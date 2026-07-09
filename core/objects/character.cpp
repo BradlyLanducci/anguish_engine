@@ -11,12 +11,16 @@ Character::Character()
     : m_resolveCollision(
           [this](Collision *p_collision)
           {
+              if (!p_collision->solid())
+              {
+                  return;
+              }
+
               Rect r1{ mp_collision->rect() };
               Rect r2{ p_collision->rect() };
               Vector2 offset{ AABB::collide(r1, r2) };
 
-              bool resolveHorizontal{ offset.x > offset.y };
-
+              bool resolveHorizontal{ std::abs(offset.x) < std::abs(offset.y) };
               if (resolveHorizontal)
               {
                   offset.y = 0.0;
