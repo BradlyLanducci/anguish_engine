@@ -62,4 +62,10 @@ function(populateDependencies)
                 BINARY_DIR ${CMAKE_BINARY_DIR}/jsoncpp_build
         )
         FetchContent_MakeAvailable(jsoncpp)
+
+        add_library(JsonLib STATIC IMPORTED GLOBAL)
+        set_target_properties(JsonLib PROPERTIES
+                IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/jsoncpp_build/src/lib_json/jsoncpp.lib
+                INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_BINARY_DIR}/jsoncpp_build/include
+        )
 endfunction()
