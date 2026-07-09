@@ -31,6 +31,7 @@ target_include_directories(${PROJECT_NAME}
         ${CMAKE_SOURCE_DIR}/Dependencies/include
         ${CMAKE_SOURCE_DIR}/core
         ${CMAKE_BINARY_DIR}/stb
+        ${CMAKE_BINARY_DIR}/jsoncpp/include
 )
 
 target_link_libraries(${PROJECT_NAME}
@@ -40,4 +41,5 @@ target_link_libraries(${PROJECT_NAME}
         glm::glm
         magic_enum
         miniaudio
+        jsoncpp_lib
 )
