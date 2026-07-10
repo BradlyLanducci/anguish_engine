@@ -26,6 +26,13 @@ int App::run()
         return -1;
     }
 
+    /*
+        TODO: From my understanding an optimization would be to enable it only for all transparent objects. Then
+        disable it for non transparent for performance reasons.
+    */
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     while (!glfwWindowShouldClose(mp_window))
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

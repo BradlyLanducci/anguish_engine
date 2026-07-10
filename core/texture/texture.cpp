@@ -85,7 +85,9 @@ void Texture::load(const std::string &path)
     {
         glBindTexture(GL_TEXTURE_2D, m_id);
         checkGLError();
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_size.x, m_size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, mp_data);
+
+        GLint colorFormat{ m_channels == 4 ? GL_RGBA : GL_RGB };
+        glTexImage2D(GL_TEXTURE_2D, 0, colorFormat, m_size.x, m_size.y, 0, colorFormat, GL_UNSIGNED_BYTE, mp_data);
         checkGLError();
         glGenerateMipmap(GL_TEXTURE_2D);
         checkGLError();
