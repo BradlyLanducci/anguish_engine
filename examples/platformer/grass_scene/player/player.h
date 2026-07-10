@@ -7,6 +7,7 @@
 #include <objects/character.h>
 #include <objects/animated_sprite.h>
 #include <audio/audio_player.h>
+#include <utilities/file_io.h>
 
 //------------------------------------------------------------------//
 
@@ -14,6 +15,9 @@ class Player : public AE::Character
 {
 public:
     Player();
+
+    Json::Value serialize();
+    void deserialize(const Json::Value &data);
 
 private:
     void physicsUpdate(double deltaTime);

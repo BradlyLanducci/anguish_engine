@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ae_core.h>
+#include <utilities/persists.h>
 
 #include <iostream>
 
@@ -14,7 +14,7 @@ struct Vector2i;
 
 //------------------------------------------------------------------//
 
-struct Vector2
+struct Vector2 : public Persists
 {
     Vector2(double _x, double _y);
     Vector2(Vector2i vi);
@@ -39,6 +39,8 @@ struct Vector2
     Vector2 directionTo(const Vector2 &other);
 
     double distanceTo(const Vector2 &other);
+
+    Json::Value toJson() const override;
 
     double x{ 0.0 };
     double y{ 0.0 };

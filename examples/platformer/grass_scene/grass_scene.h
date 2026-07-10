@@ -12,6 +12,7 @@ class GrassScene : public AE::Object
 {
 public:
     GrassScene();
+    ~GrassScene();
 
 private:
     AE::Camera *mp_camera;

@@ -1,6 +1,7 @@
 #include <grass_scene/grass_scene.h>
 
 #include <utilities/camera_manager.h>
+#include <utilities/file_io.h>
 
 //------------------------------------------------------------------//
 
@@ -25,6 +26,15 @@ GrassScene::GrassScene()
     mp_camera->follow(mp_player);
 
     AE::CameraManager::get().setCurrent(mp_camera);
+    mp_player->deserialize(AE::FileIO::readJson("build/save_file.json"));
+}
+
+//------------------------------------------------------------------//
+
+GrassScene::~GrassScene()
+{
+    Json::Value data{ mp_player->serialize() };
+    (void)AE::FileIO::writeJson("build/save_file.json", data);
 }
 
 //------------------------------------------------------------------//
