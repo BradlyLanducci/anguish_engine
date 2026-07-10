@@ -148,6 +148,18 @@ double Vector2::distanceTo(const Vector2 &other)
 
 //------------------------------------------------------------------//
 
+Json::Value Vector2::toJson() const
+{
+    Json::Value vector;
+
+    vector["x"] = x;
+    vector["y"] = y;
+
+    return vector;
+}
+
+//------------------------------------------------------------------//
+
 END_AE_NAMESPACE
 
 //------------------------------------------------------------------//

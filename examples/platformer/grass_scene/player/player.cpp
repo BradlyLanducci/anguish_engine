@@ -62,9 +62,7 @@ Player::Player()
 Json::Value Player::serialize()
 {
     Json::Value root;
-    root["global_position"] = Json::Value{};
-    root["global_position"]["x"] = globalPosition().x;
-    root["global_position"]["y"] = globalPosition().y;
+    root["globalPosition"] = globalPosition().toJson();
     return root;
 }
 
@@ -72,7 +70,7 @@ Json::Value Player::serialize()
 
 void Player::deserialize(const Json::Value &data)
 {
-    auto gp{ data.get("global_position", Json::Value()) };
+    auto gp{ data.get("globalPosition", Json::Value()) };
     double x{ gp.get("x", 0.0).asDouble() };
     double y{ gp.get("y", 0.0).asDouble() };
     setGlobalPosition({ x, y });

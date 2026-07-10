@@ -53,6 +53,18 @@ Vector2i Vector2i::operator*(const Vector2i &other)
 
 //------------------------------------------------------------------//
 
+Json::Value Vector2i::toJson() const
+{
+    Json::Value vector;
+
+    vector["x"] = x;
+    vector["y"] = y;
+
+    return vector;
+}
+
+//------------------------------------------------------------------//
+
 END_AE_NAMESPACE
 
 //------------------------------------------------------------------//
