@@ -13,7 +13,7 @@ BEGIN_AE_NAMESPACE
 AnimatedSprite::AnimatedSprite()
 {
     addIdleCb([this](double deltaTime) { idleUpdate(deltaTime); });
-    shader().setVertexShader("core/shaders/anim_vert.glsl");
+    shader().setVertexShader("shaders/anim_vert.glsl");
 }
 
 //------------------------------------------------------------------//

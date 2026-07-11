@@ -11,6 +11,14 @@ add_library(${PROJECT_NAME}
     ${SourceFiles}
 )
 
+add_custom_target(copy_shaders ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_CURRENT_LIST_DIR}/shaders
+        ${CMAKE_BINARY_DIR}/shaders
+    COMMENT "Copying shaders directory to build folder"
+    VERBATIM
+)
+
 target_compile_features(${PROJECT_NAME} 
     PRIVATE 
         cxx_std_23

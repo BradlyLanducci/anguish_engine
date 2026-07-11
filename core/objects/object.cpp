@@ -87,6 +87,17 @@ void Object::addInputCb(const InputCb &cb)
 
 void Object::addChild(Object *p_child)
 {
+    if (p_child == this)
+    {
+        Log(Error) << "Tried to add a child to itself.";
+        return;
+    }
+
+    Object *p_parent{ parent() };
+    if (p_parent)
+    {
+        p_parent->removeChild(p_child);
+    }
     p_child->setParent(this);
     m_children.push_back(p_child);
 }

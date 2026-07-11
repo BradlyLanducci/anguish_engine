@@ -11,7 +11,7 @@ BEGIN_AE_NAMESPACE
 //------------------------------------------------------------------//
 
 RenderedObject::RenderedObject()
-    : m_shaderProgram("core/shaders/vert.glsl", "core/shaders/frag.glsl")
+    : m_shaderProgram("shaders/vert.glsl", "shaders/frag.glsl")
 {
     RenderingManager::get().addObject(this);
 
