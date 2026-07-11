@@ -1,14 +1,8 @@
-file(GLOB DependencySourceFiles 
-	${CMAKE_SOURCE_DIR}/dependencies/*.c
-	${CMAKE_SOURCE_DIR}/dependencies/*.cpp
-)
-
 file(GLOB_RECURSE CoreSourceFiles 
-    ${CMAKE_SOURCE_DIR}/core/*.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/*.cpp
 )
 
 set(SourceFiles
-	${DependencySourceFiles}
 	${CoreSourceFiles}
 )
 	
@@ -26,12 +20,9 @@ glad_add_library(glad_gl_core_33 REPRODUCIBLE API gl:core=3.3)
 
 target_include_directories(${PROJECT_NAME} 
     PRIVATE
-        ${CMAKE_SOURCE_DIR}/assets
-        ${CMAKE_SOURCE_DIR}/Dependencies/
-        ${CMAKE_SOURCE_DIR}/Dependencies/include
-        ${CMAKE_SOURCE_DIR}/core
         ${CMAKE_BINARY_DIR}/stb
     PUBLIC
+        ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_BINARY_DIR}/jsoncpp/include
 )
 
