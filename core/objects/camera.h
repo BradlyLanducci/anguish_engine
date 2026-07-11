@@ -24,15 +24,22 @@ public:
 
     /// @brief Follows the provided object whenever it moves.
     /// @param p_object The object to follow.
-    void follow(Object *p_object);
+    /// @param followSpeed The speed in which the camera follows the object, 1.0 is locked.
+    void follow(Object *p_object, double followSpeed = 1.0);
 
     /// @brief Sets the current zoom of the camera.
     /// @param zoom A 2D vector representing the x/y zoom.
-    void setZoom(Vector2 zoom);
+    void setZoom(const Vector2 &zoom);
 
     Signal<glm::mat4> viewChanged;
 
 private:
+    Vector2 getNextPosition(const Vector2 &targetPosition);
+
+    Vector2 m_currentPosition;
+    Vector2 m_targetPosition;
+
+    double m_followSpeed{ 1.0 };
     Slot<Vector2> m_followObject;
 
     Object *mp_objectToFollow{ nullptr };
