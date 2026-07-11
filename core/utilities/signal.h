@@ -2,6 +2,8 @@
 
 //------------------------------------------------------------------//
 
+#include <ae_core.h>
+
 #include <vector>
 #include <functional>
 
