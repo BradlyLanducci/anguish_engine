@@ -20,6 +20,8 @@ public:
     /// @return
     const glm::dmat4 &view() const;
 
+    Vector2 zoom() const;
+
     /// @brief Follows the provided object whenever it moves.
     /// @param p_object The object to follow.
     void follow(Object *p_object);
@@ -36,7 +38,7 @@ private:
     Object *mp_objectToFollow{ nullptr };
 
     glm::dmat4 m_view{ 1.0 };
-    glm::dvec3 m_zoom{ 1.0 };
+    Vector2 m_zoom;
 };
 
 //------------------------------------------------------------------//

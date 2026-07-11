@@ -22,9 +22,10 @@ CameraManager::CameraManager()
           {
               Vector2 gp{ mp_camera->globalPosition() };
               Vector2 windowSize{ Window::size() };
-              glm::dmat4 translate{ glm::translate(mp_camera->view(),
-                                                   { -gp.x + static_cast<double>(windowSize.x) / 2.f,
-                                                     -gp.y + static_cast<double>(windowSize.y) / 2.f, 0.0f }) };
+              glm::dmat4 translate{ glm::translate(
+                  mp_camera->view(),
+                  { -gp.x + static_cast<double>(windowSize.x) / (mp_camera->zoom().x * 2.0),
+                    -gp.y + static_cast<double>(windowSize.y) / (mp_camera->zoom().y * 2.0), 0.0f }) };
               RenderingManager::get().setViewMatrix(translate);
           })
     , m_cameraViewChanged([this](glm::mat4 view) { RenderingManager::get().setViewMatrix(view); })

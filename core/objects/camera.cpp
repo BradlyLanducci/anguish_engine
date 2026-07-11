@@ -20,6 +20,13 @@ const glm::dmat4 &Camera::view() const
 
 //------------------------------------------------------------------//
 
+Vector2 Camera::zoom() const
+{
+    return m_zoom;
+}
+
+//------------------------------------------------------------------//
+
 void Camera::follow(Object *p_object)
 {
     if (mp_objectToFollow)
@@ -34,6 +41,7 @@ void Camera::follow(Object *p_object)
 
 void Camera::setZoom(Vector2 zoom)
 {
+    m_zoom = zoom;
     m_view = glm::scale(glm::dmat4(1.0), { zoom.x, zoom.y, 1.f });
     viewChanged.emit(m_view);
 }
