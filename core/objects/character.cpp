@@ -30,6 +30,8 @@ Character::Character()
                   offset.x = 0.0;
               }
 
+              resolvedCollision.emit(offset);
+
               setGlobalPosition(globalPosition() + offset);
               if (offset.y != 0.0)
               {
