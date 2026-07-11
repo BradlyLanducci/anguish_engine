@@ -23,15 +23,8 @@ void AnimatedSprite::idleUpdate(double deltaTime)
     if (!m_currentAnimation.empty())
     {
         auto &sheet{ m_animations.at(m_currentAnimation) };
-        if (sheet->isComplete())
-        {
-            m_currentAnimation = "";
-        }
-        else
-        {
-            Vector2i currentFrame{ sheet->getCurrentFrame(deltaTime) };
-            shader().p_vertexShader->setVec2i("currentFrame", currentFrame);
-        }
+        Vector2i currentFrame{ sheet->getCurrentFrame(deltaTime) };
+        shader().p_vertexShader->setVec2i("currentFrame", currentFrame);
     }
 }
 
@@ -105,10 +98,10 @@ void AnimatedSprite::draw()
         glBindVertexArray(m_vao.get());
 
         auto &sheet{ m_animations.at(m_currentAnimation) };
-        if (!sheet->isComplete())
-        {
-            sheet->texture().bind();
-        }
+        // if (!sheet->isComplete())
+        // {
+        sheet->texture().bind();
+        // }
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         checkGLError();

@@ -26,7 +26,15 @@ Vector2i Spritesheet::getCurrentFrame(double deltaTime)
 {
     m_accumulator += deltaTime;
 
-    while (m_accumulator >= m_frameDuration)
+    /*
+        In the case of a non looping animation that has no next animation to play, it will hold on the last frame.
+    */
+    if (isComplete())
+    {
+        return { m_columns - 1, m_rows - 1 };
+    }
+
+    while (m_accumulator >= m_frameDuration && m_isPlaying)
     {
         m_accumulator -= m_frameDuration;
         incrementCol();
@@ -120,7 +128,13 @@ void Spritesheet::incrementCol()
     if (m_currentColumn >= m_columns)
     {
         incrementRow();
-        m_currentColumn = 0;
+
+        // We only need to reset looping animations.
+        // Otherwise it's the responsibility of the owner of this object to stop it, or queue a new one.
+        if (m_loops)
+        {
+            m_currentColumn = 0;
+        }
     }
 }
 
@@ -131,8 +145,13 @@ void Spritesheet::incrementRow()
     m_currentRow++;
     if (m_currentRow >= m_rows)
     {
-        reset();
-        if (!m_loops)
+        // We only need to reset looping animations.
+        // Otherwise it's the responsibility of the owner of this object to stop it, or queue a new one.
+        if (m_loops)
+        {
+            reset();
+        }
+        else
         {
             m_isPlaying = false;
         }
