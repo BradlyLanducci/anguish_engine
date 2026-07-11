@@ -61,16 +61,18 @@ void ShaderProgram::setFragmentShader(const std::string &path)
 {
     if (p_fragmentShader)
     {
+        glDetachShader(m_id, p_fragmentShader->get());
+        checkGLError();
         p_fragmentShader->setShader(path, GL_FRAGMENT_SHADER);
     }
     else
     {
         p_fragmentShader = std::make_unique<Shader>(m_id, path, GL_FRAGMENT_SHADER);
-        glAttachShader(m_id, p_fragmentShader->get());
-        checkGLError();
-        glLinkProgram(m_id);
-        checkGLError();
     }
+    glAttachShader(m_id, p_fragmentShader->get());
+    checkGLError();
+    glLinkProgram(m_id);
+    checkGLError();
 }
 
 //------------------------------------------------------------------//

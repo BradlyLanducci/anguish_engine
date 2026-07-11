@@ -80,7 +80,7 @@ void Shader::setFloat(const std::string &name, float value) const
 
 //------------------------------------------------------------------//
 
-void Shader::setMat4(const std::string &name, glm::dmat4 value) const
+void Shader::setMat4(const std::string &name, const glm::dmat4 &value) const
 {
     glUseProgram(m_shaderProgram);
     checkGLError();
@@ -92,7 +92,7 @@ void Shader::setMat4(const std::string &name, glm::dmat4 value) const
 
 //------------------------------------------------------------------//
 
-void Shader::setVec2i(const std::string &name, Vector2i value) const
+void Shader::setVec2i(const std::string &name, const Vector2i &value) const
 {
     glUseProgram(m_shaderProgram);
     checkGLError();
@@ -103,11 +103,22 @@ void Shader::setVec2i(const std::string &name, Vector2i value) const
 
 //------------------------------------------------------------------//
 
-void Shader::setVec2(const std::string &name, Vector2 value) const
+void Shader::setVec2(const std::string &name, const Vector2 &value) const
 {
     glUseProgram(m_shaderProgram);
     checkGLError();
     glUniform2f(glGetUniformLocation(m_shaderProgram, name.c_str()), value.x, value.y);
+    checkGLError();
+    glUseProgram(0);
+}
+
+//------------------------------------------------------------------//
+
+void Shader::setVec4(const std::string &name, const glm::vec4 &value) const
+{
+    glUseProgram(m_shaderProgram);
+    checkGLError();
+    glUniform4f(glGetUniformLocation(m_shaderProgram, name.c_str()), value.x, value.y, value.z, value.w);
     checkGLError();
     glUseProgram(0);
 }
