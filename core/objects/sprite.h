@@ -14,6 +14,12 @@ BEGIN_AE_NAMESPACE
 class Sprite : public RenderedObject
 {
 public:
+    /// @brief Whether or not this sprite is currently being drawn.
+    /// @return
+    bool enabled() const;
+
+    /// @brief Sets the sprite to be drawn or not.
+    /// @param enabled
     void setEnabled(bool enabled);
 
 private:

@@ -8,6 +8,13 @@ BEGIN_AE_NAMESPACE
 
 //------------------------------------------------------------------//
 
+bool Sprite::enabled() const
+{
+    return m_enabled;
+}
+
+//------------------------------------------------------------------//
+
 void Sprite::setEnabled(bool enabled)
 {
     m_enabled = enabled;
