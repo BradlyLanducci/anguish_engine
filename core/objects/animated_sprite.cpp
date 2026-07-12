@@ -105,11 +105,7 @@ void AnimatedSprite::draw()
         glBindVertexArray(m_vao.get());
 
         auto &sheet{ m_animations.at(m_currentAnimation) };
-        // if (!sheet->isComplete())
-        // {
         sheet->texture().bind();
-        // }
-
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         checkGLError();
     }

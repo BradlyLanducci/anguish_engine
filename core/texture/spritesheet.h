@@ -3,7 +3,7 @@
 //------------------------------------------------------------------//
 
 #include <texture/texture.h>
-
+#include <utilities/signal.h>
 #include <utilities/logger.h>
 
 //------------------------------------------------------------------//
@@ -44,6 +44,8 @@ public:
     Vector2 frameSize() const;
 
     Texture &texture();
+
+    Signal<> animationFinished;
 
 private:
     void reset();

@@ -155,6 +155,8 @@ void Spritesheet::incrementRow()
         {
             m_isPlaying = false;
         }
+
+        animationFinished.emit();
     }
 }
 
