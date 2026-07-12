@@ -21,6 +21,8 @@ public:
 
     void idleUpdate(double deltaTime);
 
+    std::string currentAnimation() const;
+
     void addAnimation(const std::string &animation, Shared<Spritesheet> spritesheet);
     void playAnimation(const std::string &animation);
     void stopAnimation();

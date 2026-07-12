@@ -17,13 +17,16 @@ public:
     Collision();
     ~Collision() override;
 
+    bool enabled() const;
     bool solid() const;
 
+    void setEnabled(bool enabled);
     void setSolid(bool solid);
 
     Signal<Collision *> collided;
 
 private:
+    bool m_enabled{ true };
     bool m_solid{ true };
 };
 

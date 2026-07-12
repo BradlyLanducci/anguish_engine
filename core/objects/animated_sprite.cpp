@@ -30,6 +30,13 @@ void AnimatedSprite::idleUpdate(double deltaTime)
 
 //------------------------------------------------------------------//
 
+std::string AnimatedSprite::currentAnimation() const
+{
+    return m_currentAnimation;
+}
+
+//------------------------------------------------------------------//
+
 void AnimatedSprite::addAnimation(const std::string &animation, Shared<Spritesheet> spritesheet)
 {
     m_animations.try_emplace(animation, spritesheet);

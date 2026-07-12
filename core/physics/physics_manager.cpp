@@ -91,13 +91,16 @@ void PhysicsManager::update(double currentTime)
                 auto co2{ m_collisionQueue[j] };
                 if (co1 != co2)
                 {
+                    if (!co1->enabled() || !co2->enabled())
+                    {
+                        continue;
+                    }
                     auto collisionIt{ std::find_if(collisions.begin(), collisions.end(), [&co1, &co2](auto collision)
                                                    { return collision.first == co1 && collision.second == co2; }) };
                     if (collisionIt == collisions.end())
                     {
                         Rect r1{ co1->globalPosition(), co1->size() };
                         Rect r2{ co2->globalPosition(), co2->size() };
-
                         if (AABB::aabb(r1, r2))
                         {
                             collisions.push_back(std::pair(co1, co2));
@@ -107,10 +110,31 @@ void PhysicsManager::update(double currentTime)
             }
         }
 
-        for (auto &[co1, co2] : collisions)
+        /*
+            So the original issue is that resolving in a single direction favors the order in which objects are created.
+
+            By doing multiple iterations it allows for physics functions to converge to valid values.
+
+            It's important to note that because of this physics resolution in collided slots should be able to logically
+            handle multiple sequential calls in one physics frame.
+        */
+        constexpr int NumIterations{ 8 };
+        for (int i = 0; i < NumIterations; ++i)
         {
-            co1->collided.emit(co2);
-            co2->collided.emit(co1);
+            const bool reverse{ i % 2 };
+            for (auto &[co1, co2] : collisions)
+            {
+                if (reverse)
+                {
+                    co2->collided.emit(co1);
+                    co1->collided.emit(co2);
+                }
+                else
+                {
+                    co1->collided.emit(co2);
+                    co2->collided.emit(co1);
+                }
+            }
         }
 
         dtAccumulator -= PHYSICS_INTERVAL;
