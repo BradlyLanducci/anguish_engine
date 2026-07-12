@@ -34,18 +34,6 @@ GameLayer::~GameLayer()
 
 //------------------------------------------------------------------//
 
-void GameLayer::destroy()
-{
-    InputManager::get().destroy();
-    RenderingManager::get().destroy();
-    PhysicsManager::get().destroy();
-    IdleManager::get().destroy();
-    AudioManager::get().destroy();
-    MemoryManager::get().destroy();
-}
-
-//------------------------------------------------------------------//
-
 void GameLayer::setRoot(Object *p_object)
 {
     if (mp_root)

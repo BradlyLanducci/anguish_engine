@@ -29,8 +29,6 @@ public:
 
     ~GameLayer();
 
-    void destroy() override;
-
     void update(double deltaTime) override;
     void render() override;
 

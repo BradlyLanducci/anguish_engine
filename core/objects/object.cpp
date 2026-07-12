@@ -254,7 +254,19 @@ Object *Object::parent() const
 
 bool Object::isUi() const
 {
-    return m_isUi;
+    bool isUi{ m_isUi };
+    Object *p_parent{ parent() };
+    while (p_parent && !isUi)
+    {
+        isUi = p_parent->m_isUi;
+        if (isUi)
+        {
+            break;
+        }
+
+        p_parent = p_parent->parent();
+    }
+    return isUi;
 }
 
 //------------------------------------------------------------------//

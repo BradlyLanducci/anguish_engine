@@ -1,6 +1,12 @@
 #include <app.h>
 #include <utilities/time.h>
 #include <utilities/logger.h>
+#include <idle/idle_manager.h>
+#include <audio/audio_manager.h>
+#include <memory/memory_manager.h>
+#include <physics/physics_manager.h>
+#include <renderer/rendering_manager.h>
+#include <input/input_manager.h>
 #include <layers/layer.h>
 
 #include <glad/gl.h>
@@ -14,8 +20,25 @@ BEGIN_AE_NAMESPACE
 App::App()
     : mp_window(Window::get())
 {
+    InputManager::get();
+    RenderingManager::get();
+    PhysicsManager::get();
+    IdleManager::get();
+    AudioManager::get();
+    MemoryManager::get();
 }
 
+//------------------------------------------------------------------//
+
+App::~App()
+{
+    InputManager::get().destroy();
+    RenderingManager::get().destroy();
+    PhysicsManager::get().destroy();
+    IdleManager::get().destroy();
+    AudioManager::get().destroy();
+    MemoryManager::get().destroy();
+}
 //------------------------------------------------------------------//
 
 int App::run()

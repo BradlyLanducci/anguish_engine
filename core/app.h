@@ -21,6 +21,8 @@ class App
 {
 public:
     App();
+    ~App();
+
     /// @brief Runs the main app loop. Each of these loops is considered
     /// a 'App Frame'.
     /// @return
