@@ -81,7 +81,8 @@ void PhysicsManager::update(double currentTime)
         }
 
         // Collect collisions
-        std::vector<std::pair<Collision *, Collision *>> collisions;
+        std::vector<std::pair<Collision *, Collision *>> solidcollisions;
+        std::vector<std::pair<Collision *, Collision *>> unsolidCollisions;
         size_t numObjects{ m_collisionQueue.size() };
         for (size_t i = 0; i < numObjects; i++)
         {
@@ -95,6 +96,9 @@ void PhysicsManager::update(double currentTime)
                     {
                         continue;
                     }
+
+                    auto &collisions{ !co1->solid() || !co2->solid() ? unsolidCollisions : solidcollisions };
+
                     auto collisionIt{ std::find_if(collisions.begin(), collisions.end(), [&co1, &co2](auto collision)
                                                    { return collision.first == co1 && collision.second == co2; }) };
                     if (collisionIt == collisions.end())
@@ -122,7 +126,7 @@ void PhysicsManager::update(double currentTime)
         for (int i = 0; i < NumIterations; ++i)
         {
             const bool reverse{ i % 2 == 0 ? true : false };
-            for (auto &[co1, co2] : collisions)
+            for (auto &[co1, co2] : solidcollisions)
             {
                 if (reverse)
                 {
@@ -135,6 +139,12 @@ void PhysicsManager::update(double currentTime)
                     co2->collided.emit(co1);
                 }
             }
+        }
+
+        for (auto &[co1, co2] : unsolidCollisions)
+        {
+            co1->collided.emit(co2);
+            co2->collided.emit(co1);
         }
 
         dtAccumulator -= PHYSICS_INTERVAL;
