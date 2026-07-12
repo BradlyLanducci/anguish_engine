@@ -34,13 +34,13 @@ public:
     Signal<glm::mat4> viewChanged;
 
 private:
+    void idleUpdate(double deltatTime);
     Vector2 getNextPosition(const Vector2 &targetPosition);
 
     Vector2 m_currentPosition;
     Vector2 m_targetPosition;
 
     double m_followSpeed{ 1.0 };
-    Slot<Vector2> m_followObject;
 
     Object *mp_objectToFollow{ nullptr };
 

@@ -7,13 +7,8 @@ BEGIN_AE_NAMESPACE
 //------------------------------------------------------------------//
 
 Camera::Camera()
-    : m_followObject(
-          [this](Vector2 newPosition)
-          {
-              Vector2 nextPosition{ getNextPosition(newPosition) };
-              setGlobalPosition(nextPosition);
-          })
 {
+    addIdleCb([this](double deltaTime) { idleUpdate(deltaTime); });
 }
 
 //------------------------------------------------------------------//
@@ -34,13 +29,7 @@ Vector2 Camera::zoom() const
 
 void Camera::follow(Object *p_object, double followSpeed)
 {
-    if (mp_objectToFollow)
-    {
-        mp_objectToFollow->moved.disconnect(m_followObject);
-    }
     mp_objectToFollow = p_object;
-    p_object->moved.connect(m_followObject);
-
     m_followSpeed = followSpeed;
 }
 
@@ -51,6 +40,16 @@ void Camera::setZoom(const Vector2 &zoom)
     m_zoom = zoom;
     m_view = glm::scale(glm::dmat4(1.0), { zoom.x, zoom.y, 1.f });
     viewChanged.emit(m_view);
+}
+
+//------------------------------------------------------------------//
+
+void Camera::idleUpdate(double deltatTime)
+{
+    if (mp_objectToFollow)
+    {
+        setGlobalPosition(globalPosition() + getNextPosition(mp_objectToFollow->globalPosition()));
+    }
 }
 
 //------------------------------------------------------------------//
