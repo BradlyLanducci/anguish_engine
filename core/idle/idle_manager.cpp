@@ -49,10 +49,24 @@ void IdleManager::update(double currentTime)
 
     m_queue.update();
 
+    for (auto &cb : m_nextFrameCbs)
+    {
+        cb();
+    }
+
+    m_nextFrameCbs.clear();
+
     for (const auto &p_object : m_queue)
     {
         p_object->idleUpdate(deltaTime);
     }
+}
+
+//------------------------------------------------------------------//
+
+void IdleManager::callNextFrame(std::function<void()> cb)
+{
+    m_nextFrameCbs.push_back(cb);
 }
 
 //------------------------------------------------------------------//

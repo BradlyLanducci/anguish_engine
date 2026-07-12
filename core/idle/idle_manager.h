@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <memory>
+#include <functional>
 
 //------------------------------------------------------------------//
 
@@ -42,9 +43,14 @@ public:
     /// @param currentTime
     void update(double currentTime);
 
+    /// @brief Defers a function call until the beginning of the next idle loop
+    /// @param cb The function to defer.
+    void callNextFrame(std::function<void()> cb);
+
 private:
     IdleManager() = default;
 
+    static inline std::vector<std::function<void()>> m_nextFrameCbs;
     static inline ObjectQueue<Object *> m_queue;
 };
 
