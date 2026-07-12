@@ -10,6 +10,8 @@ Timer::Timer(double seconds, double oneShot)
 {
     m_seconds = seconds;
     m_oneShot = oneShot;
+
+    addIdleCb([this](double deltaTime) { idleUpdate(deltaTime); });
 }
 
 //------------------------------------------------------------------//
@@ -46,6 +48,10 @@ void Timer::idleUpdate(double deltaTime)
         if (m_accumulator >= m_seconds)
         {
             m_accumulator = 0.0;
+            if (m_oneShot)
+            {
+                m_running = false;
+            }
             finished.emit();
         }
     }
