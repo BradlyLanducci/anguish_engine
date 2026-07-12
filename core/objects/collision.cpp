@@ -7,8 +7,16 @@ BEGIN_AE_NAMESPACE
 
 //------------------------------------------------------------------//
 
-Collision::Collision()
+Collision::Collision(bool debug)
+    : mp_sprite(debug ? new Sprite() : nullptr)
+    , m_onResized([this](Vector2 newSize) { mp_sprite->setSize(newSize); })
 {
+    if (mp_sprite)
+    {
+        addChild(mp_sprite);
+        resized.connect(m_onResized);
+    }
+
     PhysicsManager::get().addCollisionObject(this);
 }
 
@@ -38,6 +46,10 @@ bool Collision::solid() const
 void Collision::setEnabled(bool enabled)
 {
     m_enabled = enabled;
+    if (mp_sprite)
+    {
+        mp_sprite->setEnabled(enabled);
+    }
 }
 
 //------------------------------------------------------------------//

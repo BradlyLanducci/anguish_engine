@@ -2,7 +2,7 @@
 
 //------------------------------------------------------------------//
 
-#include <objects/object.h>
+#include <objects/sprite.h>
 #include <utilities/signal.h>
 
 //------------------------------------------------------------------//
@@ -14,7 +14,7 @@ BEGIN_AE_NAMESPACE
 class Collision : public Object
 {
 public:
-    Collision();
+    Collision(bool debug = false);
     ~Collision() override;
 
     bool enabled() const;
@@ -26,6 +26,9 @@ public:
     Signal<Collision *> collided;
 
 private:
+    Slot<Vector2> m_onResized;
+
+    Sprite *mp_sprite{ nullptr };
     bool m_enabled{ true };
     bool m_solid{ true };
 };

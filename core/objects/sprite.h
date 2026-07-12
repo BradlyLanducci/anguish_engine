@@ -13,8 +13,12 @@ BEGIN_AE_NAMESPACE
 
 class Sprite : public RenderedObject
 {
+public:
+    void setEnabled(bool enabled);
+
 private:
     void draw() override;
+    bool m_enabled{ true };
 };
 
 //------------------------------------------------------------------//
