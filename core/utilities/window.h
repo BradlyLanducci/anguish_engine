@@ -5,6 +5,8 @@
 #include <math/vector2i.h>
 #include <math/vector2.h>
 
+#include <utilities/signal.h>
+
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
@@ -46,6 +48,8 @@ public:
     /// @brief Sets the windows current size.
     /// @param size A 2D vector representing the windows new width and height.
     static void setWindowSize(const Vector2i &size);
+
+    static inline Signal<Vector2> resized;
 
 private:
     Window() = default;

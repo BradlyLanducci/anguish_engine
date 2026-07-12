@@ -24,6 +24,7 @@ void Window::frameBufferSizeCallback(GLFWwindow *p_window, int width, int height
     (void)p_window;
     glViewport(0, 0, width, height);
     m_windowSize = Vector2{ static_cast<double>(width), static_cast<double>(height) };
+    resized.emit(m_windowSize);
 }
 
 //------------------------------------------------------------------//
