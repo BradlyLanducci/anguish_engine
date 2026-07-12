@@ -48,7 +48,7 @@ void Camera::idleUpdate(double deltatTime)
 {
     if (mp_objectToFollow)
     {
-        setGlobalPosition(globalPosition() + getNextPosition(mp_objectToFollow->globalPosition()));
+        setGlobalPosition(getNextPosition(mp_objectToFollow->globalPosition()));
     }
 }
 
