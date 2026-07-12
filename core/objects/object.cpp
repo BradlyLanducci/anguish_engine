@@ -118,6 +118,13 @@ void Object::setParent(Object *p_parent)
 
 //------------------------------------------------------------------//
 
+void Object::setIsUi(bool isUi)
+{
+    m_isUi = isUi;
+}
+
+//------------------------------------------------------------------//
+
 void Object::queueDelete()
 {
     MemoryManager::get().queueDelete(this);
@@ -241,6 +248,13 @@ const Vector2 &Object::size() const
 Object *Object::parent() const
 {
     return mp_parent;
+}
+
+//------------------------------------------------------------------//
+
+bool Object::isUi() const
+{
+    return m_isUi;
 }
 
 //------------------------------------------------------------------//

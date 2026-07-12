@@ -62,7 +62,8 @@ void RenderedObject::setProjectionMatrix(const glm::dmat4 &projection) const
 
 void RenderedObject::setViewMatrix(const glm::dmat4 &view) const
 {
-    m_shaderProgram.p_vertexShader->setMat4("view", view);
+    constexpr glm::dmat4 Identity{ 1.0 };
+    m_shaderProgram.p_vertexShader->setMat4("view", isUi() ? Identity : view);
 }
 
 //------------------------------------------------------------------//

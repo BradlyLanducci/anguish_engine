@@ -103,6 +103,10 @@ public:
     /// @return
     [[nodiscard]] Object *parent() const;
 
+    /// @brief Returns whether or not this is a UI object.
+    /// @return
+    [[nodiscard]] bool isUi() const;
+
     void setTransform(const Transform &transform);
     void setPosition(Vector2 position);
     void setGlobalPosition(Vector2 globalPosition);
@@ -110,6 +114,7 @@ public:
     void setSize(const Vector2 &size);
     void setScale(const Vector2 &scale);
     void setParent(Object *p_parent);
+    void setIsUi(bool isUi);
 
     /// @brief Queues this object to be deleted with the memory manager.
     void queueDelete();
@@ -138,6 +143,8 @@ private:
     Vector2 m_size;
     Transform m_transform;
     std::vector<Object *> m_children;
+
+    bool m_isUi{ false };
 };
 
 //------------------------------------------------------------------//
