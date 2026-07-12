@@ -121,7 +121,7 @@ void PhysicsManager::update(double currentTime)
         constexpr int NumIterations{ 8 };
         for (int i = 0; i < NumIterations; ++i)
         {
-            const bool reverse{ i % 2 };
+            const bool reverse{ i % 2 == 0 ? true : false };
             for (auto &[co1, co2] : collisions)
             {
                 if (reverse)
