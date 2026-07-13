@@ -33,6 +33,11 @@ Object::~Object()
     {
         PhysicsManager::get().removeObject(this);
     }
+
+    if (m_inputCbs.size() > 0)
+    {
+        InputManager::get().removeObject(this);
+    }
 }
 
 //------------------------------------------------------------------//
